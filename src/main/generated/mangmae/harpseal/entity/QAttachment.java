@@ -24,7 +24,7 @@ public class QAttachment extends EntityPathBase<Attachment> {
 
     public final EnumPath<mangmae.harpseal.entity.type.AttachmentType> attachmentType = createEnum("attachmentType", mangmae.harpseal.entity.type.AttachmentType.class);
 
-    public final StringPath Data = createString("Data");
+    public final StringPath filePath = createString("filePath");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

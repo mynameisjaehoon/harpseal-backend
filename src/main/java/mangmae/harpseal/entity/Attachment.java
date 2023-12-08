@@ -16,7 +16,5 @@ public class Attachment {
 
     @Enumerated(EnumType.STRING)
     private AttachmentType attachmentType;
-
-    @Lob
-    private String Data;
+    private String filePath;
 }

@@ -1,12 +1,15 @@
 package mangmae.harpseal.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import mangmae.harpseal.entity.auditing.CreatedDateEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Quiz extends CreatedDateEntity {
 
     @Id

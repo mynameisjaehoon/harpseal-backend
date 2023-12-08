@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity.domain.dto;
+package mangmae.harpseal.domain.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

@@ -10,10 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
-public class CreatedInfoEntity extends CreatedDateEntity{
-
+public class CreatedInfoEntity extends CreatedDateEntity {
     @CreatedBy
     @Column(updatable = false)
     private String createdBy;
-
 }

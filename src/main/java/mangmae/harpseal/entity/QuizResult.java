@@ -7,7 +7,7 @@ import mangmae.harpseal.entity.auditing.CreatedDateEntity;
 public class QuizResult extends CreatedDateEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "result_id")
     private Long id;
 

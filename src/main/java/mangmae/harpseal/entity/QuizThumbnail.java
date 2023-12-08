@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 public class QuizThumbnail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_id")
     private Quiz quiz;
     private String filePath;
 }

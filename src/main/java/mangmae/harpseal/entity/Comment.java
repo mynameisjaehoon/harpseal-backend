@@ -7,7 +7,7 @@ import mangmae.harpseal.entity.auditing.CreatedInfoEntity;
 @Table(name = "comments") // comment는 예약어
 public class Comment extends CreatedInfoEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
 

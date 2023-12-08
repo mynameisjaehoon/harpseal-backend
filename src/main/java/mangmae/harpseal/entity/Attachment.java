@@ -6,7 +6,7 @@ import mangmae.harpseal.entity.type.AttachmentType;
 @Entity
 public class Attachment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attachment_id")
     private Long id;
 

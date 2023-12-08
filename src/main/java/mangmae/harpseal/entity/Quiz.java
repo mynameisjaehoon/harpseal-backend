@@ -2,6 +2,7 @@ package mangmae.harpseal.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.entity.auditing.CreatedDateEntity;
 
@@ -10,10 +11,11 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Quiz extends CreatedDateEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "quiz_id")
     private Long id;
     private String title;
@@ -34,8 +36,7 @@ public class Quiz extends CreatedDateEntity {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "thumbnail_id")
+    @OneToOne(mappedBy = "quiz", fetch = FetchType.LAZY)
     private QuizThumbnail thumbnail;
 
 }

@@ -17,6 +17,7 @@ public class Quiz extends CreatedDateEntity {
     @Column(name = "quiz_id")
     private Long id;
     private String title;
+    private String description;
     private String password;
 
     public Quiz(String title, String password) {
@@ -32,5 +33,9 @@ public class Quiz extends CreatedDateEntity {
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "thumbnail_id")
+    private QuizThumbnail thumbnail;
 
 }

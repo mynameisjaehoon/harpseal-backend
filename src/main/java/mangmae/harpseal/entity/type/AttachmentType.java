@@ -1,2 +1,5 @@
-package mangmae.harpseal.entity.type;public enum AttachmentType {
+package mangmae.harpseal.entity.type;
+
+public enum AttachmentType {
+    IMAGE, SOUND
 }

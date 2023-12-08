@@ -1,5 +1,11 @@
+# properties
 application-aws.properties
+# Querydsl Q Object
+./src/main/generated/
 
+
+
+# gitignore.io 에서 생성한 목록
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839

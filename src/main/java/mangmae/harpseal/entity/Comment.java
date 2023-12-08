@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import mangmae.harpseal.entity.auditing.CreatedInfoEntity;
 
 @Entity
+@Table(name = "comments") // comment는 예약어
 public class Comment extends CreatedInfoEntity {
     @Id
     @GeneratedValue

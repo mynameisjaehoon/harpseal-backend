@@ -10,7 +10,8 @@ public class Attachment {
     @Column(name = "attachment_id")
     private Long id;
 
-    @OneToOne(mappedBy = "attachment")
+    @OneToOne
+    @JoinColumn(name = "question_id")
     private Question question;
 
     @Enumerated(EnumType.STRING)

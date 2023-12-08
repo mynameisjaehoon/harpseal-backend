@@ -18,12 +18,10 @@ public class Question {
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
-    @OneToOne
-    @JoinColumn(name = "attachment_id")
+    @OneToOne(mappedBy = "question")
     private Attachment attachment;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @Column(name = "multiple_question_choice")
     private List<MultipleQuestionChoice> choices = new ArrayList<>();
 
     private String content;

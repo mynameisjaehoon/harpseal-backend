@@ -1,19 +1,20 @@
 package mangmae.harpseal.entity;
 
+
 import jakarta.persistence.*;
-import mangmae.harpseal.entity.auditing.CreatedDateEntity;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @Entity
-public class QuizResult extends CreatedDateEntity {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class QuizThumbnail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "result_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
-
-    private Integer score;
+    private String filePath;
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class MultipleQuestionChoice {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "choice_id")
     private Long id;
 

@@ -2,9 +2,12 @@ package mangmae.harpseal.domain.quiz.util;
 
 import mangmae.harpseal.domain.dto.QuestionRegistrationFormDto;
 import mangmae.harpseal.domain.dto.QuizRegistrationFormDto;
+import mangmae.harpseal.domain.quiz.exception.QuestionFormNotValidException;
 import mangmae.harpseal.domain.quiz.exception.QuizFormNotValidException;
+import mangmae.harpseal.entity.type.QuestionType;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -12,12 +15,17 @@ import java.util.List;
  */
 public class QuizRegisterValidator {
 
+    // quiz validation constant
     private final static int MINIMUM_QUIZ_TITLE_LENGTH = 5;
     private final static int MINIMUM_PASSWORD_LENGTH = 5;
     private final static int MINIMUM_DESCRIPTION_LENGTH = 10;
     private final static int MAXIMUM_DESCRIPTION_LENGTH = 100;
     private final static int MINIMUM_QUESTION_COUNT = 3;
     private final static int MAXIMUM_QUESTION_COUNT = 30;
+
+    // question validation constant
+    private final static int MINIMUM_QUESTION_LENGTH = 5;
+    private final static int MAXIMUM_QUESTION_LENGTH = 5;
 
     private QuizRegisterValidator() {
     }
@@ -34,7 +42,6 @@ public class QuizRegisterValidator {
         String title = form.getTitle();
         String password = form.getPassword();
         String description = form.getDescription();
-        List<QuestionRegistrationFormDto> questions = form.getQuestions();
 
         if (!StringUtils.hasText(title) || title.length() < MINIMUM_QUIZ_TITLE_LENGTH) {
             throw new QuizFormNotValidException("The quiz title must be at least 5 characters long.");
@@ -48,8 +55,23 @@ public class QuizRegisterValidator {
             throw new QuizFormNotValidException("The description of the quiz must be between 5 and 100 characters.");
         }
 
-        if (questions.size() < MINIMUM_QUESTION_COUNT || questions.size() > MAXIMUM_QUESTION_COUNT) {
-            throw new QuizFormNotValidException("The number of questions should be no more than 3 and no less than 30.");
+    }
+
+    public static void validateQuestionRegistrationForm(QuestionRegistrationFormDto form) {
+        String content = form.getContent();
+        String type = form.getType();
+        String answer = form.getAnswer();
+
+        if (!StringUtils.hasText(content) || content.length() < MINIMUM_QUESTION_LENGTH || content.length() > MAXIMUM_QUESTION_LENGTH) {
+            throw new QuestionFormNotValidException("Question must be at least 5 characters long and no more than 200 characters.");
+        }
+
+        if (!StringUtils.hasText(type) || !Arrays.toString(QuestionType.values()).contains(type)) {
+            throw new QuestionFormNotValidException("The type of Question is required. (MULTIPLE, SUBJECTIVE)");
+        }
+
+        if (!StringUtils.hasText(answer)) {
+            throw new QuestionFormNotValidException("The answer of Question is required");
         }
     }
 }

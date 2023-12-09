@@ -8,7 +8,6 @@ import mangmae.harpseal.entity.type.QuestionType;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 퀴즈 등록 검증 클래스
@@ -20,8 +19,6 @@ public class QuizRegisterValidator {
     private final static int MINIMUM_PASSWORD_LENGTH = 5;
     private final static int MINIMUM_DESCRIPTION_LENGTH = 10;
     private final static int MAXIMUM_DESCRIPTION_LENGTH = 100;
-    private final static int MINIMUM_QUESTION_COUNT = 3;
-    private final static int MAXIMUM_QUESTION_COUNT = 30;
 
     // question validation constant
     private final static int MINIMUM_QUESTION_LENGTH = 5;

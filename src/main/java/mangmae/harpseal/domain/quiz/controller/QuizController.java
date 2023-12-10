@@ -1,6 +1,7 @@
 package mangmae.harpseal.domain.quiz.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.dto.QuizRegistrationFormDto;
 import mangmae.harpseal.domain.quiz.service.QuizService;
 import mangmae.harpseal.entity.Quiz;
@@ -12,11 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 
-@RestController("/quiz/api/v1")
+@RestController
+@RequestMapping("/quiz/api/v1")
 @RequiredArgsConstructor
+@Slf4j
 public class QuizController {
-
-    @Value("${file.}")
 
     private final QuizService quizService;
 
@@ -31,12 +32,12 @@ public class QuizController {
 
     @PostMapping(value = "/new", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> createQuiz(
-            @RequestPart QuizRegistrationFormDto form,
-            @RequestPart MultipartFile thumbnailImage
+            @RequestPart(value = "form") QuizRegistrationFormDto form,
+            @RequestPart(value = "thumbnail", required = false) MultipartFile thumbnail
     ) {
-
+        log.info("QuizController - form = {}", form);
         Quiz createdQuiz = quizService.createQuiz(form);
-        quizService.storeQuizThumbnailImage(createdQuiz, thumbnailImage);
+        quizService.storeQuizThumbnailImage(createdQuiz, thumbnail);
         return ResponseEntity.created(URI.create("/quiz/api/v1/" + createdQuiz.getId())).build();
     }
 }

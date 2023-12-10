@@ -1,17 +1,19 @@
 package mangmae.harpseal.domain.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
-@RequiredArgsConstructor
-@Builder
 public class QuestionRegistrationFormDto {
 
-    private final String content;
-    private final int number;
-    private final String type;
-    private final String answer;
+    private String content;
+    private int number;
+    private String type;
+    private String answer;
 
+    public QuestionRegistrationFormDto(String content, int number, String type, String answer) {
+        this.content = content;
+        this.number = number;
+        this.type = type;
+        this.answer = answer;
+    }
 }

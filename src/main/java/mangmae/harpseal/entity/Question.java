@@ -10,13 +10,16 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
     private Long id;
+
+    private String content;
+    private int number;
+    private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
@@ -28,11 +31,13 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<MultipleQuestionChoice> choices = new ArrayList<>();
 
-    private String content;
-    private int number;
-
     @Enumerated(value = EnumType.STRING)
     private QuestionType questionType;
 
-    private String answer;
+    public Question(String content, int number, String answer, QuestionType questionType) {
+        this.content = content;
+        this.number = number;
+        this.answer = answer;
+        this.questionType = questionType;
+    }
 }

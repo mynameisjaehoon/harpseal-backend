@@ -22,11 +22,6 @@ public class Quiz extends CreatedDateEntity {
     private String description;
     private String password;
 
-    public Quiz(String title, String password) {
-        this.title = title;
-        this.password = password;
-    }
-
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
 
@@ -38,5 +33,21 @@ public class Quiz extends CreatedDateEntity {
 
     @OneToOne(mappedBy = "quiz", fetch = FetchType.LAZY)
     private QuizThumbnail thumbnail;
+
+    public Quiz(String title, String description, String password) {
+        this.title = title;
+        this.description = description;
+        this.password = password;
+    }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+        question.setQuiz(this);
+    }
+
+    public void addThumbnail(QuizThumbnail thumbnail) {
+        this.thumbnail = thumbnail;
+        thumbnail.setQuiz(this);
+    }
 
 }

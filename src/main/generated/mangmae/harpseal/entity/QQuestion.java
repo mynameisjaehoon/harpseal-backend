@@ -32,6 +32,8 @@ public class QQuestion extends EntityPathBase<Question> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final NumberPath<Integer> number = createNumber("number", Integer.class);
+
     public final EnumPath<mangmae.harpseal.entity.type.QuestionType> questionType = createEnum("questionType", mangmae.harpseal.entity.type.QuestionType.class);
 
     public final QQuiz quiz;

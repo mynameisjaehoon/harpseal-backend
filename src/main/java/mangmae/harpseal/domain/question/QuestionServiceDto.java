@@ -4,7 +4,8 @@ package mangmae.harpseal.domain.question;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import mangmae.harpseal.domain.quiz.dto.ChoiceCreateDto;
+import mangmae.harpseal.domain.choice.dto.ChoiceCreateDto;
+import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public class QuestionServiceDto {
     private String type;
     private String answer;
     private String attachmentType;
-    private List<ChoiceCreateDto> choices;
+    private List<ChoiceServiceDto> choices;
 }

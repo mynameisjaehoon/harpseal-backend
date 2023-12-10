@@ -1,6 +1,8 @@
 package mangmae.harpseal.domain.quiz.dto;
 
 import lombok.*;
+import mangmae.harpseal.domain.choice.dto.ChoiceCreateDto;
+import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.question.QuestionServiceDto;
 
 import java.util.List;
@@ -25,6 +27,11 @@ public class QuestionCreateRequestForm {
     }
 
     public QuestionServiceDto toServiceDto() {
+
+        List<ChoiceServiceDto> serviceChoices = choices.stream()
+            .map(ChoiceCreateDto::toServiceDto)
+            .toList();
+
         return QuestionServiceDto.builder()
             .content(content)
             .password(password)
@@ -32,7 +39,7 @@ public class QuestionCreateRequestForm {
             .type(type)
             .answer(answer)
             .attachmentType(attachmentType)
-            .choices(choices)
+            .choices(serviceChoices)
             .build();
     }
 

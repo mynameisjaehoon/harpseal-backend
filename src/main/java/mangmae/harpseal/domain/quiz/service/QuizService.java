@@ -22,10 +22,7 @@ import java.util.Optional;
 public class QuizService {
 
     private final QuizRepository quizRepository;
-    private final ThumbnailRepository thumbnailRepository;
-    private final QuestionRepository questionRepository;
-    private final FilePathUtil filePathUtil;
-
+    
     @Transactional
     public Quiz save(Quiz quiz) {
         return quizRepository.save(quiz);

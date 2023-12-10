@@ -13,6 +13,7 @@ public class Comment extends CreatedInfoEntity {
 
     private String content;
     private String password;
+    private int like;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")

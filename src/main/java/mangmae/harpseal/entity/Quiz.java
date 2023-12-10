@@ -21,7 +21,7 @@ public class Quiz extends CreatedDateEntity {
     private String title;
     private String description;
     private String password;
-    private int like;
+    private Integer likeCount;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
@@ -40,6 +40,7 @@ public class Quiz extends CreatedDateEntity {
         this.title = title;
         this.description = description;
         this.password = password;
+        this.likeCount = 0;
     }
 
     public void addQuestion(Question question) {

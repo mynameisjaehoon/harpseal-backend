@@ -22,7 +22,7 @@ import java.util.Optional;
 public class QuizService {
 
     private final QuizRepository quizRepository;
-    
+
     @Transactional
     public Quiz save(Quiz quiz) {
         return quizRepository.save(quiz);

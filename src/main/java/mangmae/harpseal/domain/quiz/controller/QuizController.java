@@ -44,14 +44,5 @@ public class QuizController {
         return ResponseEntity.created(URI.create("/quiz/api/v1/" + createdQuiz.getId())).build();
     }
 
-    @PostMapping(value = "/{quizId}")
-    public ResponseEntity<QuestionCreateResponseDto> createQuestion(
-            @RequestParam("quizId") Long quizId,
-            @RequestPart QuestionCreateRequestForm form,
-            @RequestPart MultipartFile attachment
-    ) {
-        log.info("QuizController-createQuestion form={}", form);
-        Question storeQuestion = quizFacadeService.createQuestion(quizId, form.toServiceDto(), attachment);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new QuestionCreateResponseDto());
-    }
+
 }

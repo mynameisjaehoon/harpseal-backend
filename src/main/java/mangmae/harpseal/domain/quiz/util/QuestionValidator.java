@@ -12,7 +12,7 @@ public class QuestionValidator {
 
     // question validation constant
     private final static int MINIMUM_QUESTION_LENGTH = 5;
-    private final static int MAXIMUM_QUESTION_LENGTH = 5;
+    private final static int MAXIMUM_QUESTION_LENGTH = 200;
 
     /**
      * 올바른 문제 등록 폼인지 검사하는 메서드

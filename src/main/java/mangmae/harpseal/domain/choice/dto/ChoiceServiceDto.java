@@ -1,12 +1,11 @@
 package mangmae.harpseal.domain.choice.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Builder
 @Getter
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChoiceServiceDto {
     private String content;
 }

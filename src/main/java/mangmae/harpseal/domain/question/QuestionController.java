@@ -7,28 +7,29 @@ import mangmae.harpseal.domain.quiz.dto.QuestionCreateRequestForm;
 import mangmae.harpseal.domain.quiz.dto.QuestionCreateResponseDto;
 import mangmae.harpseal.entity.Question;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import static org.springframework.http.MediaType.*;
 
 
 @Slf4j
-@RestController("/api/v1/quiz")
+@RestController
+@RequestMapping("/api/v1/quiz")
 @RequiredArgsConstructor
 public class QuestionController {
 
     private final QuizFacadeService quizFacadeService;
 
-    @PostMapping(value = "/{quizId}")
+    @PostMapping(value = "/{quizId}", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<QuestionCreateResponseDto> createQuestion(
-        @RequestParam("quizId") Long quizId,
-        @RequestPart QuestionCreateRequestForm form,
-        @RequestPart MultipartFile attachment
+        @PathVariable("quizId") Long quizId,
+        @RequestPart(value = "form") QuestionCreateRequestForm form,
+        @RequestPart(value = "attachment") MultipartFile attachment
     ) {
-        log.info("QuizController-createQuestion form={}", form);
+        log.info("QuestionController-createQuestion form={}", form);
         Question storeQuestion = quizFacadeService.createQuestion(quizId, form.toServiceDto(), attachment);
         return ResponseEntity.status(HttpStatus.CREATED).body(new QuestionCreateResponseDto());
     }

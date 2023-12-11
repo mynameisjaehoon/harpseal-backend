@@ -1,7 +1,9 @@
 package mangmae.harpseal.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mangmae.harpseal.entity.type.QuestionType;
 
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Question {
 
     @Id
@@ -40,4 +43,19 @@ public class Question {
         this.answer = answer;
         this.questionType = questionType;
     }
+
+    /**
+     * 연관관계에 있는 quiz 엔티티를 바꾸는 메서드.<br>
+     * Quiz 엔티티에서 Question 목록을 추가할 때 사용되는 메서드이다.
+     * @param quiz 연관관계이 있는 퀴즈
+     */
+    public void changeQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
+    public void addChoices(MultipleQuestionChoice choice) {
+        choices.add(choice);
+        choice.changeQuestion(this);
+    }
+
 }

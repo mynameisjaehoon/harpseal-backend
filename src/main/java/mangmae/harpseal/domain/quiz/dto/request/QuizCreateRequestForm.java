@@ -2,7 +2,7 @@ package mangmae.harpseal.domain.quiz.dto.request;
 
 
 import lombok.*;
-import mangmae.harpseal.domain.quiz.service.QuizServiceDto;
+import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
 
 @Data
 public class QuizCreateRequestForm {
@@ -11,8 +11,8 @@ public class QuizCreateRequestForm {
     private String password; //비밀번호
     private String description;
 
-    public QuizServiceDto toServiceDto() {
-        return QuizServiceDto.builder()
+    public QuizCreateServiceDto toServiceDto() {
+        return QuizCreateServiceDto.builder()
             .title(title)
             .password(password)
             .description(description)

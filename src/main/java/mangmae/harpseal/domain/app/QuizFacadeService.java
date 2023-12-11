@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.application;
+package mangmae.harpseal.domain.app;
 
 
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.question.QuestionService;
 import mangmae.harpseal.domain.question.QuestionCreateServiceDto;
 import mangmae.harpseal.domain.quiz.service.QuizService;
-import mangmae.harpseal.domain.quiz.service.QuizServiceDto;
+import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
 import mangmae.harpseal.domain.quiz.util.QuestionValidator;
 import mangmae.harpseal.entity.type.AttachmentType;
 import mangmae.harpseal.util.SecurityUtil;
@@ -42,7 +42,7 @@ public class QuizFacadeService {
      */
     @Transactional
     public Quiz createQuiz(
-        final QuizServiceDto dto,
+        final QuizCreateServiceDto dto,
         final MultipartFile thumbnailImage
     ) {
         Quiz createdQuiz = quizService.createQuiz(dto);

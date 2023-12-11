@@ -3,12 +3,16 @@ package mangmae.harpseal.domain.quiz.service;
 
 import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.exception.CannotFindQuizException;
+import mangmae.harpseal.domain.quiz.dto.response.QuizSearchResponseDto;
 import mangmae.harpseal.domain.quiz.repository.QuizRepository;
+import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
+import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceCondition;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.entity.Quiz;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -34,7 +38,7 @@ public class QuizService {
     }
 
     @Transactional
-    public Quiz createQuiz(QuizServiceDto dto) {
+    public Quiz createQuiz(QuizCreateServiceDto dto) {
         QuizValidator.validateQuizRegistrationForm(dto); // 퀴즈 등록 폼 데이터 검증
 
         // 폼에서 데이터를 추출해 Quiz 엔티티를 만든다.
@@ -45,6 +49,11 @@ public class QuizService {
 
         Quiz newQuiz = new Quiz(title, description, password);
         return quizRepository.save(newQuiz);
+    }
+
+    public List<QuizSearchResponseDto> find(QuizSearchServiceCondition condition) {
+
+        return null;
     }
 
 }

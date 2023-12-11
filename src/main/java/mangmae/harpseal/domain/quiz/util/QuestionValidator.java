@@ -1,7 +1,6 @@
 package mangmae.harpseal.domain.quiz.util;
 
-import mangmae.harpseal.domain.question.QuestionServiceDto;
-import mangmae.harpseal.domain.quiz.dto.QuestionCreateRequestForm;
+import mangmae.harpseal.domain.question.QuestionCreateServiceDto;
 import mangmae.harpseal.domain.exception.QuestionFormNotValidException;
 import mangmae.harpseal.entity.type.QuestionType;
 import org.springframework.util.StringUtils;
@@ -20,7 +19,7 @@ public class QuestionValidator {
      * -
      * @param form 문제(Question) 등록 폼
      */
-    public static void validateQuestionRegistrationForm(QuestionServiceDto form) {
+    public static void validateQuestionRegistrationForm(QuestionCreateServiceDto form) {
         String content = form.getContent();
         String type = form.getType();
         String answer = form.getAnswer();

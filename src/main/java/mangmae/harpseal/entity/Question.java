@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import mangmae.harpseal.domain.question.QuestionCreateServiceDto;
 import mangmae.harpseal.entity.type.QuestionType;
 
 import java.util.ArrayList;
@@ -44,6 +44,10 @@ public class Question {
         this.questionType = questionType;
     }
 
+    public Question(QuestionCreateServiceDto dto) {
+        this(dto.getContent(), dto.getNumber(), dto.getAnswer(), QuestionType.by(dto.getType()));
+    }
+
     /**
      * 연관관계에 있는 quiz 엔티티를 바꾸는 메서드.<br>
      * Quiz 엔티티에서 Question 목록을 추가할 때 사용되는 메서드이다.
@@ -53,9 +57,14 @@ public class Question {
         this.quiz = quiz;
     }
 
-    public void addChoices(MultipleQuestionChoice choice) {
+    public void addChoice(MultipleQuestionChoice choice) {
         choices.add(choice);
         choice.changeQuestion(this);
+    }
+
+    public void addAttachment(Attachment attachment) {
+        this.attachment = attachment;
+        attachment.changeQuestion(this);
     }
 
 }

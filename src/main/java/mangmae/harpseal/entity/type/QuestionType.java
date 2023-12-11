@@ -1,6 +1,6 @@
 package mangmae.harpseal.entity.type;
 
-import mangmae.harpseal.domain.exception.CannotFindQuestionTypeException;
+import mangmae.harpseal.domain.exception.UnknownQuestionTypeException;
 
 import java.util.Arrays;
 
@@ -10,8 +10,8 @@ public enum QuestionType {
 
     public static QuestionType by(String name) {
         return Arrays.stream(QuestionType.values())
-                .filter(value -> value.toString().equals(name))
+                .filter(value -> value.toString().equalsIgnoreCase(name))
                 .findAny()
-                .orElseThrow(() -> new CannotFindQuestionTypeException("Can't find [" + name + "] question type"));
+                .orElseThrow(() -> new UnknownQuestionTypeException("Can't find [" + name + "] question type"));
     }
 }

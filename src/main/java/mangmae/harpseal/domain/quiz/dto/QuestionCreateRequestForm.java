@@ -3,7 +3,7 @@ package mangmae.harpseal.domain.quiz.dto;
 import lombok.*;
 import mangmae.harpseal.domain.choice.dto.ChoiceCreateDto;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
-import mangmae.harpseal.domain.question.QuestionServiceDto;
+import mangmae.harpseal.domain.question.QuestionCreateServiceDto;
 
 import java.util.List;
 
@@ -26,13 +26,13 @@ public class QuestionCreateRequestForm {
         this.answer = answer;
     }
 
-    public QuestionServiceDto toServiceDto() {
+    public QuestionCreateServiceDto toServiceDto() {
 
         List<ChoiceServiceDto> serviceChoices = choices.stream()
             .map(ChoiceCreateDto::toServiceDto)
             .toList();
 
-        return QuestionServiceDto.builder()
+        return QuestionCreateServiceDto.builder()
             .content(content)
             .password(password)
             .number(number)

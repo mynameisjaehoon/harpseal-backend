@@ -1,8 +1,8 @@
 package mangmae.harpseal.domain.quiz.service;
 
 import jakarta.persistence.EntityManager;
-import mangmae.harpseal.domain.quiz.dto.QuestionCreateRequestForm;
-import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
+import mangmae.harpseal.domain.quiz.dto.request.QuestionCreateRequestForm;
+import mangmae.harpseal.domain.quiz.dto.request.QuizCreateRequestForm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

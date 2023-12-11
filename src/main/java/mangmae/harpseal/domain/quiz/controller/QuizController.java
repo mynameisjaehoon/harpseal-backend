@@ -3,13 +3,9 @@ package mangmae.harpseal.domain.quiz.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.application.QuizFacadeService;
-import mangmae.harpseal.domain.quiz.dto.QuestionCreateResponseDto;
-import mangmae.harpseal.domain.quiz.dto.QuestionCreateRequestForm;
-import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
+import mangmae.harpseal.domain.quiz.dto.request.QuizCreateRequestForm;
 import mangmae.harpseal.domain.quiz.service.QuizService;
-import mangmae.harpseal.entity.Question;
 import mangmae.harpseal.entity.Quiz;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +28,9 @@ public class QuizController {
      */
     @GetMapping()
     public String quizList() {
+
+
+
         return "ok";
     }
 

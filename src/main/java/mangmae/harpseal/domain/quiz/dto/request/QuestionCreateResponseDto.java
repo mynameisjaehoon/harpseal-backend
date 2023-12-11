@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.dto;
+package mangmae.harpseal.domain.quiz.dto.request;
 
 
 import lombok.Data;

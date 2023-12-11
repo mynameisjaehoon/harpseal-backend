@@ -2,14 +2,10 @@ package mangmae.harpseal.domain.quiz.service;
 
 
 import lombok.RequiredArgsConstructor;
-import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
 import mangmae.harpseal.domain.exception.CannotFindQuizException;
-import mangmae.harpseal.domain.question.QuestionRepository;
 import mangmae.harpseal.domain.quiz.repository.QuizRepository;
-import mangmae.harpseal.domain.thumbnail.ThumbnailRepository;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.entity.Quiz;
-import mangmae.harpseal.util.FilePathUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

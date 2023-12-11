@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.exception;
+package mangmae.harpseal.domain.exception;
 
 public class ThumbnailImageStoreException extends RuntimeException {
     public ThumbnailImageStoreException() {

@@ -10,6 +10,9 @@ public class FilePathUtil {
     @Value("${file.thumbnail-image.path}")
     private String quizThumbnailImagePath;
 
+    @Value("${file.question-image.path}")
+    private String questionImagePath;
+
     private FilePathUtil(){
     }
 
@@ -17,13 +20,21 @@ public class FilePathUtil {
         return new FilePathUtil();
     }
 
+    // TODO: 2023/12/11 이미지 타입 호환 고려
     public String makeThumbnailImagePath() {
         StringBuilder imageNameBuilder = new StringBuilder(quizThumbnailImagePath);
-        imageNameBuilder
-                .append(UUID.randomUUID().toString().substring(0, 10))
-                .append(".png");
+        return imageNameBuilder
+            .append(UUID.randomUUID().toString().substring(0, 10))
+            .append(".png")
+            .toString();
+    }
 
-        return imageNameBuilder.toString();
+    public String makeQuestionImagePath() {
+        StringBuilder imageNameBuilder = new StringBuilder(questionImagePath);
+        return imageNameBuilder
+            .append(UUID.randomUUID().toString().substring(0, 10))
+            .append(".png")
+            .toString();
     }
 
 }

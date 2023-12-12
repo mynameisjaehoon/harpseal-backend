@@ -10,7 +10,7 @@ import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizSearchServiceCondition {
+public class QuizSearchServiceCond {
     private String title;
     private QuizSearchType searchType;
 }

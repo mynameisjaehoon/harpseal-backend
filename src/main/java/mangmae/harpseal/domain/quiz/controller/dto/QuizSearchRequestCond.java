@@ -1,27 +1,24 @@
-package mangmae.harpseal.domain.quiz.dto.request;
+package mangmae.harpseal.domain.quiz.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
-import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceCondition;
+import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceCond;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuizSearchRequestCond {
     private String title;
-    private QuizSearchType searchType;
+    private String searchType;
 
-    public QuizSearchRequestCond(String title, String searchType) {
-        this.title = title;
-        this.searchType = QuizSearchType.by(searchType);
-    }
+    public QuizSearchServiceCond toServiceDto() {
+        QuizSearchType type = QuizSearchType.by(searchType);
 
-    public QuizSearchServiceCondition toServiceDto() {
-        return QuizSearchServiceCondition.builder()
+        return QuizSearchServiceCond.builder()
             .title(title)
-            .searchType(searchType)
+            .searchType(type)
             .build();
     }
 }

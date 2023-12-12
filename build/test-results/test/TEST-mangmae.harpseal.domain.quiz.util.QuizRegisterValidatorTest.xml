@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="mangmae.harpseal.domain.quiz.util.QuizRegisterValidatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-12T12:08:54" hostname="Jaehoonui-MacBookAir.local" time="0.002">
-  <properties/>
-  <testcase name="quizRegistrationFormValidateTest()" classname="mangmae.harpseal.domain.quiz.util.QuizRegisterValidatorTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

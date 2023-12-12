@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * 애플리케이션 로컬에서 사용할 퀴즈 데이터를 초기화 하는 클래스
  */
-@Profile("local")
+@Profile("local-create")
 @Component
 @RequiredArgsConstructor
 public class InitQuiz {

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface QuizQueryRepository {
 
-    public List<QuizSearchResponseDto> find(QuizSearchRequestCond condition);
+    public List<QuizSearchResponseDto> findWithCondition(QuizSearchRequestCond condition);
 
 }

@@ -2,7 +2,7 @@ package mangmae.harpseal.domain.question;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mangmae.harpseal.domain.application.QuizFacadeService;
+import mangmae.harpseal.domain.app.QuizFacadeService;
 import mangmae.harpseal.domain.quiz.dto.request.QuestionCreateRequestForm;
 import mangmae.harpseal.domain.quiz.dto.request.QuestionCreateResponseDto;
 import mangmae.harpseal.entity.Question;

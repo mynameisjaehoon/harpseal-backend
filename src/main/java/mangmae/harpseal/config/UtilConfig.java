@@ -1,6 +1,6 @@
 package mangmae.harpseal.config;
 
-import mangmae.harpseal.util.FilePathUtil;
+import mangmae.harpseal.util.FileUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public class UtilConfig {
 
     @Bean
-    public FilePathUtil filePathUtil() {
-        return FilePathUtil.of();
+    public FileUtil filePathUtil() {
+        return FileUtil.of();
     }
 
 }

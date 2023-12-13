@@ -5,6 +5,7 @@ import mangmae.harpseal.domain.quiz.exception.UnknownQuizSearchConditionExceptio
 import java.util.Arrays;
 
 public enum QuizSearchType {
+    NONE,
     COUNT_ASC,
     COUNT_DESC,
     RECENT,

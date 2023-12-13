@@ -14,6 +14,9 @@ public class FileUtil {
     @Value("${file.thumbnail-image.path}")
     private String quizThumbnailImagePath;
 
+    @Value("${file.thumbnail-image.default-path}")
+    private String quizThumbnailDefaultImagePath;
+
     @Value("${file.question-image.path}")
     private String questionImagePath;
 
@@ -61,6 +64,9 @@ public class FileUtil {
     }
 
     public String loadImageBase64(String filePath) {
+        if (filePath == null) {
+            filePath = quizThumbnailDefaultImagePath;
+        }
         return Base64.getEncoder().encodeToString(loadImageBytes(filePath));
     }
 

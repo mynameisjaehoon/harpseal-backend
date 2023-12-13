@@ -2,10 +2,14 @@ package mangmae.harpseal.util;
 
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.FileCopyUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.UUID;
 
-public class FilePathUtil {
+public class FileUtil {
 
     @Value("${file.thumbnail-image.path}")
     private String quizThumbnailImagePath;
@@ -16,11 +20,11 @@ public class FilePathUtil {
     @Value("${file.question-sound.path}")
     private String questionSoundPath;
 
-    private FilePathUtil(){
+    private FileUtil(){
     }
 
-    public static FilePathUtil of() {
-        return new FilePathUtil();
+    public static FileUtil of() {
+        return new FileUtil();
     }
 
     // TODO: 2023/12/11 이미지 타입 호환 고려, MultiPartFile 로부터 확장자 정보를 가져와야하나?
@@ -47,5 +51,18 @@ public class FilePathUtil {
             .append(".mp3")
             .toString();
     }
+
+    public byte[] loadImageBytes(String filePath) {
+        try {
+            return FileCopyUtils.copyToByteArray(new File(filePath));
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Unable to make byte data from path=[" + filePath + "]");
+        }
+    }
+
+    public String loadImageBase64(String filePath) {
+        return Base64.getEncoder().encodeToString(loadImageBytes(filePath));
+    }
+
 
 }

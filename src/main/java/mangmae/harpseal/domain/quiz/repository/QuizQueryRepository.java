@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface QuizQueryRepository {
 
-    public List<QuizSearchRepositoryDto> findPlayTimeDesc(QuizSearchRepositoryCond condition, Pageable pageable);
+    public List<QuizSearchRepositoryDto> findPlayTimeDesc(QuizSearchRepositoryCond condition, long offset, int limit);
 
-    public List<QuizSearchRepositoryDto> findPlayTimeAsc(QuizSearchRepositoryCond condition, Pageable pageable);
+    public List<QuizSearchRepositoryDto> findPlayTimeAsc(QuizSearchRepositoryCond condition, long offset, int limit);
 
-    public List<QuizSearchRepositoryDto> findRecentDesc(QuizSearchRepositoryCond condition, Pageable pageable);
+    public List<QuizSearchRepositoryDto> findRecentDesc(QuizSearchRepositoryCond condition, long offset, int limit);
 
-    public List<QuizSearchRepositoryDto> findRecentAsc(QuizSearchRepositoryCond condition, Pageable pageable);
+    public List<QuizSearchRepositoryDto> findRecentAsc(QuizSearchRepositoryCond condition, long offset, int limit);
 
 }

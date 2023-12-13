@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.exception.ThumbnailImageStoreException;
 import mangmae.harpseal.entity.Quiz;
 import mangmae.harpseal.entity.QuizThumbnail;
-import mangmae.harpseal.util.FilePathUtil;
+import mangmae.harpseal.util.FileUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class ThumbnailService {
 
     private final ThumbnailRepository thumbnailRepository;
-    private final FilePathUtil filePathUtil;
+    private final FileUtil filePathUtil;
 
     /**
      * 연관된 퀴즈와 저장할 이미지 데이터를 전달받아 새롭게 생성된 퀴즈에 썸네일 이미지를 저장하는 메서드<br>

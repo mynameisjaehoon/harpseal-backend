@@ -4,15 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.app.QuizFacadeService;
 import mangmae.harpseal.domain.quiz.dto.request.QuizCreateRequestForm;
-import mangmae.harpseal.domain.quiz.dto.request.QuizSearchRequestCond;
+import mangmae.harpseal.domain.quiz.controller.dto.QuizSearchRequestCond;
 import mangmae.harpseal.domain.quiz.service.QuizService;
 import mangmae.harpseal.entity.Quiz;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.Pageable;
 import java.net.URI;
 
 @RestController
@@ -34,7 +34,7 @@ public class QuizController {
         @RequestBody(required = false) QuizSearchRequestCond condition,
         Pageable pageable
     ) {
-        quizService.find(condition.toServiceDto());
+        quizService.searchWithCondition(condition.toServiceDto(), pageable);
 
         return "ok";
     }

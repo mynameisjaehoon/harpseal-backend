@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import mangmae.harpseal.entity.auditing.CreatedDateEntity;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@ToString(of = {"title", "description", "password", "likeCount", "playTime"})
 public class Quiz extends CreatedDateEntity {
 
     @Id
@@ -53,6 +55,10 @@ public class Quiz extends CreatedDateEntity {
     public void addThumbnail(QuizThumbnail thumbnail) {
         this.thumbnail = thumbnail;
         thumbnail.setQuiz(this);
+    }
+
+    public void addPlayTime() {
+        playTime++;
     }
 
 }

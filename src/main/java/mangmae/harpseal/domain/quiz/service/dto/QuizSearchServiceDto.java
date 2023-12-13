@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
 
 @Getter
 @Builder
@@ -15,4 +16,8 @@ public class QuizSearchServiceDto {
     private String title;
     private String description;
     private String imageData;
+
+    public QuizSearchServiceDto(QuizSearchRepositoryDto quizSearchRepositoryDto) {
+
+    }
 }

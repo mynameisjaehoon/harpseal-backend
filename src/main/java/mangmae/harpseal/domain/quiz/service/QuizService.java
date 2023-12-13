@@ -13,6 +13,7 @@ import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceDto;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.entity.Quiz;
 import mangmae.harpseal.util.FileUtil;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +57,7 @@ public class QuizService {
         return quizRepository.save(newQuiz);
     }
 
-    public List<QuizSearchServiceDto> searchWithCondition(
+    public Page<QuizSearchServiceDto> searchWithCondition(
         final QuizSearchServiceCond condition,
         final Pageable pageable
     ) {
@@ -64,30 +65,27 @@ public class QuizService {
         QuizSearchRepositoryCond repositoryCond = condition.toRepositoryCond();
         long offset = pageable.getOffset();
         int size = pageable.getPageSize();
-        List<QuizSearchRepositoryDto> dtos = null;
+
+        Page<QuizSearchRepositoryDto> result = null;
         switch (searchType) {
             case NONE, COUNT_ASC:
-                dtos = quizRepository.findPlayTimeAsc(repositoryCond, offset, size);
+                result = quizRepository.findPlayTimeAsc(repositoryCond, pageable);
             case COUNT_DESC:
-                dtos = quizRepository.findPlayTimeDesc(repositoryCond, offset, size);
+                result = quizRepository.findPlayTimeDesc(repositoryCond, pageable);
             case RECENT:
-                dtos = quizRepository.findRecentDesc(repositoryCond, offset, size);
+                result = quizRepository.findRecentDesc(repositoryCond, pageable);
             case OLD:
-                dtos = quizRepository.findRecentAsc(repositoryCond, offset, size);
+                result = quizRepository.findRecentAsc(repositoryCond, pageable);
                 // TODO: 2023/12/13 올바르지 못한 타입이 입력되었을 때 어떻게 할것인가? 생각해보자. 단, 이 서비스 클래스에서 할일은 아닌 것 같다.
         }
 
-        return dtos.stream()
-            .map((searchData) -> {
-                return QuizSearchServiceDto.builder()
-                    .id(searchData.getId())
-                    .title(searchData.getTitle())
-                    .description(searchData.getDescription())
-                    .imageData(fileUtil.loadImageBase64(searchData.getImagePath()))
-                    .build();
-            })
-            .toList();
-
+        return result.map(dto -> QuizSearchServiceDto.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .description(dto.getDescription())
+            .imageData(fileUtil.loadImageBase64(dto.getImagePath()))
+            .build()
+        );
     }
 
 }

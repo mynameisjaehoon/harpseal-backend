@@ -1,6 +1,7 @@
 package mangmae.harpseal.util;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.UUID;
 
+@Slf4j
 public class FileUtil {
 
     @Value("${file.thumbnail-image.path}")
@@ -67,6 +69,7 @@ public class FileUtil {
         if (filePath == null) {
             filePath = quizThumbnailDefaultImagePath;
         }
+        log.info("[image path]={}", filePath);
         return Base64.getEncoder().encodeToString(loadImageBytes(filePath));
     }
 

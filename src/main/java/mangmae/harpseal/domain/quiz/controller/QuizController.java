@@ -3,6 +3,7 @@ package mangmae.harpseal.domain.quiz.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.app.QuizFacadeService;
+import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.dto.request.QuizCreateRequestForm;
 import mangmae.harpseal.domain.quiz.controller.dto.QuizSearchRequestCond;
 import mangmae.harpseal.domain.quiz.service.QuizService;
@@ -37,6 +38,9 @@ public class QuizController {
         @RequestBody(required = false) QuizSearchRequestCond condition,
         Pageable pageable
     ) {
+        if (condition == null) {
+            condition = new QuizSearchRequestCond(null, QuizSearchType.NONE.toString());
+        }
         return quizService.searchWithCondition(condition.toServiceDto(), pageable);
     }
 

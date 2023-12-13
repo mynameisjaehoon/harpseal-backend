@@ -6,7 +6,7 @@ import mangmae.harpseal.domain.attachment.exception.QuestionDataStoreFailExcepti
 import mangmae.harpseal.entity.Attachment;
 import mangmae.harpseal.entity.Question;
 import mangmae.harpseal.entity.type.AttachmentType;
-import mangmae.harpseal.util.FilePathUtil;
+import mangmae.harpseal.util.FileUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class AttachmentService {
 
     private final AttachmentRepository attachmentRepository;
-    private final FilePathUtil filePathUtil;
+    private final FileUtil filePathUtil;
 
     public Attachment save(final Attachment attachment) {
         return attachmentRepository.save(attachment);

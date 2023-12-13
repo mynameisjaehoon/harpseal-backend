@@ -2,12 +2,11 @@ package mangmae.harpseal.domain.question;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mangmae.harpseal.domain.application.QuizFacadeService;
-import mangmae.harpseal.domain.quiz.dto.QuestionCreateRequestForm;
-import mangmae.harpseal.domain.quiz.dto.QuestionCreateResponseDto;
+import mangmae.harpseal.domain.app.QuizFacadeService;
+import mangmae.harpseal.domain.quiz.dto.request.QuestionCreateRequestForm;
+import mangmae.harpseal.domain.quiz.dto.request.QuestionCreateResponseDto;
 import mangmae.harpseal.entity.Question;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

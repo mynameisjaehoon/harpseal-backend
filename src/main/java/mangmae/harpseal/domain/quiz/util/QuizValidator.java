@@ -1,8 +1,7 @@
 package mangmae.harpseal.domain.quiz.util;
 
-import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
 import mangmae.harpseal.domain.exception.QuizFormNotValidException;
-import mangmae.harpseal.domain.quiz.service.QuizServiceDto;
+import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
 import org.springframework.util.StringUtils;
 
 /**
@@ -29,7 +28,7 @@ public class QuizValidator {
      * - 퀴즈의 문제 수는 3개 이상, 30개 이하여야 한다.<br>
      * @param dto 퀴즈 등록 폼 DTO
      */
-    public static void validateQuizRegistrationForm(QuizServiceDto dto) {
+    public static void validateQuizRegistrationForm(QuizCreateServiceDto dto) {
         String title = dto.getTitle();
         String password = dto.getPassword();
         String description = dto.getDescription();

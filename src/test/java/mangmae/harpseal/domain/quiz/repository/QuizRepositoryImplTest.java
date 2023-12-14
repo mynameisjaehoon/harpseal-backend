@@ -13,6 +13,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -68,15 +70,16 @@ class QuizRepositoryImplTest {
     public void playTimeSearchTest(){
         //given
         QuizSearchRepositoryCond condition = new QuizSearchRepositoryCond(PREFIX);
+        PageRequest pageRequest = PageRequest.of(0, 4);
         //when
-        List<QuizSearchRepositoryDto> playTimeDesc = quizRepositoryImpl.findPlayTimeDesc(condition, 0, 4);
-        List<QuizSearchRepositoryDto> playTimeAsc = quizRepositoryImpl.findPlayTimeAsc(condition, 0, 4);
+        Page<QuizSearchRepositoryDto> playTimeDesc = quizRepositoryImpl.findPlayTimeDesc(condition, pageRequest);
+        Page<QuizSearchRepositoryDto> playTimeAsc = quizRepositoryImpl.findPlayTimeAsc(condition, pageRequest);
 
         //then
-        assertThat(playTimeDesc)
+        assertThat(playTimeDesc.getContent())
             .extracting("title")
             .containsExactly(PREFIX + "quiz4", PREFIX + "quiz3", PREFIX + "quiz2", PREFIX + "quiz1");
-        assertThat(playTimeAsc)
+        assertThat(playTimeAsc.getContent())
             .extracting("title")
             .containsExactly(PREFIX + "quiz1", PREFIX + "quiz2", PREFIX + "quiz3", PREFIX + "quiz4");
 
@@ -88,18 +91,19 @@ class QuizRepositoryImplTest {
     public void recentSearchTest() {
         //given
         QuizSearchRepositoryCond condition = new QuizSearchRepositoryCond(PREFIX);
+        PageRequest pageRequest = PageRequest.of(0, 4);
         //when
-        List<QuizSearchRepositoryDto> recentDesc = quizRepositoryImpl.findRecentDesc(condition, 0, 4);
-        List<QuizSearchRepositoryDto> recentAsc = quizRepositoryImpl.findRecentAsc(condition, 0, 4);
+        Page<QuizSearchRepositoryDto> recentDesc = quizRepositoryImpl.findRecentDesc(condition, pageRequest);
+        Page<QuizSearchRepositoryDto> recentAsc = quizRepositoryImpl.findRecentAsc(condition, pageRequest);
 
         //퀴즈 생성 순서가 quiz1 -> quiz2 -> quiz3 -> quiz4 인것에 유의
         //then
-        assertThat(recentDesc)
+        assertThat(recentDesc.getContent())
             .extracting("title")
             .containsExactly(PREFIX + "quiz4", PREFIX + "quiz3", PREFIX + "quiz2", PREFIX + "quiz1");
-        assertThat(recentAsc)
-            .extracting("title")
-            .containsExactly(PREFIX + "quiz1", PREFIX + "quiz2", PREFIX + "quiz3", PREFIX + "quiz4");
+        assertThat(recentAsc.getContent())
+                .extracting("title")
+                .containsExactly(PREFIX + "quiz1", PREFIX + "quiz2", PREFIX + "quiz3", PREFIX + "quiz4");
 
     }
 

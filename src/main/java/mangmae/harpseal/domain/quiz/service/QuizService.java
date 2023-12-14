@@ -2,14 +2,16 @@ package mangmae.harpseal.domain.quiz.service;
 
 
 import lombok.RequiredArgsConstructor;
+import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.exception.CannotFindQuizException;
+import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
+import mangmae.harpseal.domain.question.dto.QuestionServiceDto;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.repository.QuizRepository;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
-import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
-import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceCond;
-import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceDto;
+import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
+import mangmae.harpseal.domain.quiz.service.dto.*;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.entity.Quiz;
 import mangmae.harpseal.util.FileUtil;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,6 +89,28 @@ public class QuizService {
             .imageData(fileUtil.loadImageBase64(dto.getImagePath()))
             .build()
         );
+    }
+
+    public SingleQuizServiceResponse findSingleQuiz(final SingleQuizServiceCond condition) {
+        Long quizId = condition.getId();
+        SingleQuizRepositoryResponse response = quizRepository.findSingleQuizById(quizId);
+
+        String thumbnailData = fileUtil.loadImageBase64(response.getThumbnailPath());
+
+        List<QuestionServiceDto> questions = new ArrayList<>();
+        List<QuestionRepositoryDto> repositoryQuestions = response.getQuestions();
+
+        repositoryQuestions
+                .forEach(dto -> {
+                    List<ChoiceServiceDto> choices = dto.getChoices().stream()
+                            .map(ChoiceServiceDto::fromRepositoryDto)
+                            .toList();
+
+                    String attachmentData = fileUtil.loadImageBase64(dto.getAttachmentPath());
+                    QuestionServiceDto serviceDto = QuestionServiceDto.fromRepositoryDto(dto, attachmentData, choices);
+                    questions.add(serviceDto);
+                });
+        return SingleQuizServiceResponse.fromRepositoryResponse(response, thumbnailData, questions);
     }
 
 }

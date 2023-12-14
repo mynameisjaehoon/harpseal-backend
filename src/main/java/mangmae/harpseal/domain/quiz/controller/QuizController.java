@@ -8,6 +8,8 @@ import mangmae.harpseal.domain.quiz.dto.request.QuizCreateRequestForm;
 import mangmae.harpseal.domain.quiz.controller.dto.QuizSearchRequestCond;
 import mangmae.harpseal.domain.quiz.service.QuizService;
 import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceDto;
+import mangmae.harpseal.domain.quiz.service.dto.SingleQuizServiceCond;
+import mangmae.harpseal.domain.quiz.service.dto.SingleQuizServiceResponse;
 import mangmae.harpseal.entity.Quiz;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,6 +46,11 @@ public class QuizController {
         return quizService.searchWithCondition(condition.toServiceDto(), pageable);
     }
 
+    @GetMapping("/{quizId}")
+    public SingleQuizServiceResponse findSingleQuiz(@PathVariable("quizId") Long quizId) {
+        return quizService.findSingleQuiz(new SingleQuizServiceCond(quizId));
+    }
+
     @PostMapping(value = "/new", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> createQuiz(
             @RequestPart(value = "form") QuizCreateRequestForm form,
@@ -52,6 +59,7 @@ public class QuizController {
         Quiz createdQuiz = quizFacadeService.createQuiz(form.toServiceDto(), thumbnail);
         return ResponseEntity.created(URI.create("/quiz/api/v1/" + createdQuiz.getId())).build();
     }
+
 
 
 }

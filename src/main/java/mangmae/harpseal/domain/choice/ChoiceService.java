@@ -3,7 +3,7 @@ package mangmae.harpseal.domain.choice;
 
 import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
-import mangmae.harpseal.domain.question.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 import mangmae.harpseal.entity.MultipleQuestionChoice;
 import mangmae.harpseal.entity.Question;
 import org.springframework.stereotype.Service;

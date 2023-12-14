@@ -207,7 +207,52 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
 
         Quiz findQuiz = em.find(Quiz.class, quizId);
 
-        List<QuestionRepositoryDto> questionDtoList = queryFactory
+        // TODO: 2023/12/15 Question, Thumbnail Image 데이터에 접근하는 쿼리들이 QuizRepository에 있는 것이 맞는가...
+        List<QuestionRepositoryDto> questionDtoList = findQuestionWith(quizId);
+        fetchChoiceData(questionDtoList);
+        String thumbnailImagePath = findThumbnailPath(quizId);
+
+
+        long time = System.currentTimeMillis() - startTime;
+        log.info("time={}ms", time);
+
+        return SingleQuizRepositoryResponse.builder()
+                .id(quizId)
+                .title(findQuiz.getTitle())
+                .description(findQuiz.getDescription())
+                .thumbnailPath(thumbnailImagePath)
+                .questions(questionDtoList)
+                .build();
+    }
+
+    private String findThumbnailPath(Long quizId) {
+        return queryFactory
+                .select(quizThumbnail.filePath)
+                .from(quizThumbnail)
+                .where(quizThumbnail.quiz.id.eq(quizId))
+                .fetchOne();
+    }
+
+    private void fetchChoiceData(List<QuestionRepositoryDto> questionDtoList) {
+        questionDtoList
+                .forEach(dto -> {
+                    Long questionId = dto.getId();
+                    List<ChoiceRepositoryDto> choiceResult = queryFactory
+                            .select(
+                                    Projections.constructor(
+                                            ChoiceRepositoryDto.class,
+                                            multipleQuestionChoice.content
+                                    )
+                            )
+                            .from(multipleQuestionChoice)
+                            .where(multipleQuestionChoice.question.id.eq(questionId))
+                            .fetch();
+                    dto.fetchChoices(choiceResult);
+                });
+    }
+
+    private List<QuestionRepositoryDto> findQuestionWith(Long quizId) {
+        return queryFactory
                 .select(
                         Projections.constructor(
                                 QuestionRepositoryDto.class,
@@ -224,40 +269,6 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
                 .where(question.quiz.id.eq(quizId))
                 .orderBy(question.number.asc())
                 .fetch();
-
-        questionDtoList
-                .forEach(dto -> {
-                    Long questionId = dto.getId();
-                    List<ChoiceRepositoryDto> choiceResult = queryFactory
-                            .select(
-                                    Projections.constructor(
-                                            ChoiceRepositoryDto.class,
-                                            multipleQuestionChoice.content
-                                    )
-                            )
-                            .from(multipleQuestionChoice)
-                            .where(multipleQuestionChoice.question.id.eq(questionId))
-                            .fetch();
-                    dto.fetchChoices(choiceResult);
-                });
-
-        String thumbnailImagePath = queryFactory
-                .select(quizThumbnail.filePath)
-                .from(quizThumbnail)
-                .where(quizThumbnail.quiz.id.eq(quizId))
-                .fetchOne();
-
-
-        long time = System.currentTimeMillis() - startTime;
-        log.info("time={}ms", time);
-
-        return SingleQuizRepositoryResponse.builder()
-                .id(quizId)
-                .title(findQuiz.getTitle())
-                .description(findQuiz.getDescription())
-                .thumbnailPath(thumbnailImagePath)
-                .questions(questionDtoList)
-                .build();
     }
 
     private BooleanExpression quizTitleContains(String quizTitle) {

@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 import mangmae.harpseal.entity.Quiz;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -104,6 +105,14 @@ class QuizRepositoryImplTest {
         assertThat(recentAsc.getContent())
                 .extracting("title")
                 .containsExactly(PREFIX + "quiz1", PREFIX + "quiz2", PREFIX + "quiz3", PREFIX + "quiz4");
+
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("퀴즈 ID로 퀴즈 하나 찾기")
+    public void findSingleQuizTest() {
+        SingleQuizRepositoryResponse findQuiz = quizRepositoryImpl.findSingleQuizById(1L);
 
     }
 

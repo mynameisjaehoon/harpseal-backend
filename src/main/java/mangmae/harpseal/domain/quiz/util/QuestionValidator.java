@@ -1,6 +1,6 @@
 package mangmae.harpseal.domain.quiz.util;
 
-import mangmae.harpseal.domain.question.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 import mangmae.harpseal.domain.exception.QuestionFormNotValidException;
 import mangmae.harpseal.entity.type.QuestionType;
 import org.springframework.util.StringUtils;

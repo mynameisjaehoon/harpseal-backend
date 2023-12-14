@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.question;
+package mangmae.harpseal.domain.question.dto;
 
 
 import lombok.Builder;

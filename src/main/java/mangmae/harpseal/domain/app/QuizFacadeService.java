@@ -7,7 +7,7 @@ import mangmae.harpseal.domain.attachment.AttachmentService;
 import mangmae.harpseal.domain.choice.ChoiceService;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.question.QuestionService;
-import mangmae.harpseal.domain.question.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 import mangmae.harpseal.domain.quiz.service.QuizService;
 import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
 import mangmae.harpseal.domain.quiz.util.QuestionValidator;

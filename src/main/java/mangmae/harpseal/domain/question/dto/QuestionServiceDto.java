@@ -22,4 +22,20 @@ public class QuestionServiceDto {
     private String attachmentData;
     List<ChoiceServiceDto> choices;
 
+    public static QuestionServiceDto fromRepositoryDto(
+            final QuestionRepositoryDto dto,
+            final String data,
+            final List<ChoiceServiceDto> choices) {
+
+        return QuestionServiceDto.builder()
+                .content(dto.getContent())
+                .number(dto.getNumber())
+                .answer(dto.getAnswer())
+                .type(dto.getType().toString())
+                .attachmentData(data)
+                .choices(choices)
+                .build();
+
+    }
+
 }

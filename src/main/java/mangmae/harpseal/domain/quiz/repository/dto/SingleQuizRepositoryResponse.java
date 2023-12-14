@@ -18,7 +18,7 @@ public class SingleQuizRepositoryResponse {
     private Long id;
     private String title;
     private String description;
-    private String thumbnailFilePath;
+    private String thumbnailPath;
     private List<QuestionRepositoryDto> questions = new ArrayList<>();
 
     public void addQuestion(QuestionRepositoryDto dto) {

@@ -12,8 +12,6 @@ public class ChoiceCreateDto {
     private String content;
 
     public ChoiceServiceDto toServiceDto() {
-        return ChoiceServiceDto.builder()
-            .content(content)
-            .build();
+        return new ChoiceServiceDto(content);
     }
 }

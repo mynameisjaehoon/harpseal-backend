@@ -3,10 +3,10 @@ package mangmae.harpseal.domain.quiz.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
 import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
@@ -19,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static mangmae.harpseal.entity.QAttachment.*;
@@ -29,6 +28,7 @@ import static mangmae.harpseal.entity.QQuiz.*;
 import static mangmae.harpseal.entity.QQuizThumbnail.*;
 
 
+@Slf4j
 @Repository
 public class QuizRepositoryImpl implements QuizQueryRepository {
 
@@ -203,11 +203,7 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
     @Override
     public SingleQuizRepositoryResponse findSingleQuizById(Long quizId) {
 
-        // 1. quizId 에 해당하는 Question 엔티티를 찾는다.
-        // 2. Question id를 사용해서 Choice를 찾는다.
-        // 3. Choice DTO들을 Question DTO에 추가한다.
-        // 4. Quiz를 찾는다.
-        // 5. 받아온 Quiz DTO에 Question, Choice 정보를 추가한다.
+        long startTime = System.currentTimeMillis();
 
         Quiz findQuiz = em.find(Quiz.class, quizId);
 
@@ -252,15 +248,18 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
                 .fetchOne();
 
 
+        long time = System.currentTimeMillis() - startTime;
+        log.info("time={}ms", time);
+
         return SingleQuizRepositoryResponse.builder()
                 .id(quizId)
                 .title(findQuiz.getTitle())
                 .description(findQuiz.getDescription())
-                .thumbnailFilePath(thumbnailImagePath)
+                .thumbnailPath(thumbnailImagePath)
                 .questions(questionDtoList)
                 .build();
     }
-    
+
     private BooleanExpression quizTitleContains(String quizTitle) {
         return StringUtils.hasText(quizTitle) ? quiz.title.contains(quizTitle) : null;
     }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.domain.question.dto.QuestionServiceDto;
+import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,24 @@ import java.util.List;
 @AllArgsConstructor
 public class SingleQuizServiceResponse {
 
-    private String quizId;
+    private Long quizId;
     private String title;
     private String description;
     private String thumbnailData;
     private List<QuestionServiceDto> questions = new ArrayList<>();
+
+    public static SingleQuizServiceResponse fromRepositoryResponse(
+            final SingleQuizRepositoryResponse dto,
+            final String thumbnailData,
+            final List<QuestionServiceDto> questions
+    ) {
+        return SingleQuizServiceResponse.builder()
+                .quizId(dto.getId())
+                .title(dto.getTitle())
+                .description(dto.getDescription())
+                .thumbnailData(thumbnailData)
+                .questions(questions)
+                .build();
+    }
 
 }

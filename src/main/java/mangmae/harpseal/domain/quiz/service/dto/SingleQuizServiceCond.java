@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SingleQuizServiceCond {
-    private String id; // quiz id
+    private Long id; // quiz id
 }

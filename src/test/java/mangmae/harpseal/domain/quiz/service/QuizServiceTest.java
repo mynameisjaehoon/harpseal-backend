@@ -1,20 +1,20 @@
 package mangmae.harpseal.domain.quiz.service;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-
+@Slf4j
 @SpringBootTest
+@Transactional
 class QuizServiceTest {
 
-    @Test
-    @DisplayName("퀴즈 삭제 테스트")
-    void deleteQuiz() {
+    private static String password;
+
+    @BeforeEach
+    void before() {
 
     }
-
-
 }

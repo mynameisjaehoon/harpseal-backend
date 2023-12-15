@@ -232,17 +232,12 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
         final Long quizId,
         final String password
     ) {
-        return queryFactory
-            .select(
-                Projections.constructor(
-                    QuizDeleteRepositoryResponse.class,
-                    quiz.id,
-                    quiz.password
-                )
-            )
-            .from(quiz)
+        long deletedId = queryFactory
+            .delete(quiz)
             .where(quiz.id.eq(quizId))
-            .fetchOne();
+            .execute();
+
+        return new QuizDeleteRepositoryResponse(deletedId, password);
     }
 
     private String findThumbnailPath(Long quizId) {

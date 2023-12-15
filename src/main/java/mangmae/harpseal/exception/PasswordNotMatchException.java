@@ -5,10 +5,6 @@ public class PasswordNotMatchException extends RuntimeException {
         super();
     }
 
-    public PasswordNotMatchException(String password1, String password2) {
-        super("[" + password1 + "] and [" + password2 + "] is not match");
-    }
-
     public PasswordNotMatchException(String message) {
         super(message);
     }

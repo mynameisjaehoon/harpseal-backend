@@ -15,6 +15,7 @@ import mangmae.harpseal.domain.quiz.service.dto.SingleQuizServiceResponse;
 import mangmae.harpseal.entity.Quiz;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,10 +64,11 @@ public class QuizController {
     }
 
     @DeleteMapping("/{quizId}")
-    public QuizDeleteResponseDto deleteQuiz(
+    public ResponseEntity<QuizDeleteResponseDto> deleteQuiz(
         @PathVariable("quizId") Long quizId,
         @RequestBody QuizDeleteRequestDto requestDto
     ) {
-        return quizService.deleteQuizById(quizId, requestDto.getPassword());
+        QuizDeleteResponseDto response = quizService.deleteQuizById(quizId, requestDto.getPassword());
+        return ResponseEntity.accepted().body(response);
     }
 }

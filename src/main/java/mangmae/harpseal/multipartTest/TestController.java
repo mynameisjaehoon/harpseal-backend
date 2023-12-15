@@ -21,6 +21,5 @@ public class TestController {
             @RequestPart(value = "imgFile") MultipartFile imgFile
     ) {
         log.info("이름={}, 나이={}, 이미지={}", request.getName(), request.getAge(), imgFile);
-
     }
 }

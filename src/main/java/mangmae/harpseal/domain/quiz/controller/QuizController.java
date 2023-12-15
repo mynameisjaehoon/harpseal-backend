@@ -3,16 +3,19 @@ package mangmae.harpseal.domain.quiz.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.app.QuizFacadeService;
+import mangmae.harpseal.domain.quiz.controller.dto.QuizDeleteRequestDto;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.dto.request.QuizCreateRequestForm;
 import mangmae.harpseal.domain.quiz.controller.dto.QuizSearchRequestCond;
 import mangmae.harpseal.domain.quiz.service.QuizService;
+import mangmae.harpseal.domain.quiz.service.dto.QuizDeleteResponseDto;
 import mangmae.harpseal.domain.quiz.service.dto.QuizSearchServiceDto;
 import mangmae.harpseal.domain.quiz.service.dto.SingleQuizServiceCond;
 import mangmae.harpseal.domain.quiz.service.dto.SingleQuizServiceResponse;
 import mangmae.harpseal.entity.Quiz;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +63,12 @@ public class QuizController {
         return ResponseEntity.created(URI.create("/quiz/api/v1/" + createdQuiz.getId())).build();
     }
 
-
-
+    @DeleteMapping("/{quizId}")
+    public ResponseEntity<QuizDeleteResponseDto> deleteQuiz(
+        @PathVariable("quizId") Long quizId,
+        @RequestBody QuizDeleteRequestDto requestDto
+    ) {
+        QuizDeleteResponseDto response = quizService.deleteQuizById(quizId, requestDto.getPassword());
+        return ResponseEntity.accepted().body(response);
+    }
 }

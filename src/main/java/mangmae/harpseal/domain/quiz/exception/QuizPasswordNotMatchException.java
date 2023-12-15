@@ -1,8 +1,14 @@
-package mangmae.harpseal.domain.exception;
+package mangmae.harpseal.domain.quiz.exception;
 
-public class QuizPasswordNotMatchException extends RuntimeException {
+import mangmae.harpseal.exception.PasswordNotMatchException;
+
+public class QuizPasswordNotMatchException extends PasswordNotMatchException {
     public QuizPasswordNotMatchException() {
         super();
+    }
+
+    public QuizPasswordNotMatchException(Long quizId, String password, Throwable cause) {
+        super("id [" + quizId + "] quiz password is invalid", cause);
     }
 
     public QuizPasswordNotMatchException(String message) {

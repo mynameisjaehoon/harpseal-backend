@@ -8,12 +8,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
+import mangmae.harpseal.domain.exception.CannotFindQuizException;
 import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
-import mangmae.harpseal.domain.quiz.service.dto.QuizDeleteResponseDto;
 import mangmae.harpseal.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -229,15 +229,23 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
 
     @Override
     public QuizDeleteRepositoryResponse deleteQuizById(
-        final Long quizId,
-        final String password
+        final Long quizId
     ) {
         long deletedId = queryFactory
             .delete(quiz)
             .where(quiz.id.eq(quizId))
             .execute();
 
-        return new QuizDeleteRepositoryResponse(deletedId, password);
+        return new QuizDeleteRepositoryResponse(deletedId);
+    }
+
+    @Override
+    public String findPasswordById(Long quizId) {
+        return queryFactory
+            .select(quiz.password)
+            .from(quiz)
+            .where(quizIdEq(quizId))
+            .fetchFirst();
     }
 
     private String findThumbnailPath(Long quizId) {
@@ -288,5 +296,9 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
 
     private BooleanExpression quizTitleContains(String quizTitle) {
         return StringUtils.hasText(quizTitle) ? quiz.title.contains(quizTitle) : null;
+    }
+
+    private BooleanExpression quizIdEq(Long id) {
+        return quiz.id.eq(id);
     }
 }

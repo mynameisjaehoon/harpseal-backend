@@ -7,8 +7,6 @@ import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
-
 public interface QuizQueryRepository {
 
     public Page<QuizSearchRepositoryDto> findPlayTimeDesc(QuizSearchRepositoryCond condition, Pageable pageable);
@@ -21,6 +19,8 @@ public interface QuizQueryRepository {
 
     public SingleQuizRepositoryResponse findSingleQuizById(Long quizId);
 
-    public QuizDeleteRepositoryResponse deleteQuizById(Long quizId, String password);
+    public QuizDeleteRepositoryResponse deleteQuizById(Long quizId);
+
+    public String findPasswordById(Long quizId);
 
 }

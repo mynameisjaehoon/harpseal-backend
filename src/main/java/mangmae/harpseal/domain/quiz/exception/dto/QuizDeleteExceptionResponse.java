@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.repository.dto;
+package mangmae.harpseal.domain.quiz.exception.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizDeleteRepositoryResponse {
+public class QuizDeleteExceptionResponse {
 
-    private Long id;
+    private String message;
 
 }

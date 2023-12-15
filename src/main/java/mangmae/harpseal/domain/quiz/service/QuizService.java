@@ -7,7 +7,6 @@ import mangmae.harpseal.domain.exception.CannotFindQuizException;
 import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
 import mangmae.harpseal.domain.question.dto.QuestionServiceDto;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
-import mangmae.harpseal.domain.quiz.exception.QuizPasswordNotMatchException;
 import mangmae.harpseal.domain.quiz.repository.QuizRepository;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
@@ -16,7 +15,6 @@ import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.service.dto.*;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.entity.Quiz;
-import mangmae.harpseal.exception.PasswordNotMatchException;
 import mangmae.harpseal.util.FileUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -120,15 +118,19 @@ public class QuizService {
 
     @Transactional
     public QuizDeleteResponseDto deleteQuizById(Long id, String password) {
-        QuizDeleteRepositoryResponse response = quizRepository.deleteQuizById(id, password);
-
-        try {
-            verifyPassword(password, response.getPassword());
-        } catch (PasswordNotMatchException e) {
-            throw new QuizPasswordNotMatchException(id, password, e);
-        }
+        checkPasswordMatch(id, password);
+        QuizDeleteRepositoryResponse response = quizRepository.deleteQuizById(id);
 
         return QuizDeleteResponseDto.fromRepositoryDto(response);
+    }
+
+    private void checkPasswordMatch(Long id, String password) {
+        String quizPassword = quizRepository.findPasswordById(id);
+        if (quizPassword == null) {
+            throw new CannotFindQuizException("ID=[" + id + "] 인 퀴즈를 찾을 수 없습니다.");
+        }
+
+        verifyPassword(password, quizPassword);
     }
 
 }

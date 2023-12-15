@@ -9,9 +9,11 @@ import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
 import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
+import mangmae.harpseal.domain.quiz.service.dto.QuizDeleteResponseDto;
 import mangmae.harpseal.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -223,6 +225,24 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
                 .thumbnailPath(thumbnailImagePath)
                 .questions(questionDtoList)
                 .build();
+    }
+
+    @Override
+    public QuizDeleteRepositoryResponse deleteQuizById(
+        final Long quizId,
+        final String password
+    ) {
+        return queryFactory
+            .select(
+                Projections.constructor(
+                    QuizDeleteRepositoryResponse.class,
+                    quiz.id,
+                    quiz.password
+                )
+            )
+            .from(quiz)
+            .where(quiz.id.eq(quizId))
+            .fetchOne();
     }
 
     private String findThumbnailPath(Long quizId) {

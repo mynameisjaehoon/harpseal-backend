@@ -134,12 +134,15 @@ public class QuizService {
         final QuizEditServiceDto dto,
         final MultipartFile thumbnailRequest
     ) {
+        // 패스워드 검사
         Quiz quiz = findById(dto.getId());
         verifyPassword(quiz.getPassword(), dto.getPassword());
 
+        // 퀴즈 데이터 업데이트
         quizRepository.updateQuiz(dto.toRepositoryDto());
-        Optional<QuizThumbnail> findThumbnail = thumbnailRepository.findByQuizId(dto.getId());
 
+        // 썸네일 데이터 수정
+        Optional<QuizThumbnail> findThumbnail = thumbnailRepository.findByQuizId(dto.getId());
         findThumbnail.ifPresent((th) -> {
             thumbnailRepository.delete(th);
             fileUtil.deleteFile(th.getFilePath());

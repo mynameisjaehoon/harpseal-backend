@@ -1,9 +1,6 @@
 package mangmae.harpseal.domain.quiz.repository;
 
-import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
-import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
+import mangmae.harpseal.domain.quiz.repository.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,5 +19,7 @@ public interface QuizQueryRepository {
     public QuizDeleteRepositoryResponse deleteQuizById(Long quizId);
 
     public String findPasswordById(Long quizId);
+
+    public Long updateQuiz(QuizEditRepositoryDto dto);
 
 }

@@ -14,12 +14,15 @@ import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.service.dto.*;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
+import mangmae.harpseal.domain.thumbnail.ThumbnailRepository;
 import mangmae.harpseal.entity.Quiz;
+import mangmae.harpseal.entity.QuizThumbnail;
 import mangmae.harpseal.util.FileUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,7 @@ import static mangmae.harpseal.util.SecurityUtil.*;
 public class QuizService {
 
     private final QuizRepository quizRepository;
+    private final ThumbnailRepository thumbnailRepository;
     private final FileUtil fileUtil;
 
     @Transactional
@@ -118,19 +122,45 @@ public class QuizService {
 
     @Transactional
     public QuizDeleteResponseDto deleteQuizById(Long id, String password) {
-        checkPasswordMatch(id, password);
+        Quiz quiz = findById(id);
+        verifyPassword(quiz.getPassword(), password);
         QuizDeleteRepositoryResponse response = quizRepository.deleteQuizById(id);
 
         return QuizDeleteResponseDto.fromRepositoryDto(response);
     }
 
-    private void checkPasswordMatch(Long id, String password) {
-        String quizPassword = quizRepository.findPasswordById(id);
-        if (quizPassword == null) {
-            throw new CannotFindQuizException("ID=[" + id + "] 인 퀴즈를 찾을 수 없습니다.");
+    @Transactional
+    public QuizEditServiceResponse editQuiz(
+        final QuizEditServiceDto dto,
+        final MultipartFile thumbnailRequest
+    ) {
+        // 패스워드 검사
+        Quiz quiz = findById(dto.getId());
+        verifyPassword(quiz.getPassword(), dto.getPassword());
+
+        // 퀴즈 데이터 업데이트
+        quizRepository.updateQuiz(dto.toRepositoryDto());
+
+        // 썸네일 데이터 수정
+        Optional<QuizThumbnail> findThumbnail = thumbnailRepository.findByQuizId(dto.getId());
+        findThumbnail.ifPresent((th) -> {
+            thumbnailRepository.delete(th);
+            fileUtil.deleteFile(th.getFilePath());
+        });
+        String savedPath = fileUtil.saveThumbnailImage(thumbnailRequest);
+
+        if (!thumbnailRequest.isEmpty()) {
+            QuizThumbnail newThumbnail = new QuizThumbnail(savedPath);
+            quiz.changeThumbnail(newThumbnail);
+            thumbnailRepository.save(newThumbnail);
         }
 
-        verifyPassword(password, quizPassword);
+        return QuizEditServiceResponse.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .description(dto.getDescription())
+            .thumbnailImage(fileUtil.loadImageBase64(savedPath))
+            .message("퀴즈가 수정되었습니다.")
+            .build();
     }
-
 }

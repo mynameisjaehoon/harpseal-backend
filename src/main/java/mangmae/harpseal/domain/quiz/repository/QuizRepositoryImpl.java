@@ -10,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
 import mangmae.harpseal.domain.exception.CannotFindQuizException;
 import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
-import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
+import mangmae.harpseal.domain.quiz.repository.dto.*;
 import mangmae.harpseal.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -246,6 +243,21 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
             .from(quiz)
             .where(quizIdEq(quizId))
             .fetchFirst();
+    }
+
+    /**
+     * 전달된 DTO로 퀴저 정보를 업데이트한다.
+     * @param dto 업데이트할 퀴즈 정보
+     * @return 업데이트로 변경된 튜플 갯수
+     */
+    @Override
+    public Long updateQuiz(QuizEditRepositoryDto dto) {
+        return queryFactory
+            .update(quiz)
+            .set(quiz.title, dto.getTitle())
+            .set(quiz.description, dto.getDescription())
+            .where(quizIdEq(dto.getId()))
+            .execute();
     }
 
     private String findThumbnailPath(Long quizId) {

@@ -2,8 +2,10 @@ package mangmae.harpseal.util;
 
 
 import lombok.extern.slf4j.Slf4j;
+import mangmae.harpseal.util.type.FileType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,5 +75,28 @@ public class FileUtil {
         return Base64.getEncoder().encodeToString(loadImageBytes(filePath));
     }
 
+    public String saveThumbnailImage(MultipartFile image) {
 
+        if (image.isEmpty()) {
+            return null;
+        }
+
+        try {
+            String path = makeThumbnailImagePath();
+            image.transferTo(new File(path));
+            return path;
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Unable to save thumbnailImage", e);
+        }
+    }
+
+    public void deleteFile(String path) {
+        File file = new File(path);
+        boolean result = file.delete();
+        if (!result) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Unable to delete file path=[").append(path).append("]");
+            throw new IllegalArgumentException(sb.toString());
+        }
+    }
 }

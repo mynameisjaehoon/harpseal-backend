@@ -14,12 +14,15 @@ import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.service.dto.*;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
+import mangmae.harpseal.domain.thumbnail.ThumbnailRepository;
 import mangmae.harpseal.entity.Quiz;
+import mangmae.harpseal.entity.QuizThumbnail;
 import mangmae.harpseal.util.FileUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,7 @@ import static mangmae.harpseal.util.SecurityUtil.*;
 public class QuizService {
 
     private final QuizRepository quizRepository;
+    private final ThumbnailRepository thumbnailRepository;
     private final FileUtil fileUtil;
 
     @Transactional
@@ -126,9 +130,34 @@ public class QuizService {
     }
 
     @Transactional
-    public QuizEditServiceResponse editQuiz(QuizEditServiceDto dto) {
+    public QuizEditServiceResponse editQuiz(
+        final QuizEditServiceDto dto,
+        final MultipartFile thumbnailRequest
+    ) {
         Quiz quiz = findById(dto.getId());
         verifyPassword(quiz.getPassword(), dto.getPassword());
 
+        quizRepository.updateQuiz(dto.toRepositoryDto());
+        Optional<QuizThumbnail> findThumbnail = thumbnailRepository.findByQuizId(dto.getId());
+
+        findThumbnail.ifPresent((th) -> {
+            thumbnailRepository.delete(th);
+            fileUtil.deleteFile(th.getFilePath());
+        });
+        String savedPath = fileUtil.saveThumbnailImage(thumbnailRequest);
+
+        if (!thumbnailRequest.isEmpty()) {
+            QuizThumbnail newThumbnail = new QuizThumbnail(savedPath);
+            quiz.changeThumbnail(newThumbnail);
+            thumbnailRepository.save(newThumbnail);
+        }
+
+        return QuizEditServiceResponse.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .description(dto.getDescription())
+            .thumbnailImage(fileUtil.loadImageBase64(savedPath))
+            .message("퀴즈가 수정되었습니다.")
+            .build();
     }
 }

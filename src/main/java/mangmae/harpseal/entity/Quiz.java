@@ -52,7 +52,7 @@ public class Quiz extends CreatedDateEntity {
         question.changeQuiz(this);
     }
 
-    public void addThumbnail(QuizThumbnail thumbnail) {
+    public void changeThumbnail(QuizThumbnail thumbnail) {
         this.thumbnail = thumbnail;
         thumbnail.setQuiz(this);
     }

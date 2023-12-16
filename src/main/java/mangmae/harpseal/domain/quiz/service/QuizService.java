@@ -118,19 +118,17 @@ public class QuizService {
 
     @Transactional
     public QuizDeleteResponseDto deleteQuizById(Long id, String password) {
-        checkPasswordMatch(id, password);
+        Quiz quiz = findById(id);
+        verifyPassword(quiz.getPassword(), password);
         QuizDeleteRepositoryResponse response = quizRepository.deleteQuizById(id);
 
         return QuizDeleteResponseDto.fromRepositoryDto(response);
     }
 
-    private void checkPasswordMatch(Long id, String password) {
-        String quizPassword = quizRepository.findPasswordById(id);
-        if (quizPassword == null) {
-            throw new CannotFindQuizException("ID=[" + id + "] 인 퀴즈를 찾을 수 없습니다.");
-        }
+    @Transactional
+    public QuizEditServiceResponse editQuiz(QuizEditServiceDto dto) {
+        Quiz quiz = findById(dto.getId());
+        verifyPassword(quiz.getPassword(), dto.getPassword());
 
-        verifyPassword(password, quizPassword);
     }
-
 }

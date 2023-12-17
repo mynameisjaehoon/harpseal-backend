@@ -2,7 +2,7 @@ package mangmae.harpseal.domain.quiz.service;
 
 
 import lombok.RequiredArgsConstructor;
-import mangmae.harpseal.domain.quiz.repository.jpainterface.QuestionRepository;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.question.QuestionRepository;
 import mangmae.harpseal.entity.Question;
 import org.springframework.stereotype.Service;
 

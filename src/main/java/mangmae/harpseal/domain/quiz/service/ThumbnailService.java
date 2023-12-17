@@ -2,7 +2,7 @@ package mangmae.harpseal.domain.quiz.service;
 
 import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.exception.ThumbnailImageStoreException;
-import mangmae.harpseal.domain.quiz.repository.jpainterface.ThumbnailRepository;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.thumbnail.ThumbnailRepository;
 import mangmae.harpseal.entity.Quiz;
 import mangmae.harpseal.entity.QuizThumbnail;
 import mangmae.harpseal.util.FileUtil;

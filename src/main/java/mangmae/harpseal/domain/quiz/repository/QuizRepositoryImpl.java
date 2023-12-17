@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.question.QuestionRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.quiz.*;
-import mangmae.harpseal.domain.quiz.repository.jpainterface.QuizQueryRepository;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.quiz.QuizQueryRepository;
 import mangmae.harpseal.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.repository.jpainterface;
+package mangmae.harpseal.domain.quiz.repository.jpainterface.attachment;
 
 import mangmae.harpseal.entity.Attachment;
 import mangmae.harpseal.entity.MultipleQuestionChoice;

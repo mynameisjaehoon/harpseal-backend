@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.quiz.repository.dto.quiz.QuizSearchRepositoryCond;
 import mangmae.harpseal.domain.quiz.repository.dto.quiz.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.quiz.SingleQuizRepositoryResponse;
-import mangmae.harpseal.domain.quiz.repository.jpainterface.QuizQueryRepository;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.quiz.QuizQueryRepository;
 import mangmae.harpseal.entity.Quiz;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.repository.jpainterface;
+package mangmae.harpseal.domain.quiz.repository.jpainterface.thumbnail;
 
 import mangmae.harpseal.entity.QuizThumbnail;
 

@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.repository.jpainterface;
+package mangmae.harpseal.domain.quiz.repository.jpainterface.quiz;
 
 import mangmae.harpseal.domain.quiz.repository.dto.question.QuestionEditRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.quiz.*;

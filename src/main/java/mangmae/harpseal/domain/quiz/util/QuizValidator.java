@@ -1,7 +1,7 @@
 package mangmae.harpseal.domain.quiz.util;
 
 import mangmae.harpseal.domain.exception.QuizFormNotValidException;
-import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
+import mangmae.harpseal.domain.quiz.service.dto.quiz.QuizCreateServiceDto;
 import org.springframework.util.StringUtils;
 
 /**

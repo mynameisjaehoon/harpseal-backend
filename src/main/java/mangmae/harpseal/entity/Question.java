@@ -5,9 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
-import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
-import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
+import mangmae.harpseal.domain.quiz.service.dto.question.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.quiz.repository.dto.QuestionRepositoryDto;
 import mangmae.harpseal.entity.type.QuestionType;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
-package mangmae.harpseal.domain.quiz.repository.jpainterface.question;
+package mangmae.harpseal.domain.quiz.repository;
 
+import mangmae.harpseal.domain.quiz.repository.jpainterface.question.QuestionQueryRepository;
 import mangmae.harpseal.entity.Question;
 import org.springframework.stereotype.Repository;
 

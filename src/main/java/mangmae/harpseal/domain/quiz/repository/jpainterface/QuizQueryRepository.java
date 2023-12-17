@@ -1,6 +1,7 @@
 package mangmae.harpseal.domain.quiz.repository.jpainterface;
 
-import mangmae.harpseal.domain.quiz.repository.dto.*;
+import mangmae.harpseal.domain.quiz.repository.dto.question.QuestionEditRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.quiz.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,5 +22,7 @@ public interface QuizQueryRepository {
     public String findPasswordById(Long quizId);
 
     public Long updateQuiz(QuizEditRepositoryDto dto);
+
+    public void updateQuestion(QuestionEditRepositoryDto dto);
 
 }

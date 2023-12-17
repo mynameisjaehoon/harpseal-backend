@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.quiz.QuizSearchRepositoryDto;
 
 @Getter
 @Builder

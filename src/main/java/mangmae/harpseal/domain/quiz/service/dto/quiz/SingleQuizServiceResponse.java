@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
+import mangmae.harpseal.domain.quiz.repository.dto.quiz.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.service.dto.question.QuestionServiceDto;
 
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
-import mangmae.harpseal.domain.quiz.repository.dto.QuestionRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.question.QuestionRepositoryDto;
 
 import java.util.List;
 

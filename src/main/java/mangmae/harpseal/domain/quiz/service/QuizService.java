@@ -4,15 +4,16 @@ package mangmae.harpseal.domain.quiz.service;
 import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.exception.CannotFindQuizException;
-import mangmae.harpseal.domain.quiz.repository.dto.QuestionRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.question.QuestionRepositoryDto;
+import mangmae.harpseal.domain.quiz.service.dto.question.QuestionEditServiceDto;
 import mangmae.harpseal.domain.quiz.service.dto.question.QuestionServiceDto;
 import mangmae.harpseal.domain.quiz.service.dto.quiz.*;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.repository.jpainterface.QuizRepository;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
-import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
-import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
+import mangmae.harpseal.domain.quiz.repository.dto.quiz.QuizDeleteRepositoryResponse;
+import mangmae.harpseal.domain.quiz.repository.dto.quiz.QuizSearchRepositoryCond;
+import mangmae.harpseal.domain.quiz.repository.dto.quiz.QuizSearchRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.quiz.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.domain.quiz.repository.jpainterface.ThumbnailRepository;
 import mangmae.harpseal.entity.Quiz;
@@ -162,5 +163,21 @@ public class QuizService {
             .thumbnailImage(fileUtil.loadImageBase64(savedPath))
             .message("퀴즈가 수정되었습니다.")
             .build();
+    }
+
+    @Transactional
+    public void editQuestion(
+        final QuestionEditServiceDto dto,
+        final MultipartFile attachment
+    ) {
+        // 비밀번호 검사
+        Long quizId = dto.getQuizId();
+        Quiz quiz = findById(quizId);
+        verifyPassword(quiz.getPassword(), dto.getPassword());
+
+
+
+
+
     }
 }

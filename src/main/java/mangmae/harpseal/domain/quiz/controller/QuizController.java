@@ -1,10 +1,14 @@
 package mangmae.harpseal.domain.quiz.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import mangmae.harpseal.domain.app.QuizFacadeService;
+import mangmae.harpseal.domain.quiz.controller.dto.question.QuestionEditRequestDto;
 import mangmae.harpseal.domain.quiz.controller.dto.quiz.QuizDeleteRequestDto;
 import mangmae.harpseal.domain.quiz.controller.dto.quiz.QuizEditRequestDto;
+import mangmae.harpseal.domain.quiz.service.dto.question.QuestionEditServiceResponse;
 import mangmae.harpseal.domain.quiz.service.dto.quiz.*;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.controller.dto.question.QuestionCreateRequestForm;
@@ -16,12 +20,16 @@ import mangmae.harpseal.entity.Question;
 import mangmae.harpseal.entity.Quiz;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import static org.springframework.http.MediaType.*;
 
@@ -97,5 +105,23 @@ public class QuizController {
         return ResponseEntity
             .ok()
             .body(response);
+    }
+
+    @PutMapping(value = "/{quizId}/{number}", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
+    public void editQuestion(
+        @PathVariable("quizId") Long quizId,
+        @PathVariable("number") int number,
+        @RequestPart(value = "form") QuestionEditRequestDto dto,
+        @RequestPart(value = "attachment") MultipartFile attachment,
+        HttpServletResponse response
+    ) throws IOException {
+
+        quizService.editQuestion(dto.toServiceDto(quizId, number), attachment);
+
+
+        StringBuilder urlBuilder = new StringBuilder("http://localhost:8080/api/v1/quiz/");
+        urlBuilder.append("quizId");
+        response.sendRedirect(urlBuilder.toString());
+
     }
 }

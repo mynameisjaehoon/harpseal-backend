@@ -3,6 +3,7 @@ package mangmae.harpseal.domain.quiz.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.ThumbnailQueryRepository;
 import mangmae.harpseal.entity.QuizThumbnail;
 import org.springframework.stereotype.Repository;
 

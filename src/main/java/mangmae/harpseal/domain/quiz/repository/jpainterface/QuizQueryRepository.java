@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.repository;
+package mangmae.harpseal.domain.quiz.repository.jpainterface;
 
 import mangmae.harpseal.domain.quiz.repository.dto.*;
 import org.springframework.data.domain.Page;

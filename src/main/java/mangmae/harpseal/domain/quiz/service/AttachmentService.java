@@ -3,7 +3,7 @@ package mangmae.harpseal.domain.quiz.service;
 
 import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.quiz.exception.QuestionDataStoreFailException;
-import mangmae.harpseal.domain.quiz.repository.AttachmentRepository;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.AttachmentRepository;
 import mangmae.harpseal.entity.Attachment;
 import mangmae.harpseal.entity.Question;
 import mangmae.harpseal.entity.type.AttachmentType;

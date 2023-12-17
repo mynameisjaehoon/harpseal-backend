@@ -3,13 +3,13 @@ package mangmae.harpseal.domain.app;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mangmae.harpseal.domain.attachment.AttachmentService;
+import mangmae.harpseal.domain.quiz.service.AttachmentService;
 import mangmae.harpseal.domain.choice.ChoiceService;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
-import mangmae.harpseal.domain.question.QuestionService;
-import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.quiz.service.QuestionService;
+import mangmae.harpseal.domain.quiz.service.dto.question.QuestionCreateServiceDto;
 import mangmae.harpseal.domain.quiz.service.QuizService;
-import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
+import mangmae.harpseal.domain.quiz.service.dto.quiz.QuizCreateServiceDto;
 import mangmae.harpseal.domain.quiz.util.QuestionValidator;
 import mangmae.harpseal.entity.type.AttachmentType;
 import mangmae.harpseal.util.SecurityUtil;

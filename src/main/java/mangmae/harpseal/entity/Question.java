@@ -64,7 +64,7 @@ public class Question {
         choice.changeQuestion(this);
     }
 
-    public void addAttachment(Attachment attachment) {
+    public void changeAttachment(Attachment attachment) {
         this.attachment = attachment;
         attachment.changeQuestion(this);
     }

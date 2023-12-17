@@ -2,12 +2,14 @@ package mangmae.harpseal.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.entity.type.AttachmentType;
 
 import static lombok.AccessLevel.*;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = PROTECTED)
 public class Attachment {
     @Id

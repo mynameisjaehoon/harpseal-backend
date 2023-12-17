@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionEditRequestDto {
 
-    private Long quizId;
     private String password;
     private String content;
     private String answer;

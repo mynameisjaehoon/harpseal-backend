@@ -1,6 +1,10 @@
 package mangmae.harpseal.domain.quiz.repository.jpainterface.question;
 
+import mangmae.harpseal.domain.quiz.repository.dto.question.ChoiceEditRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.dto.question.QuestionEditRepositoryDto;
 import mangmae.harpseal.entity.Question;
+
+import java.util.List;
 
 public interface QuestionQueryRepository {
 
@@ -10,5 +14,11 @@ public interface QuestionQueryRepository {
      * @return 발견된 Question 엔티티
      */
     public Question findQuestion(Long quizId, int number);
+
+    public Long updateQuestion(QuestionEditRepositoryDto dto);
+
+    public Long deleteChoices(Long questionId);
+
+    public void insertChoice(Question existQuestion, ChoiceEditRepositoryDto dto);
 
 }

@@ -55,7 +55,7 @@ public class AttachmentService {
         // Attachment를 데이터베이스에 저장
         Attachment newAttachment = new Attachment(type, savedFilePath);
         Attachment savedAttachment = save(newAttachment);
-        question.addAttachment(savedAttachment); // 연관관계 바인딩
+        question.changeAttachment(savedAttachment); // 연관관계 바인딩
 
         return Optional.of(savedAttachment);
     }

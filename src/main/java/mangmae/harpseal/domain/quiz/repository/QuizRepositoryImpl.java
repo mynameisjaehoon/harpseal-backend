@@ -247,12 +247,12 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
 
     /**
      * 전달된 DTO로 퀴저 정보를 업데이트한다.
+     *
      * @param dto 업데이트할 퀴즈 정보
-     * @return 업데이트로 변경된 튜플 갯수
      */
     @Override
-    public Long updateQuiz(QuizEditRepositoryDto dto) {
-        return queryFactory
+    public void updateQuiz(QuizEditRepositoryDto dto) {
+        queryFactory
             .update(quiz)
             .set(quiz.title, dto.getTitle())
             .set(quiz.description, dto.getDescription())

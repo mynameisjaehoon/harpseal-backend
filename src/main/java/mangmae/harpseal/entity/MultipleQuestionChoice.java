@@ -23,6 +23,11 @@ public class MultipleQuestionChoice {
         this.content = content;
     }
 
+    public MultipleQuestionChoice(int number, String content) {
+        this.number = number;
+        this.content = content;
+    }
+
     /**
      * 연관관계에 있는 `Question`을 추가하는 메서드이다.<br>
      * 이메서드를 호출했을 때 `Question`에도 `Choice` 엔티티 목록이 추가되지는 않는다는 점에 주의해야한다.<br>

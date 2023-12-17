@@ -28,7 +28,6 @@ public class QuestionEditServiceDto {
 
     public QuestionEditRepositoryDto toRepositoryDto() {
 
-
         return QuestionEditRepositoryDto.builder()
             .quizId(quizId)
             .content(content)

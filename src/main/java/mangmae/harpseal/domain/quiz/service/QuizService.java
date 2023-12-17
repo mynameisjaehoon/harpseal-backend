@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.exception.CannotFindQuizException;
 import mangmae.harpseal.domain.quiz.repository.dto.question.QuestionRepositoryDto;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.attachment.AttachmentRepository;
+import mangmae.harpseal.domain.quiz.repository.jpainterface.question.QuestionRepository;
+import mangmae.harpseal.domain.quiz.service.dto.question.ChoiceEditServiceDto;
 import mangmae.harpseal.domain.quiz.service.dto.question.QuestionEditServiceDto;
 import mangmae.harpseal.domain.quiz.service.dto.question.QuestionServiceDto;
 import mangmae.harpseal.domain.quiz.service.dto.quiz.*;
@@ -16,8 +19,11 @@ import mangmae.harpseal.domain.quiz.repository.dto.quiz.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.quiz.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.domain.quiz.repository.jpainterface.thumbnail.ThumbnailRepository;
+import mangmae.harpseal.entity.Attachment;
+import mangmae.harpseal.entity.Question;
 import mangmae.harpseal.entity.Quiz;
 import mangmae.harpseal.entity.QuizThumbnail;
+import mangmae.harpseal.entity.type.AttachmentType;
 import mangmae.harpseal.util.FileUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static mangmae.harpseal.entity.type.QuestionType.*;
 import static mangmae.harpseal.util.SecurityUtil.*;
 
 @Service
@@ -37,7 +44,9 @@ import static mangmae.harpseal.util.SecurityUtil.*;
 public class QuizService {
 
     private final QuizRepository quizRepository;
+    private final QuestionRepository questionRepository;
     private final ThumbnailRepository thumbnailRepository;
+    private final AttachmentRepository attachmentRepository;
     private final FileUtil fileUtil;
 
     @Transactional
@@ -175,9 +184,35 @@ public class QuizService {
         Quiz quiz = findById(quizId);
         verifyPassword(quiz.getPassword(), dto.getPassword());
 
+        // 수정하고자 하는 Question 엔티티를 찾는다.
+        int questionNumber = dto.getNumber();
+        Question findQuestion = questionRepository.findQuestion(quizId, questionNumber);
+        questionRepository.updateQuestion(dto.toRepositoryDto());
 
+        // 선택지 정보를 수정한다.
+        Long questionId = findQuestion.getId();
+        List<ChoiceEditServiceDto> choices = dto.getChoices();
+        questionRepository.deleteChoices(questionId); // 기존의 선택지 정보 삭제
 
+        // 문제의 타입 정보가 객관식이고, 요청데이터에 선택지 데이터가 비어있지 않은 경우에만 선택지 데이터 삽입
+        if (dto.getType() == MULTIPLE && dto.getChoices() != null) {
+            for (ChoiceEditServiceDto choice : dto.getChoices()) {
+                questionRepository.insertChoice(findQuestion, choice.toRepositoryDto());
+            }
+        }
 
+        // 첨부파일 정보를 수정한다.
+        Optional<Attachment> findAttachment = attachmentRepository.findAttachment(questionId);
+        findAttachment.ifPresent((at) -> {
+            attachmentRepository.delete(at);
+            fileUtil.deleteFile(at.getFilePath());
+        });
 
+        if (!attachment.isEmpty()) {
+            // TODO: 2023/12/18 이미지 말고 다른 타입도 대응해야한다.
+            String savedPath = fileUtil.makeQuestionImagePath();
+            Attachment newAttachment = new Attachment(AttachmentType.IMAGE, savedPath);
+            findQuestion.changeAttachment(newAttachment);
+        }
     }
 }

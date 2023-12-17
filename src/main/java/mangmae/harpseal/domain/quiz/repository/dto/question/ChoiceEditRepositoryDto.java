@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChoiceEditRepositoryDto {
 
-    private Long questionId;
     private int number;
     private String content;
 

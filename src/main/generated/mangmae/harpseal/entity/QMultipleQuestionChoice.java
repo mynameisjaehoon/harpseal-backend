@@ -26,6 +26,8 @@ public class QMultipleQuestionChoice extends EntityPathBase<MultipleQuestionChoi
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final NumberPath<Integer> number = createNumber("number", Integer.class);
+
     public final QQuestion question;
 
     public QMultipleQuestionChoice(String variable) {

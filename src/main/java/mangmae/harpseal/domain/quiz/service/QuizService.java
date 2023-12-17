@@ -14,7 +14,7 @@ import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.service.dto.*;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
-import mangmae.harpseal.domain.thumbnail.ThumbnailRepository;
+import mangmae.harpseal.domain.quiz.repository.ThumbnailRepository;
 import mangmae.harpseal.entity.Quiz;
 import mangmae.harpseal.entity.QuizThumbnail;
 import mangmae.harpseal.util.FileUtil;

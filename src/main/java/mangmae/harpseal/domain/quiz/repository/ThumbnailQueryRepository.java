@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.thumbnail;
+package mangmae.harpseal.domain.quiz.repository;
 
 import mangmae.harpseal.entity.QuizThumbnail;
 

@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.attachment;
+package mangmae.harpseal.domain.question.repository;
 
 import mangmae.harpseal.entity.Attachment;
 import mangmae.harpseal.entity.MultipleQuestionChoice;

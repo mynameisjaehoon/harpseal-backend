@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.attachment.exception;
+package mangmae.harpseal.domain.question.exception;
 
 public class QuestionDataStoreFailException extends RuntimeException {
     public QuestionDataStoreFailException() {

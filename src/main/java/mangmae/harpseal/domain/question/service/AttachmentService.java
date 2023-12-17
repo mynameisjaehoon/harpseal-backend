@@ -1,8 +1,9 @@
-package mangmae.harpseal.domain.attachment;
+package mangmae.harpseal.domain.question.service;
 
 
 import lombok.RequiredArgsConstructor;
-import mangmae.harpseal.domain.attachment.exception.QuestionDataStoreFailException;
+import mangmae.harpseal.domain.question.exception.QuestionDataStoreFailException;
+import mangmae.harpseal.domain.question.repository.AttachmentRepository;
 import mangmae.harpseal.entity.Attachment;
 import mangmae.harpseal.entity.Question;
 import mangmae.harpseal.entity.type.AttachmentType;

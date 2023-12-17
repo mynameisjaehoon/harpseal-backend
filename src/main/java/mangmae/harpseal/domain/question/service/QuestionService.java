@@ -1,9 +1,9 @@
-package mangmae.harpseal.domain.question;
+package mangmae.harpseal.domain.question.service;
 
 
 import lombok.RequiredArgsConstructor;
+import mangmae.harpseal.domain.question.repository.QuestionRepository;
 import mangmae.harpseal.entity.Question;
-import mangmae.harpseal.entity.Quiz;
 import org.springframework.stereotype.Service;
 
 @Service

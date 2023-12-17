@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.attachment.dto;
+package mangmae.harpseal.domain.question.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

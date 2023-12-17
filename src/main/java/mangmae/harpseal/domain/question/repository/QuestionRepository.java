@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.question;
+package mangmae.harpseal.domain.question.repository;
 
 import mangmae.harpseal.entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;

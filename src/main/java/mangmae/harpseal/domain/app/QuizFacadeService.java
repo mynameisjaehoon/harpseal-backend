@@ -13,7 +13,7 @@ import mangmae.harpseal.domain.quiz.service.dto.QuizCreateServiceDto;
 import mangmae.harpseal.domain.quiz.util.QuestionValidator;
 import mangmae.harpseal.entity.type.AttachmentType;
 import mangmae.harpseal.util.SecurityUtil;
-import mangmae.harpseal.domain.thumbnail.ThumbnailService;
+import mangmae.harpseal.domain.quiz.service.ThumbnailService;
 import mangmae.harpseal.entity.MultipleQuestionChoice;
 import mangmae.harpseal.entity.Question;
 import mangmae.harpseal.entity.Quiz;

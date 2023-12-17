@@ -1,7 +1,8 @@
-package mangmae.harpseal.domain.thumbnail;
+package mangmae.harpseal.domain.quiz.service;
 
 import lombok.RequiredArgsConstructor;
 import mangmae.harpseal.domain.exception.ThumbnailImageStoreException;
+import mangmae.harpseal.domain.quiz.repository.ThumbnailRepository;
 import mangmae.harpseal.entity.Quiz;
 import mangmae.harpseal.entity.QuizThumbnail;
 import mangmae.harpseal.util.FileUtil;

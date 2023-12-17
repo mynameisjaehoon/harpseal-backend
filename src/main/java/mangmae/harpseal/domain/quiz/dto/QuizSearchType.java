@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.type;
+package mangmae.harpseal.domain.quiz.dto;
 
 import mangmae.harpseal.domain.quiz.exception.UnknownQuizSearchConditionException;
 

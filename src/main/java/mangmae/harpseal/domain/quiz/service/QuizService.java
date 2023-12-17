@@ -7,7 +7,7 @@ import mangmae.harpseal.domain.exception.CannotFindQuizException;
 import mangmae.harpseal.domain.quiz.repository.dto.QuestionRepositoryDto;
 import mangmae.harpseal.domain.quiz.service.dto.question.QuestionServiceDto;
 import mangmae.harpseal.domain.quiz.service.dto.quiz.*;
-import mangmae.harpseal.domain.quiz.type.QuizSearchType;
+import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.repository.jpainterface.QuizRepository;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;

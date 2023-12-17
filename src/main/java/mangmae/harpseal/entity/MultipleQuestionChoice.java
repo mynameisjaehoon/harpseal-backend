@@ -16,6 +16,7 @@ public class MultipleQuestionChoice {
     @JoinColumn(name = "question_id")
     private Question question;
 
+    private int number;
     private String content;
 
     public MultipleQuestionChoice(String content) {

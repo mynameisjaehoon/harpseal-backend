@@ -6,7 +6,7 @@ import mangmae.harpseal.domain.app.QuizFacadeService;
 import mangmae.harpseal.domain.quiz.controller.dto.quiz.QuizDeleteRequestDto;
 import mangmae.harpseal.domain.quiz.controller.dto.quiz.QuizEditRequestDto;
 import mangmae.harpseal.domain.quiz.service.dto.quiz.*;
-import mangmae.harpseal.domain.quiz.type.QuizSearchType;
+import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.controller.dto.question.QuestionCreateRequestForm;
 import mangmae.harpseal.domain.quiz.controller.dto.question.QuestionCreateResponseDto;
 import mangmae.harpseal.domain.quiz.controller.dto.quiz.QuizCreateRequestForm;

@@ -8,6 +8,9 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import mangmae.harpseal.global.entity.MultipleQuestionChoice;
+import mangmae.harpseal.global.entity.Question;
+import mangmae.harpseal.global.entity.type.QuestionType;
 
 
 /**
@@ -34,7 +37,7 @@ public class QQuestion extends EntityPathBase<Question> {
 
     public final NumberPath<Integer> number = createNumber("number", Integer.class);
 
-    public final EnumPath<mangmae.harpseal.entity.type.QuestionType> questionType = createEnum("questionType", mangmae.harpseal.entity.type.QuestionType.class);
+    public final EnumPath<QuestionType> questionType = createEnum("questionType", QuestionType.class);
 
     public final QQuiz quiz;
 

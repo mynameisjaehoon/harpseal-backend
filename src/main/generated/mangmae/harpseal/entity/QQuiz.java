@@ -8,6 +8,10 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import mangmae.harpseal.global.entity.Comment;
+import mangmae.harpseal.global.entity.Question;
+import mangmae.harpseal.global.entity.Quiz;
+import mangmae.harpseal.global.entity.QuizResult;
 
 
 /**

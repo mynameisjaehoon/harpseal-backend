@@ -1,6 +1,6 @@
 package mangmae.harpseal;
 
-import mangmae.harpseal.util.UserUtil;
+import mangmae.harpseal.global.util.UserUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

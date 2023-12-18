@@ -8,9 +8,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
-import mangmae.harpseal.domain.quiz.repository.dto.QuestionRepositoryDto;
+import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.*;
-import mangmae.harpseal.entity.*;
+import mangmae.harpseal.global.entity.Quiz;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -246,12 +246,12 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
 
     /**
      * 전달된 DTO로 퀴저 정보를 업데이트한다.
+     *
      * @param dto 업데이트할 퀴즈 정보
-     * @return 업데이트로 변경된 튜플 갯수
      */
     @Override
-    public Long updateQuiz(QuizEditRepositoryDto dto) {
-        return queryFactory
+    public void updateQuiz(QuizEditRepositoryDto dto) {
+        queryFactory
             .update(quiz)
             .set(quiz.title, dto.getTitle())
             .set(quiz.description, dto.getDescription())

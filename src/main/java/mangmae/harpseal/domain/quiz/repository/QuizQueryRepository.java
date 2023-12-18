@@ -20,6 +20,6 @@ public interface QuizQueryRepository {
 
     public String findPasswordById(Long quizId);
 
-    public Long updateQuiz(QuizEditRepositoryDto dto);
+    public void updateQuiz(QuizEditRepositoryDto dto);
 
 }

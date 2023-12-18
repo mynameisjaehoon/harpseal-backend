@@ -6,6 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChoiceServiceDto {
+
     private String content;
 
     public static ChoiceServiceDto fromRepositoryDto(ChoiceRepositoryDto dto) {

@@ -1,6 +1,5 @@
 package mangmae.harpseal.domain.quiz.repository;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -8,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
-import mangmae.harpseal.entity.Quiz;
+import mangmae.harpseal.global.entity.Quiz;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
@@ -36,7 +34,8 @@ class QuizRepositoryImplTest {
 
     JPAQueryFactory queryFactory;
 
-    @Autowired QuizQueryRepository quizRepositoryImpl;
+    @Autowired
+    QuizQueryRepository quizRepositoryImpl;
 
     @BeforeEach
     void beforeEach() {

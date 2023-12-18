@@ -1,6 +1,6 @@
 package mangmae.harpseal.domain.quiz.exception;
 
-import mangmae.harpseal.exception.PasswordNotMatchException;
+import mangmae.harpseal.global.exception.PasswordNotMatchException;
 
 public class QuizPasswordNotMatchException extends PasswordNotMatchException {
     public QuizPasswordNotMatchException() {

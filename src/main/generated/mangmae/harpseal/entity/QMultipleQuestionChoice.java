@@ -8,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import mangmae.harpseal.global.entity.MultipleQuestionChoice;
 
 
 /**
@@ -25,6 +26,8 @@ public class QMultipleQuestionChoice extends EntityPathBase<MultipleQuestionChoi
     public final StringPath content = createString("content");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final NumberPath<Integer> number = createNumber("number", Integer.class);
 
     public final QQuestion question;
 

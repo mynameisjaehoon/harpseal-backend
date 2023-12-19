@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity;
+package mangmae.harpseal.global.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -8,7 +8,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import mangmae.harpseal.global.entity.QuizThumbnail;
 
 
 /**
@@ -17,7 +16,7 @@ import mangmae.harpseal.global.entity.QuizThumbnail;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QQuizThumbnail extends EntityPathBase<QuizThumbnail> {
 
-    private static final long serialVersionUID = 2061403356L;
+    private static final long serialVersionUID = -687552281L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

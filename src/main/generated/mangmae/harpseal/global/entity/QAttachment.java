@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity;
+package mangmae.harpseal.global.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -8,8 +8,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import mangmae.harpseal.global.entity.Attachment;
-import mangmae.harpseal.global.entity.type.AttachmentType;
 
 
 /**
@@ -18,13 +16,13 @@ import mangmae.harpseal.global.entity.type.AttachmentType;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QAttachment extends EntityPathBase<Attachment> {
 
-    private static final long serialVersionUID = 1033564286L;
+    private static final long serialVersionUID = -801955757L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QAttachment attachment = new QAttachment("attachment");
 
-    public final EnumPath<AttachmentType> attachmentType = createEnum("attachmentType", AttachmentType.class);
+    public final EnumPath<mangmae.harpseal.global.entity.type.AttachmentType> attachmentType = createEnum("attachmentType", mangmae.harpseal.global.entity.type.AttachmentType.class);
 
     public final StringPath filePath = createString("filePath");
 

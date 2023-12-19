@@ -1,13 +1,11 @@
 package mangmae.harpseal.domain.quiz.api;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.application.QuizFacadeService;
-import mangmae.harpseal.domain.quiz.api.dto.question.QuestionEditRequestDto;
 import mangmae.harpseal.domain.quiz.api.dto.quiz.QuizDeleteRequestDto;
 import mangmae.harpseal.domain.quiz.api.dto.quiz.QuizEditRequestDto;
-import mangmae.harpseal.domain.quiz.application.dto.quiz.*;
+import mangmae.harpseal.domain.quiz.application.dto.*;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.api.dto.question.QuestionCreateRequestForm;
 import mangmae.harpseal.domain.quiz.api.dto.question.QuestionCreateResponseDto;
@@ -23,7 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.net.URI;
 
 import static org.springframework.http.MediaType.*;
@@ -55,7 +52,7 @@ public class QuizController {
 
     @GetMapping("/{quizId}")
     public SingleQuizServiceResponse findSingleQuiz(@PathVariable("quizId") Long quizId) {
-        return quizService.findSingleQuiz(new SingleQuizServiceCond(quizId));
+        return quizFacadeService.findSingleQuiz(new SingleQuizServiceCond(quizId));
     }
 
     @PostMapping(value = "/{quizId}", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})

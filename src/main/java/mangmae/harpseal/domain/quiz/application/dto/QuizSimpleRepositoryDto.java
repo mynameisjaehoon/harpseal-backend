@@ -1,21 +1,18 @@
-package mangmae.harpseal.domain.quiz.application.dto.quiz;
+package mangmae.harpseal.domain.quiz.application.dto;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizEditServiceResponse {
+public class QuizSimpleRepositoryDto {
 
     private Long id;
     private String title;
     private String description;
-    private String thumbnailImage;
-    private String message;
+    private String thumbnailPath;
 
 }

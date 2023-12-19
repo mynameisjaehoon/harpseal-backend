@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.repository.dto;
+package mangmae.harpseal.domain.quiz.application.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -10,9 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SingleQuizRepositoryResponse {
+public class QuizEditServiceResponse {
+
     private Long id;
     private String title;
     private String description;
-    private String thumbnailPath;
+    private String thumbnailImage;
+    private String message;
+
 }

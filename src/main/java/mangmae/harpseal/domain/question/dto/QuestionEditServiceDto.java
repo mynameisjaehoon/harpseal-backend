@@ -1,11 +1,10 @@
-package mangmae.harpseal.domain.quiz.application.dto.question;
+package mangmae.harpseal.domain.question.dto;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mangmae.harpseal.domain.question.dto.QuestionEditRepositoryDto;
 import mangmae.harpseal.global.entity.type.QuestionType;
 
 import java.util.List;

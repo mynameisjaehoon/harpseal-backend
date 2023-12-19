@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity;
+package mangmae.harpseal.global.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -8,7 +8,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import mangmae.harpseal.global.entity.QuizResult;
 
 
 /**
@@ -17,13 +16,13 @@ import mangmae.harpseal.global.entity.QuizResult;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QQuizResult extends EntityPathBase<QuizResult> {
 
-    private static final long serialVersionUID = -1390699987L;
+    private static final long serialVersionUID = 1068747266L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QQuizResult quizResult = new QQuizResult("quizResult");
 
-    public final mangmae.harpseal.entity.auditing.QCreatedDateEntity _super = new mangmae.harpseal.entity.auditing.QCreatedDateEntity(this);
+    public final mangmae.harpseal.global.entity.auditing.QCreatedDateEntity _super = new mangmae.harpseal.global.entity.auditing.QCreatedDateEntity(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;

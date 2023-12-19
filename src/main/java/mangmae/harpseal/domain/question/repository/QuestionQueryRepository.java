@@ -2,7 +2,10 @@ package mangmae.harpseal.domain.question.repository;
 
 import mangmae.harpseal.domain.choice.ChoiceEditRepositoryDto;
 import mangmae.harpseal.domain.question.dto.QuestionEditRepositoryDto;
+import mangmae.harpseal.domain.question.dto.QuestionSimpleRepositoryDto;
 import mangmae.harpseal.global.entity.Question;
+
+import java.util.List;
 
 public interface QuestionQueryRepository {
 
@@ -12,6 +15,8 @@ public interface QuestionQueryRepository {
      * @return 발견된 Question 엔티티
      */
     public Question findQuestion(Long quizId, int number);
+
+    public List<QuestionSimpleRepositoryDto> findQuizQuestions(Long quizId);
 
     public Long updateQuestion(QuestionEditRepositoryDto dto);
 

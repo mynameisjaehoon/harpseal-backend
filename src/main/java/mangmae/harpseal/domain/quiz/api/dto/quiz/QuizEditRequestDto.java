@@ -3,7 +3,7 @@ package mangmae.harpseal.domain.quiz.api.dto.quiz;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mangmae.harpseal.domain.quiz.application.dto.quiz.QuizEditServiceDto;
+import mangmae.harpseal.domain.quiz.application.dto.QuizEditServiceDto;
 
 @Getter
 @NoArgsConstructor

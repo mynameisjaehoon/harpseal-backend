@@ -9,5 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChoiceRepositoryDto {
+    private Long questionId;
+    private int number;
     private String content;
 }

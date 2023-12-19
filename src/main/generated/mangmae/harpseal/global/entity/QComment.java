@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity;
+package mangmae.harpseal.global.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -8,7 +8,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import mangmae.harpseal.global.entity.Comment;
 
 
 /**
@@ -17,13 +16,13 @@ import mangmae.harpseal.global.entity.Comment;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QComment extends EntityPathBase<Comment> {
 
-    private static final long serialVersionUID = 1784810724L;
+    private static final long serialVersionUID = -513608401L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QComment comment = new QComment("comment");
 
-    public final mangmae.harpseal.entity.auditing.QCreatedInfoEntity _super = new mangmae.harpseal.entity.auditing.QCreatedInfoEntity(this);
+    public final mangmae.harpseal.global.entity.auditing.QCreatedInfoEntity _super = new mangmae.harpseal.global.entity.auditing.QCreatedInfoEntity(this);
 
     public final StringPath content = createString("content");
 

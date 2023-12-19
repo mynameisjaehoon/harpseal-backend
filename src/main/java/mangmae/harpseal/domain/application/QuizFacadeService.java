@@ -7,10 +7,15 @@ import mangmae.harpseal.domain.attachment.application.AttachmentService;
 import mangmae.harpseal.domain.choice.application.ChoiceService;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.question.application.QuestionService;
-import mangmae.harpseal.domain.quiz.application.dto.question.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionServiceDto;
 import mangmae.harpseal.domain.quiz.application.QuizService;
-import mangmae.harpseal.domain.quiz.application.dto.quiz.QuizCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionSimpleServiceDto;
+import mangmae.harpseal.domain.quiz.application.dto.QuizCreateServiceDto;
 import mangmae.harpseal.domain.question.util.QuestionValidator;
+import mangmae.harpseal.domain.quiz.application.dto.SingleQuizServiceCond;
+import mangmae.harpseal.domain.quiz.application.dto.QuizSimpleServiceDto;
+import mangmae.harpseal.domain.quiz.application.dto.SingleQuizServiceResponse;
 import mangmae.harpseal.global.entity.type.AttachmentType;
 import mangmae.harpseal.global.util.SecurityUtil;
 import mangmae.harpseal.domain.thumbnail.application.ThumbnailService;
@@ -21,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -90,6 +96,32 @@ public class QuizFacadeService {
             });
 
         return savedQuestion;
+    }
+
+    public SingleQuizServiceResponse findSingleQuiz(final SingleQuizServiceCond condition) {
+        QuizSimpleServiceDto quiz = quizService.findSingleQuiz(condition);
+        List<QuestionSimpleServiceDto> simpleQuestions = questionService.findQuizQuestions(quiz.getId());
+
+        List<QuestionServiceDto> questions = new ArrayList<>();
+        for (QuestionSimpleServiceDto question : simpleQuestions) {
+            // 문제마다 관련된 선택지 목록을 가져와 적용한다.
+            Long questionId = question.getId();
+            List<ChoiceServiceDto> choices = choiceService.findQuestionChoices(questionId);
+            QuestionServiceDto questionServiceDto = QuestionServiceDto.fromSimpleServiceDto(question);
+            if (choices != null) {
+                questionServiceDto.addChoices(choices);
+            }
+
+            questions.add(questionServiceDto);
+        }
+
+        return SingleQuizServiceResponse.builder()
+            .quizId(quiz.getId())
+            .title(quiz.getTitle())
+            .description(quiz.getDescription())
+            .thumbnailData(quiz.getThumbnailData())
+            .questions(questions)
+            .build();
     }
 
 }

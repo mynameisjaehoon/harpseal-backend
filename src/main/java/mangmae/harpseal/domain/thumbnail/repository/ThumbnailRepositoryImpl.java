@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-import static mangmae.harpseal.entity.QQuizThumbnail.*;
+import static mangmae.harpseal.global.entity.QQuizThumbnail.*;
 
 @Repository
 public class ThumbnailRepositoryImpl implements ThumbnailQueryRepository {

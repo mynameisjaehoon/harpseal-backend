@@ -2,21 +2,17 @@ package mangmae.harpseal.domain.quiz.application;
 
 
 import lombok.RequiredArgsConstructor;
-import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
+import mangmae.harpseal.domain.quiz.application.dto.*;
 import mangmae.harpseal.domain.quiz.exception.CannotFindQuizException;
-import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
 import mangmae.harpseal.domain.attachment.repository.AttachmentRepository;
 import mangmae.harpseal.domain.question.repository.QuestionRepository;
-import mangmae.harpseal.domain.quiz.application.dto.question.ChoiceEditServiceDto;
-import mangmae.harpseal.domain.quiz.application.dto.question.QuestionEditServiceDto;
-import mangmae.harpseal.domain.quiz.application.dto.question.QuestionServiceDto;
-import mangmae.harpseal.domain.quiz.application.dto.quiz.*;
+import mangmae.harpseal.domain.question.dto.ChoiceEditServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionEditServiceDto;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.repository.QuizRepository;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizDeleteRepositoryResponse;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryCond;
 import mangmae.harpseal.domain.quiz.repository.dto.QuizSearchRepositoryDto;
-import mangmae.harpseal.domain.quiz.repository.dto.SingleQuizRepositoryResponse;
 import mangmae.harpseal.domain.quiz.util.QuizValidator;
 import mangmae.harpseal.domain.thumbnail.repository.ThumbnailRepository;
 import mangmae.harpseal.global.entity.Attachment;
@@ -31,7 +27,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,27 +103,42 @@ public class QuizService {
         );
     }
 
-    public SingleQuizServiceResponse findSingleQuiz(final SingleQuizServiceCond condition) {
+    public QuizSimpleServiceDto findSingleQuiz(final SingleQuizServiceCond condition) {
+        // 퀴즈 ID에 해당하는 퀴즈 정보를 받아온다.
         Long quizId = condition.getId();
-        SingleQuizRepositoryResponse response = quizRepository.findSingleQuizById(quizId);
+        QuizSimpleRepositoryDto repositoryDto = quizRepository.findSingleQuiz(quizId);
+        QuizSimpleServiceDto serviceDto = QuizSimpleServiceDto.fromRepositoryDto(repositoryDto);
+        // 퀴즈의 썸네일을 지정한다.
 
-        String thumbnailData = fileUtil.loadImageBase64(response.getThumbnailPath());
+        String path = repositoryDto.getThumbnailPath();
+        if (path != null) {
+            serviceDto.addThumbnailData(fileUtil.loadImageBase64(path));
+        }
 
-        List<QuestionServiceDto> questions = new ArrayList<>();
-        List<QuestionRepositoryDto> repositoryQuestions = response.getQuestions();
-
-        repositoryQuestions
-                .forEach(dto -> {
-                    List<ChoiceServiceDto> choices = dto.getChoices().stream()
-                            .map(ChoiceServiceDto::fromRepositoryDto)
-                            .toList();
-
-                    String attachmentData = fileUtil.loadImageBase64(dto.getAttachmentPath());
-                    QuestionServiceDto serviceDto = QuestionServiceDto.fromRepositoryDto(dto, attachmentData, choices);
-                    questions.add(serviceDto);
-                });
-        return SingleQuizServiceResponse.fromRepositoryResponse(response, thumbnailData, questions);
+        return serviceDto;
     }
+
+//    public SingleQuizServiceResponse findSingleQuiz(final SingleQuizServiceCond condition) {
+//        Long quizId = condition.getId();
+//        SingleQuizRepositoryResponse response = quizRepository.findSingleQuizById(quizId);
+//
+//        String thumbnailData = fileUtil.loadImageBase64(response.getThumbnailPath());
+//
+//        List<QuestionServiceDto> questions = new ArrayList<>();
+//        List<QuestionRepositoryDto> repositoryQuestions = response.getQuestions();
+//
+//        repositoryQuestions
+//                .forEach(dto -> {
+//                    List<ChoiceServiceDto> choices = dto.getChoices().stream()
+//                            .map(ChoiceServiceDto::fromRepositoryDto)
+//                            .toList();
+//
+//                    String attachmentData = fileUtil.loadImageBase64(dto.getAttachmentPath());
+//                    QuestionServiceDto serviceDto = QuestionServiceDto.fromRepositoryDto(dto, attachmentData, choices);
+//                    questions.add(serviceDto);
+//                });
+//        return SingleQuizServiceResponse.fromRepositoryResponse(response, thumbnailData, questions);
+//    }
 
     @Transactional
     public QuizDeleteResponseDto deleteQuizById(Long id, String password) {

@@ -3,7 +3,7 @@ package mangmae.harpseal.domain.quiz.api.dto.question;
 import lombok.*;
 import mangmae.harpseal.domain.choice.dto.ChoiceCreateDto;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
-import mangmae.harpseal.domain.quiz.application.dto.question.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 
 import java.util.List;
 

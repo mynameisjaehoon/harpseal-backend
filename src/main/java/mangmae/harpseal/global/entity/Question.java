@@ -5,8 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
-import mangmae.harpseal.domain.quiz.application.dto.question.QuestionCreateServiceDto;
-import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
+import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionSimpleRepositoryDto;
 import mangmae.harpseal.global.entity.type.QuestionType;
 
 import java.util.ArrayList;
@@ -67,18 +67,6 @@ public class Question {
     public void changeAttachment(Attachment attachment) {
         this.attachment = attachment;
         attachment.changeQuestion(this);
-    }
-
-    public QuestionRepositoryDto toRepositoryDto(String attachmentPath, List<ChoiceRepositoryDto> choices) {
-        return QuestionRepositoryDto.builder()
-                .id(id)
-                .content(content)
-                .number(number)
-                .answer(answer)
-                .type(questionType)
-                .attachmentPath(attachmentPath)
-                .choices(choices)
-                .build();
     }
 
 }

@@ -27,21 +27,9 @@ public class SingleQuizServiceResponse {
     private String title;
     private String description;
     private String thumbnailData;
+    private int likeCount;
+    private int playTime;
     private List<QuestionServiceDto> questions;
-
-//    public static SingleQuizServiceResponse fromRepositoryResponse(
-//            final SingleQuizRepositoryResponse dto
-//    ) {
-//        return SingleQuizServiceResponse.builder()
-//            .quizId(dto.getId())
-//            .title(dto.getTitle())
-//            .description(dto.getDescription())
-//            .thumbnailData(null)
-//            .questions(null)
-//            .build();
-//    }
-
-
 
     public void addThumbnailData(String data) {
         this.thumbnailData = data;

@@ -14,5 +14,7 @@ public class QuizSimpleRepositoryDto {
     private String title;
     private String description;
     private String thumbnailPath;
+    private int likeCount;
+    private int playTime;
 
 }

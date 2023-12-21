@@ -215,7 +215,9 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
                     quiz.id,
                     quiz.title,
                     quiz.description,
-                    quizThumbnail.filePath.as("thumbnailPath")
+                    quizThumbnail.filePath.as("thumbnailPath"),
+                    quiz.likeCount,
+                    quiz.playTime
                 )
             )
             .from(quiz)

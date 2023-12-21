@@ -19,6 +19,8 @@ public class QuizSimpleServiceDto {
     private String title;
     private String description;
     private String thumbnailData;
+    private int likeCount;
+    private int playTime;
 
     public static QuizSimpleServiceDto fromRepositoryDto(QuizSimpleRepositoryDto dto) {
         return QuizSimpleServiceDto.builder()
@@ -26,6 +28,8 @@ public class QuizSimpleServiceDto {
             .title(dto.getTitle())
             .description(dto.getDescription())
             .thumbnailData(null)
+            .likeCount(dto.getLikeCount())
+            .playTime(dto.getPlayTime())
             .build();
     }
 

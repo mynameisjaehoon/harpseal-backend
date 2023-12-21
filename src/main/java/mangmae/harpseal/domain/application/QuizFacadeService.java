@@ -117,11 +117,20 @@ public class QuizFacadeService {
             questions.add(questionServiceDto);
         }
 
+        return makeSingleQuizResponseDto(quiz, questions);
+    }
+
+    private static SingleQuizServiceResponse makeSingleQuizResponseDto(
+        final QuizSimpleServiceDto quiz,
+        final List<QuestionServiceDto> questions
+    ) {
         return SingleQuizServiceResponse.builder()
             .quizId(quiz.getId())
             .title(quiz.getTitle())
             .description(quiz.getDescription())
             .thumbnailData(quiz.getThumbnailData())
+            .likeCount(quiz.getLikeCount())
+            .playTime(quiz.getPlayTime())
             .questions(questions)
             .build();
     }

@@ -9,7 +9,7 @@ import mangmae.harpseal.domain.quiz.repository.dto.QuizEditRepositoryDto;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizEditServiceDto {
+public class QuizEditServiceRequestDto {
 
     private Long id;
     private String title;

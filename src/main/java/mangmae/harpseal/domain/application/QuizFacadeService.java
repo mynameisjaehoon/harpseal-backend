@@ -11,12 +11,11 @@ import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 import mangmae.harpseal.domain.question.dto.QuestionServiceDto;
 import mangmae.harpseal.domain.quiz.application.QuizService;
 import mangmae.harpseal.domain.question.dto.QuestionSimpleServiceDto;
-import mangmae.harpseal.domain.quiz.application.dto.QuizCreateServiceDto;
+import mangmae.harpseal.domain.quiz.application.dto.*;
 import mangmae.harpseal.domain.question.util.QuestionValidator;
-import mangmae.harpseal.domain.quiz.application.dto.SingleQuizServiceCond;
-import mangmae.harpseal.domain.quiz.application.dto.QuizSimpleServiceDto;
-import mangmae.harpseal.domain.quiz.application.dto.SingleQuizServiceResponse;
+import mangmae.harpseal.global.entity.QuizThumbnail;
 import mangmae.harpseal.global.entity.type.AttachmentType;
+import mangmae.harpseal.global.util.FileUtil;
 import mangmae.harpseal.global.util.SecurityUtil;
 import mangmae.harpseal.domain.thumbnail.application.ThumbnailService;
 import mangmae.harpseal.global.entity.MultipleQuestionChoice;
@@ -28,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -42,6 +42,8 @@ public class QuizFacadeService {
     private final ChoiceService choiceService;
     private final AttachmentService attachmentService;
 
+    private final FileUtil fileUtil;
+
     /**
      * 퀴즈를 생성하는 메서드
      * @return 생성된 엔티티
@@ -52,7 +54,7 @@ public class QuizFacadeService {
         final MultipartFile thumbnailImage
     ) {
         Quiz createdQuiz = quizService.createQuiz(dto);
-        thumbnailService.storeQuizThumbnailImage(createdQuiz, thumbnailImage);
+        thumbnailService.store(createdQuiz, thumbnailImage);
         return createdQuiz;
 
     }
@@ -122,6 +124,35 @@ public class QuizFacadeService {
             .thumbnailData(quiz.getThumbnailData())
             .questions(questions)
             .build();
+    }
+
+    @Transactional
+    public QuizEditServiceResponse editQuiz(
+        final QuizEditServiceRequestDto dto,
+        final MultipartFile thumbnailRequest
+    ) {
+
+        Quiz updatedQuiz = quizService.updateQuiz(dto);
+        Optional<QuizThumbnail> findThumbnail = thumbnailService.findByQuizId(dto.getId());
+
+        findThumbnail.ifPresent(thumbnail -> {
+            thumbnailService.delete(thumbnail.getId());
+        });
+        String savedPath = bindThumbnailWithQuiz(thumbnailRequest, updatedQuiz);
+
+        String data = fileUtil.loadImageBase64(savedPath);
+        return QuizEditServiceResponse.fromQuizEntity(updatedQuiz, data, "quiz edit success");
+    }
+
+    private String bindThumbnailWithQuiz(MultipartFile thumbnailFile, Quiz quiz) {
+        if (thumbnailFile == null || thumbnailFile.isEmpty()) {
+            return null;
+        }
+        String savedPath = fileUtil.saveThumbnailImage(thumbnailFile);
+        QuizThumbnail newThumbnail = new QuizThumbnail(savedPath);
+        quiz.changeThumbnail(newThumbnail);
+        thumbnailService.save(newThumbnail);
+        return savedPath;
     }
 
 }

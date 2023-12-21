@@ -16,7 +16,9 @@ import mangmae.harpseal.global.entity.Question;
 import mangmae.harpseal.global.entity.Quiz;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -62,7 +64,9 @@ public class QuizController {
         @RequestPart(value = "attachment") MultipartFile attachment
     ) {
         Question storeQuestion = quizFacadeService.createQuestion(quizId, form.toServiceDto(), attachment);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new QuestionCreateResponseDto("문제 생성에 성공하였습니다."));
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(new QuestionCreateResponseDto("문제 생성에 성공하였습니다."));
     }
 
     @PostMapping(value = "/new", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
@@ -88,15 +92,15 @@ public class QuizController {
     }
 
     @PutMapping(value = "/{quizId}/edit", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<QuizEditServiceResponse> editQuiz(
+    public ResponseEntity<Void> editQuiz(
         @PathVariable("quizId") Long quizId,
         @RequestPart(value = "form") QuizEditRequestDto form,
         @RequestPart(value = "thumbnail", required = false) MultipartFile thumbnail
     ) {
-        QuizEditServiceResponse response = quizService.editQuiz(form.toServiceDto(quizId), thumbnail);
-        return ResponseEntity
-            .ok()
-            .body(response);
+        quizFacadeService.editQuiz(form.toServiceDto(quizId), thumbnail);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("http://localhost:8080/api/v1/quiz/" + quizId));
+        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
     }
 
 

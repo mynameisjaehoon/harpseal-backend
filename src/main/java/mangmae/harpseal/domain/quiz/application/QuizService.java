@@ -24,6 +24,7 @@ import mangmae.harpseal.global.util.FileUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -108,37 +109,12 @@ public class QuizService {
         Long quizId = condition.getId();
         QuizSimpleRepositoryDto repositoryDto = quizRepository.findSingleQuiz(quizId);
         QuizSimpleServiceDto serviceDto = QuizSimpleServiceDto.fromRepositoryDto(repositoryDto);
+
         // 퀴즈의 썸네일을 지정한다.
-
         String path = repositoryDto.getThumbnailPath();
-        if (path != null) {
-            serviceDto.addThumbnailData(fileUtil.loadImageBase64(path));
-        }
-
+        serviceDto.addThumbnailData(path); // if path is null, the default image is applied
         return serviceDto;
     }
-
-//    public SingleQuizServiceResponse findSingleQuiz(final SingleQuizServiceCond condition) {
-//        Long quizId = condition.getId();
-//        SingleQuizRepositoryResponse response = quizRepository.findSingleQuizById(quizId);
-//
-//        String thumbnailData = fileUtil.loadImageBase64(response.getThumbnailPath());
-//
-//        List<QuestionServiceDto> questions = new ArrayList<>();
-//        List<QuestionRepositoryDto> repositoryQuestions = response.getQuestions();
-//
-//        repositoryQuestions
-//                .forEach(dto -> {
-//                    List<ChoiceServiceDto> choices = dto.getChoices().stream()
-//                            .map(ChoiceServiceDto::fromRepositoryDto)
-//                            .toList();
-//
-//                    String attachmentData = fileUtil.loadImageBase64(dto.getAttachmentPath());
-//                    QuestionServiceDto serviceDto = QuestionServiceDto.fromRepositoryDto(dto, attachmentData, choices);
-//                    questions.add(serviceDto);
-//                });
-//        return SingleQuizServiceResponse.fromRepositoryResponse(response, thumbnailData, questions);
-//    }
 
     @Transactional
     public QuizDeleteResponseDto deleteQuizById(Long id, String password) {
@@ -149,39 +125,24 @@ public class QuizService {
         return QuizDeleteResponseDto.fromRepositoryDto(response);
     }
 
+
+    /**
+     * @param dto 퀴즈 수정 정보가 담긴 dto
+     * @return 수정된 퀴즈의 PK
+     */
     @Transactional
-    public QuizEditServiceResponse editQuiz(
-        final QuizEditServiceDto dto,
-        final MultipartFile thumbnailRequest
-    ) {
-        // 패스워드 검사
-        Quiz quiz = findById(dto.getId());
-        verifyPassword(quiz.getPassword(), dto.getPassword());
+    public Quiz updateQuiz(QuizEditServiceRequestDto dto) {
+        // 패스워드 확인
+        Long quizId = dto.getId();
+        String requestPassword = dto.getPassword();
+        Quiz findQuiz = findById(quizId);
+        verifyPassword(findQuiz.getPassword(), requestPassword);
 
-        // 퀴즈 데이터 업데이트
-        quizRepository.updateQuiz(dto.toRepositoryDto());
+        // 퀴즈 정보 수정
+        findQuiz.changeTitle(dto.getTitle());
+        findQuiz.changeDescription(dto.getDescription());
 
-        // 썸네일 데이터 수정
-        Optional<QuizThumbnail> findThumbnail = thumbnailRepository.findByQuizId(dto.getId());
-        findThumbnail.ifPresent((th) -> {
-            thumbnailRepository.delete(th);
-            fileUtil.deleteFile(th.getFilePath());
-        });
-        String savedPath = fileUtil.saveThumbnailImage(thumbnailRequest);
-
-        if (!thumbnailRequest.isEmpty()) {
-            QuizThumbnail newThumbnail = new QuizThumbnail(savedPath);
-            quiz.changeThumbnail(newThumbnail);
-            thumbnailRepository.save(newThumbnail);
-        }
-
-        return QuizEditServiceResponse.builder()
-            .id(dto.getId())
-            .title(dto.getTitle())
-            .description(dto.getDescription())
-            .thumbnailImage(fileUtil.loadImageBase64(savedPath))
-            .message("퀴즈가 수정되었습니다.")
-            .build();
+        return findQuiz;
     }
 
     @Transactional

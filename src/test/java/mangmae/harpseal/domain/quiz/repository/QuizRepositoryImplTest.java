@@ -107,12 +107,4 @@ class QuizRepositoryImplTest {
 
     }
 
-    @Test
-    @Transactional
-    @DisplayName("퀴즈 ID로 퀴즈 하나 찾기")
-    public void findSingleQuizTest() {
-        SingleQuizRepositoryResponse findQuiz = quizRepositoryImpl.findSingleQuizById(1L);
-
-    }
-
 }

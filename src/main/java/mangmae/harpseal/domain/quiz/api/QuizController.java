@@ -80,14 +80,14 @@ public class QuizController {
     }
 
     @DeleteMapping("/{quizId}")
-    public ResponseEntity<QuizDeleteResponseDto> deleteQuiz(
+    public ResponseEntity<Void> deleteQuiz(
         @PathVariable("quizId") Long quizId,
         @RequestBody QuizDeleteRequestDto requestDto
     ) {
-        QuizDeleteResponseDto response = quizService.deleteQuizById(quizId, requestDto.getPassword());
-        return ResponseEntity
-            .accepted()
-            .body(response);
+        quizService.deleteQuizById(quizId, requestDto.getPassword());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("http://localhost:8080/api/v1/quiz"));
+        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
     }
 
     @PostMapping("/{quizId}/like")

@@ -2,7 +2,7 @@ package mangmae.harpseal.domain.quiz.api.dto.quiz;
 
 
 import lombok.*;
-import mangmae.harpseal.domain.quiz.application.dto.quiz.QuizCreateServiceDto;
+import mangmae.harpseal.domain.quiz.application.dto.QuizCreateServiceDto;
 
 @Data
 public class QuizCreateRequestForm {

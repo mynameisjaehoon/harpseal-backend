@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChoiceCreateDto {
+
+    private int number;
     private String content;
 
     public ChoiceServiceDto toServiceDto() {
-        return new ChoiceServiceDto(content);
+        return new ChoiceServiceDto(number, content);
     }
 }

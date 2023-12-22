@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity;
+package mangmae.harpseal.global.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -8,9 +8,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import mangmae.harpseal.global.entity.MultipleQuestionChoice;
-import mangmae.harpseal.global.entity.Question;
-import mangmae.harpseal.global.entity.type.QuestionType;
 
 
 /**
@@ -19,7 +16,7 @@ import mangmae.harpseal.global.entity.type.QuestionType;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QQuestion extends EntityPathBase<Question> {
 
-    private static final long serialVersionUID = -1068896767L;
+    private static final long serialVersionUID = 694554390L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
@@ -37,7 +34,7 @@ public class QQuestion extends EntityPathBase<Question> {
 
     public final NumberPath<Integer> number = createNumber("number", Integer.class);
 
-    public final EnumPath<QuestionType> questionType = createEnum("questionType", QuestionType.class);
+    public final EnumPath<mangmae.harpseal.global.entity.type.QuestionType> questionType = createEnum("questionType", mangmae.harpseal.global.entity.type.QuestionType.class);
 
     public final QQuiz quiz;
 

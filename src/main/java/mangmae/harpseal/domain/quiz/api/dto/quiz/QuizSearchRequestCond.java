@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
-import mangmae.harpseal.domain.quiz.application.dto.quiz.QuizSearchServiceCond;
+import mangmae.harpseal.domain.quiz.application.dto.QuizSearchServiceCond;
 
 @Getter
 @NoArgsConstructor

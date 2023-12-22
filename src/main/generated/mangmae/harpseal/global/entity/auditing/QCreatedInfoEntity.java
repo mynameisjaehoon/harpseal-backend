@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity.auditing;
+package mangmae.harpseal.global.entity.auditing;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import mangmae.harpseal.global.entity.auditing.CreatedInfoEntity;
 
 
 /**
@@ -16,7 +15,7 @@ import mangmae.harpseal.global.entity.auditing.CreatedInfoEntity;
 @Generated("com.querydsl.codegen.DefaultSupertypeSerializer")
 public class QCreatedInfoEntity extends EntityPathBase<CreatedInfoEntity> {
 
-    private static final long serialVersionUID = -421844915L;
+    private static final long serialVersionUID = -1769271774L;
 
     public static final QCreatedInfoEntity createdInfoEntity = new QCreatedInfoEntity("createdInfoEntity");
 

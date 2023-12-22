@@ -10,7 +10,6 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter
 public class QuizThumbnail {
 
     @Id
@@ -25,4 +24,9 @@ public class QuizThumbnail {
     public QuizThumbnail(String filePath) {
         this.filePath = filePath;
     }
+
+    public void changeQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
 }

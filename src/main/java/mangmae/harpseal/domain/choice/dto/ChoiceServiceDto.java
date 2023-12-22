@@ -7,9 +7,10 @@ import lombok.*;
 @AllArgsConstructor
 public class ChoiceServiceDto {
 
+    private int number;
     private String content;
 
     public static ChoiceServiceDto fromRepositoryDto(ChoiceRepositoryDto dto) {
-        return new ChoiceServiceDto(dto.getContent());
+        return new ChoiceServiceDto(dto.getNumber(), dto.getContent());
     }
 }

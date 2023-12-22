@@ -47,6 +47,14 @@ public class Quiz extends CreatedDateEntity {
         this.playTime = 0;
     }
 
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
     public void addQuestion(Question question) {
         questions.add(question);
         question.changeQuiz(this);
@@ -54,11 +62,15 @@ public class Quiz extends CreatedDateEntity {
 
     public void changeThumbnail(QuizThumbnail thumbnail) {
         this.thumbnail = thumbnail;
-        thumbnail.setQuiz(this);
+        thumbnail.changeQuiz(this);
     }
 
     public void addPlayTime() {
         playTime++;
+    }
+
+    public void addLikeCount() {
+        likeCount++;
     }
 
 }

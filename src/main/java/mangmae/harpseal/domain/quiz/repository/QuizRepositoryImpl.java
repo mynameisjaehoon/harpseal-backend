@@ -8,9 +8,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
-import mangmae.harpseal.domain.question.dto.QuestionRepositoryDto;
+import mangmae.harpseal.domain.question.dto.QuestionSimpleRepositoryDto;
+import mangmae.harpseal.domain.quiz.application.dto.QuizSimpleRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.*;
-import mangmae.harpseal.global.entity.Quiz;
+import mangmae.harpseal.global.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -19,11 +20,11 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-import static mangmae.harpseal.entity.QAttachment.*;
-import static mangmae.harpseal.entity.QMultipleQuestionChoice.*;
-import static mangmae.harpseal.entity.QQuestion.*;
-import static mangmae.harpseal.entity.QQuiz.*;
-import static mangmae.harpseal.entity.QQuizThumbnail.*;
+import static mangmae.harpseal.global.entity.QAttachment.*;
+import static mangmae.harpseal.global.entity.QMultipleQuestionChoice.*;
+import static mangmae.harpseal.global.entity.QQuestion.*;
+import static mangmae.harpseal.global.entity.QQuiz.*;
+import static mangmae.harpseal.global.entity.QQuizThumbnail.*;
 
 
 @Slf4j
@@ -193,36 +194,6 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
         return new PageImpl<>(result, pageable, total);
     }
 
-    /**
-     * 퀴즈 정보, 퀴즈에 담긴 문제, 문제의 첨부파일, 문제의 선지정보를 담아 반환한다.
-     * @param quizId 반환 받고자 하는 퀴즈 ID
-     * @return 퀴즈 정보를 담은 레포지토리 계층 DTO
-     */
-    @Override
-    public SingleQuizRepositoryResponse findSingleQuizById(Long quizId) {
-
-        long startTime = System.currentTimeMillis();
-
-        Quiz findQuiz = em.find(Quiz.class, quizId);
-
-        // TODO: 2023/12/15 Question, Thumbnail Image 데이터에 접근하는 쿼리들이 QuizRepository에 있는 것이 맞는가...
-        List<QuestionRepositoryDto> questionDtoList = findQuestionWith(quizId);
-        fetchChoiceData(questionDtoList);
-        String thumbnailImagePath = findThumbnailPath(quizId);
-
-
-        long time = System.currentTimeMillis() - startTime;
-        log.info("time={}ms", time);
-
-        return SingleQuizRepositoryResponse.builder()
-                .id(quizId)
-                .title(findQuiz.getTitle())
-                .description(findQuiz.getDescription())
-                .thumbnailPath(thumbnailImagePath)
-                .questions(questionDtoList)
-                .build();
-    }
-
     @Override
     public QuizDeleteRepositoryResponse deleteQuizById(
         final Long quizId
@@ -233,6 +204,26 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
             .execute();
 
         return new QuizDeleteRepositoryResponse(deletedId);
+    }
+
+    @Override
+    public QuizSimpleRepositoryDto findSingleQuiz(Long quizId) {
+        return queryFactory
+            .select(
+                Projections.constructor(
+                    QuizSimpleRepositoryDto.class,
+                    quiz.id,
+                    quiz.title,
+                    quiz.description,
+                    quizThumbnail.filePath.as("thumbnailPath"),
+                    quiz.likeCount,
+                    quiz.playTime
+                )
+            )
+            .from(quiz)
+            .leftJoin(quiz.thumbnail, quizThumbnail)
+            .where(quiz.id.eq(quizId))
+            .fetchOne();
     }
 
     @Override
@@ -267,29 +258,29 @@ public class QuizRepositoryImpl implements QuizQueryRepository {
                 .fetchOne();
     }
 
-    private void fetchChoiceData(List<QuestionRepositoryDto> questionDtoList) {
+    private void fetchChoiceData(List<QuestionSimpleRepositoryDto> questionDtoList) {
         questionDtoList
                 .forEach(dto -> {
                     Long questionId = dto.getId();
                     List<ChoiceRepositoryDto> choiceResult = queryFactory
                             .select(
                                     Projections.constructor(
-                                            ChoiceRepositoryDto.class,
-                                            multipleQuestionChoice.content
+                                        ChoiceRepositoryDto.class,
+                                        multipleQuestionChoice.content
                                     )
                             )
                             .from(multipleQuestionChoice)
                             .where(multipleQuestionChoice.question.id.eq(questionId))
                             .fetch();
-                    dto.fetchChoices(choiceResult);
+//                    dto.fetchChoices(choiceResult);
                 });
     }
 
-    private List<QuestionRepositoryDto> findQuestionWith(Long quizId) {
+    private List<QuestionSimpleRepositoryDto> findQuestionWith(Long quizId) {
         return queryFactory
                 .select(
                         Projections.constructor(
-                                QuestionRepositoryDto.class,
+                                QuestionSimpleRepositoryDto.class,
                                 question.id,
                                 question.content,
                                 question.number,

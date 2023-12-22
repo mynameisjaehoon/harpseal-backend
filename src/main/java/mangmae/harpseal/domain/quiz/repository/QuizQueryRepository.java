@@ -1,5 +1,6 @@
 package mangmae.harpseal.domain.quiz.repository;
 
+import mangmae.harpseal.domain.quiz.application.dto.QuizSimpleRepositoryDto;
 import mangmae.harpseal.domain.quiz.repository.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,7 @@ public interface QuizQueryRepository {
 
     public Page<QuizSearchRepositoryDto> findRecentAsc(QuizSearchRepositoryCond condition, Pageable pageable);
 
-    public SingleQuizRepositoryResponse findSingleQuizById(Long quizId);
+    public QuizSimpleRepositoryDto findSingleQuiz(Long quizId);
 
     public QuizDeleteRepositoryResponse deleteQuizById(Long quizId);
 

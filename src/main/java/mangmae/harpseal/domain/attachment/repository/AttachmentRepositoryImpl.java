@@ -2,13 +2,12 @@ package mangmae.harpseal.domain.attachment.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
-import mangmae.harpseal.domain.attachment.repository.AttachmentQueryRepository;
 import mangmae.harpseal.global.entity.Attachment;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-import static mangmae.harpseal.entity.QAttachment.*;
+import static mangmae.harpseal.global.entity.QAttachment.*;
 
 
 @Repository

@@ -1,4 +1,4 @@
-package mangmae.harpseal.domain.quiz.application.dto.quiz;
+package mangmae.harpseal.domain.quiz.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

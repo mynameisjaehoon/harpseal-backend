@@ -4,8 +4,8 @@ package mangmae.harpseal.domain.quiz.api.dto.question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mangmae.harpseal.domain.quiz.application.dto.question.ChoiceEditServiceDto;
-import mangmae.harpseal.domain.quiz.application.dto.question.QuestionEditServiceDto;
+import mangmae.harpseal.domain.question.dto.ChoiceEditServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionEditServiceDto;
 import mangmae.harpseal.global.entity.type.QuestionType;
 
 import java.util.List;

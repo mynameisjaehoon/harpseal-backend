@@ -1,4 +1,4 @@
-package mangmae.harpseal.entity;
+package mangmae.harpseal.global.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -8,10 +8,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import mangmae.harpseal.global.entity.Comment;
-import mangmae.harpseal.global.entity.Question;
-import mangmae.harpseal.global.entity.Quiz;
-import mangmae.harpseal.global.entity.QuizResult;
 
 
 /**
@@ -20,13 +16,13 @@ import mangmae.harpseal.global.entity.QuizResult;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QQuiz extends EntityPathBase<Quiz> {
 
-    private static final long serialVersionUID = 2110265840L;
+    private static final long serialVersionUID = -1293808251L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QQuiz quiz = new QQuiz("quiz");
 
-    public final mangmae.harpseal.entity.auditing.QCreatedDateEntity _super = new mangmae.harpseal.entity.auditing.QCreatedDateEntity(this);
+    public final mangmae.harpseal.global.entity.auditing.QCreatedDateEntity _super = new mangmae.harpseal.global.entity.auditing.QCreatedDateEntity(this);
 
     public final ListPath<Comment, QComment> comments = this.<Comment, QComment>createList("comments", Comment.class, QComment.class, PathInits.DIRECT2);
 

@@ -2,9 +2,10 @@ package mangmae.harpseal.domain.choice.application;
 
 
 import lombok.RequiredArgsConstructor;
+import mangmae.harpseal.domain.choice.dto.ChoiceRepositoryDto;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.choice.repository.ChoiceRepository;
-import mangmae.harpseal.domain.quiz.application.dto.question.QuestionCreateServiceDto;
+import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 import mangmae.harpseal.global.entity.MultipleQuestionChoice;
 import mangmae.harpseal.global.entity.Question;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,14 @@ public class ChoiceService {
                 save(choice);
                 question.addChoice(choice);
             });
+    }
+
+    public List<ChoiceServiceDto> findQuestionChoices(Long questionId) {
+        List<ChoiceRepositoryDto> choices = choiceRepository.findQuestionChoices(questionId);
+
+        return choices.stream()
+            .map(ChoiceServiceDto::fromRepositoryDto)
+            .toList();
     }
 
 }

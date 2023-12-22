@@ -1,16 +1,23 @@
 package mangmae.harpseal.domain.question.repository;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import mangmae.harpseal.domain.question.dto.QuestionSimpleRepositoryDto;
 import mangmae.harpseal.domain.question.exception.CannotFindQuestionException;
 import mangmae.harpseal.domain.choice.ChoiceEditRepositoryDto;
 import mangmae.harpseal.domain.question.dto.QuestionEditRepositoryDto;
 import mangmae.harpseal.global.entity.MultipleQuestionChoice;
+import mangmae.harpseal.global.entity.QAttachment;
+import mangmae.harpseal.global.entity.QMultipleQuestionChoice;
 import mangmae.harpseal.global.entity.Question;
 import org.springframework.stereotype.Repository;
 
-import static mangmae.harpseal.entity.QMultipleQuestionChoice.*;
-import static mangmae.harpseal.entity.QQuestion.*;
+import java.util.List;
+
+import static mangmae.harpseal.global.entity.QAttachment.*;
+import static mangmae.harpseal.global.entity.QMultipleQuestionChoice.*;
+import static mangmae.harpseal.global.entity.QQuestion.*;
 
 @Repository
 public class QuestionRepositoryImpl implements QuestionQueryRepository {
@@ -37,6 +44,28 @@ public class QuestionRepositoryImpl implements QuestionQueryRepository {
 
         return result;
     }
+
+    @Override
+    public List<QuestionSimpleRepositoryDto> findQuizQuestions(Long quizId) {
+        return queryFactory
+            .select(
+                Projections.constructor(
+                    QuestionSimpleRepositoryDto.class,
+                    question.id,
+                    question.content,
+                    question.number,
+                    question.answer,
+                    question.questionType.as("type"),
+                    question.attachment.filePath
+                )
+            )
+            .from(question)
+            .leftJoin(question.attachment, attachment) // 자동으로 PK=FK 조건이 적용된다.
+            .where(question.quiz.id.eq(quizId))
+            .orderBy(question.number.asc())
+            .fetch();
+    }
+
 
     @Override
     public Long updateQuestion(QuestionEditRepositoryDto dto) {

@@ -52,6 +52,17 @@ public class QuizController {
         return quizService.searchWithCondition(condition.toServiceDto(), pageable);
     }
 
+    @PostMapping(value = "/new", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> createQuiz(
+        @RequestPart(value = "form") QuizCreateRequestForm form,
+        @RequestPart(value = "thumbnail", required = false) MultipartFile thumbnail
+    ) {
+        Quiz createdQuiz = quizFacadeService.createQuiz(form.toServiceDto(), thumbnail);
+        return ResponseEntity
+            .created(URI.create("/quiz/api/v1/" + createdQuiz.getId()))
+            .build();
+    }
+
     @GetMapping("/{quizId}")
     public SingleQuizServiceResponse findSingleQuiz(@PathVariable("quizId") Long quizId) {
         return quizFacadeService.findSingleQuiz(new SingleQuizServiceCond(quizId));
@@ -69,17 +80,6 @@ public class QuizController {
             .body(new QuestionCreateResponseDto("문제 생성에 성공하였습니다."));
     }
 
-    @PostMapping(value = "/new", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<String> createQuiz(
-            @RequestPart(value = "form") QuizCreateRequestForm form,
-            @RequestPart(value = "thumbnail", required = false) MultipartFile thumbnail
-    ) {
-        Quiz createdQuiz = quizFacadeService.createQuiz(form.toServiceDto(), thumbnail);
-        return ResponseEntity
-            .created(URI.create("/quiz/api/v1/" + createdQuiz.getId()))
-            .build();
-    }
-
     @DeleteMapping("/{quizId}")
     public ResponseEntity<QuizDeleteResponseDto> deleteQuiz(
         @PathVariable("quizId") Long quizId,
@@ -89,6 +89,12 @@ public class QuizController {
         return ResponseEntity
             .accepted()
             .body(response);
+    }
+
+    @PostMapping("/{quizId}/like")
+    public ResponseEntity<Void> addQuizLike(@PathVariable Long quizId) {
+        quizService.addQuizLike(quizId);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/{quizId}/edit", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})

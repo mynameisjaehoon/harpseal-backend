@@ -69,4 +69,8 @@ public class Quiz extends CreatedDateEntity {
         playTime++;
     }
 
+    public void addLikeCount() {
+        likeCount++;
+    }
+
 }

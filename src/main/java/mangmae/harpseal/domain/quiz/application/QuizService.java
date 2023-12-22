@@ -186,4 +186,10 @@ public class QuizService {
             findQuestion.changeAttachment(newAttachment);
         }
     }
+
+    @Transactional
+    public void addQuizLike(Long quizId) {
+        Quiz findQuiz = findById(quizId);
+        findQuiz.addLikeCount();
+    }
 }

@@ -26,6 +26,7 @@ import java.net.URI;
 
 import static org.springframework.http.MediaType.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/v1/quiz")
 @RequiredArgsConstructor

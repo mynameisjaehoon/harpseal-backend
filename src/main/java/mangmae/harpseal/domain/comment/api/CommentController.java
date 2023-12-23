@@ -21,7 +21,7 @@ public class CommentController {
     private final CommentService commentService;
     private final QuizFacadeService quizFacadeService;
 
-    @PostMapping("/{quizId}/comment/new")
+    @PostMapping("/{quizId}/comment")
     public ResponseEntity<CreateCommentResponseDto> createComment(
         @PathVariable("quizId") Long quizId,
         @RequestBody CreateCommentRequestForm form

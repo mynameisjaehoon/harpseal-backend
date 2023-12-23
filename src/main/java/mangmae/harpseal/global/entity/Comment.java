@@ -3,6 +3,7 @@ package mangmae.harpseal.global.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
 import mangmae.harpseal.global.entity.auditing.CreatedInfoEntity;
 
 @Entity
@@ -26,5 +27,14 @@ public class Comment extends CreatedInfoEntity {
         this.content = content;
         this.password = password;
         this.likeCount = 0;
+    }
+
+    public CreateCommentResponseDto toServiceResponseDto() {
+        return CreateCommentResponseDto.builder()
+            .content(content)
+            .like(likeCount)
+            .createdBy(getCreatedBy())
+            .createdDate(getCreatedDate())
+            .build();
     }
 }

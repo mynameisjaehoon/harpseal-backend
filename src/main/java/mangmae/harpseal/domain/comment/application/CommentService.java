@@ -17,10 +17,10 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     public Comment createComment(final CreateCommentRequestServiceForm form) {
-        String requestPassword = form.getPassword();
+        String commentPassword = form.getPassword();
         String content = form.getContent();
 
-        Comment newComment = new Comment(content, requestPassword);
+        Comment newComment = new Comment(content, commentPassword);
         Comment savedComment = commentRepository.save(newComment);
 
         return savedComment;

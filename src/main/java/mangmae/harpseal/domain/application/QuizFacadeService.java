@@ -175,7 +175,6 @@ public class QuizFacadeService {
         String password = form.getPassword();
 
         Quiz findQuiz = quizService.findById(quizId);
-        verifyPassword(findQuiz.getPassword(), password);
 
         Comment newComment = commentService.createComment(form.toServiceDto());
         findQuiz.addComment(newComment); // 편의메서드 사용

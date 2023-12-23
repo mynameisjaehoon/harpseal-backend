@@ -7,6 +7,7 @@ import mangmae.harpseal.domain.application.QuizFacadeService;
 import mangmae.harpseal.domain.comment.application.CommentService;
 import mangmae.harpseal.domain.comment.dto.CreateCommentRequestForm;
 import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
+import mangmae.harpseal.domain.comment.dto.DeleteCommentRequestForm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,17 @@ public class CommentController {
         return ResponseEntity
             .ok()
             .body(result);
+    }
+
+    @DeleteMapping("/{quizId}/comment")
+    public ResponseEntity<Void> deleteComment(
+        @PathVariable("quizId") Long quizId,
+        @RequestBody DeleteCommentRequestForm form
+    ) {
+        commentService.deleteComment(form.toServiceForm(quizId));
+        return ResponseEntity
+            .ok()
+            .build();
     }
 
 }

@@ -39,4 +39,9 @@ public class Comment extends CreatedInfoEntity {
             .createdDate(getCreatedDate())
             .build();
     }
+
+    //편의 메서드
+    public void changeQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 }

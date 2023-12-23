@@ -175,11 +175,12 @@ public class QuizFacadeService {
         String password = form.getPassword();
 
         Quiz findQuiz = quizService.findById(quizId);
-
         Comment newComment = commentService.createComment(form.toServiceDto());
+
         findQuiz.addComment(newComment); // 편의메서드 사용
 
         return CreateCommentResponseDto.builder()
+            .commentId(newComment.getId())
             .content(newComment.getContent())
             .createdBy(newComment.getCreatedBy())
             .createdDate(newComment.getCreatedDate())

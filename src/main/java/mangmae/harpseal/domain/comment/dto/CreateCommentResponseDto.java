@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CreateCommentResponseDto {
 
+    private Long commentId;
     private String content;
     private String createdBy;
     private int like;

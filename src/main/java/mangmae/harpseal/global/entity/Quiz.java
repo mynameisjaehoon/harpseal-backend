@@ -76,6 +76,7 @@ public class Quiz extends CreatedDateEntity {
 
     public void addComment(Comment comment) {
         comments.add(comment);
+        comment.changeQuiz(this);
     }
 
 }

@@ -39,7 +39,7 @@ class QuizControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.content").exists())
             .andExpect(jsonPath("$.content[*].id").isNotEmpty())
-            .andExpect(jsonPath("$.content[*].title").hasJsonPath())
+            .andExpect(jsonPath("$.content[*].title").isNotEmpty())
             .andExpect(jsonPath("$.content[*].description").isNotEmpty())
             .andExpect(jsonPath("$.content[*].imageData").isNotEmpty());
 

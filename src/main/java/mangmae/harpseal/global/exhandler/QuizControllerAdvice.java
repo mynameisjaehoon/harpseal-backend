@@ -1,6 +1,7 @@
-package mangmae.harpseal.domain.quiz.api.exhandler;
+package mangmae.harpseal.global.exhandler;
 
 
+import mangmae.harpseal.domain.comment.api.CommentController;
 import mangmae.harpseal.domain.quiz.exception.CannotFindQuizException;
 import mangmae.harpseal.domain.quiz.api.QuizController;
 import mangmae.harpseal.domain.quiz.exception.dto.QuizDeleteExceptionResponse;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static org.springframework.http.HttpStatus.*;
 
-@RestControllerAdvice(assignableTypes = {QuizController.class})
+@RestControllerAdvice(assignableTypes = {QuizController.class, CommentController.class})
 public class QuizControllerAdvice {
 
     @ResponseStatus(BAD_REQUEST)

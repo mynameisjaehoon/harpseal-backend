@@ -16,14 +16,14 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    public CreateCommentResponseDto createComment(final CreateCommentRequestServiceForm form) {
+    public Comment createComment(final CreateCommentRequestServiceForm form) {
         String requestPassword = form.getPassword();
         String content = form.getContent();
 
         Comment newComment = new Comment(content, requestPassword);
         Comment savedComment = commentRepository.save(newComment);
 
-        return savedComment.toServiceResponseDto();
+        return savedComment;
     }
 
 }

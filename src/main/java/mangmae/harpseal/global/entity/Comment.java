@@ -2,11 +2,13 @@ package mangmae.harpseal.global.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
 import mangmae.harpseal.global.entity.auditing.CreatedInfoEntity;
 
 @Entity
+@Getter
 @Table(name = "comments") // `comment`는 예약어 이기 때문에 comments로 함
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends CreatedInfoEntity {

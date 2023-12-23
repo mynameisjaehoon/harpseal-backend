@@ -1,12 +1,19 @@
 package mangmae.harpseal.domain.comment.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.comment.application.CommentService;
 import mangmae.harpseal.domain.comment.dto.CreateCommentRequestForm;
 import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
+import mangmae.harpseal.domain.comment.dto.DeleteCommentRequestForm;
+import mangmae.harpseal.domain.comment.repository.CommentRepository;
+import mangmae.harpseal.global.entity.Comment;
 import mangmae.harpseal.global.entity.Quiz;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,11 +21,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -33,24 +44,32 @@ class CommentControllerTest {
     EntityManager em;
 
     @Autowired
-    CommentService commentService;
+    CommentRepository commentRepository;
 
     @Autowired
     MockMvc mvc;
 
     private String testPassword;
     private Long quizId;
+    private Long commentId;
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void before() {
-        objectMapper = new ObjectMapper();
+        objectMapper = new ObjectMapper()
+            .registerModule(new ParameterNamesModule())
+            .registerModule(new Jdk8Module())
+            .registerModule(new JavaTimeModule());
         testPassword = UUID.randomUUID().toString().substring(0, 8);
 
         Quiz quiz = new Quiz("comment_test_quiz1", "this is comment test quiz", testPassword);
+        Comment testComment = new Comment("this is test comment", testPassword);
+        quiz.addComment(testComment);
         em.persist(quiz);
+        em.persist(testComment);
 
-        quizId = quiz.getId(); // PK IDENTITY 전략을 사용하기 때문에 영속상태로 만드는순간 insert 쿼리가 날아가고, 캐시에 저장된다.
+        quizId = quiz.getId();
+        commentId = testComment.getId();
     }
 
     @Test
@@ -62,7 +81,7 @@ class CommentControllerTest {
 
         log.info("request new comment URL=[{}]", requestURL);
 
-        mvc.perform(post(requestURL)
+        MvcResult mvcResult = mvc.perform(post(requestURL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(formJson)
             )
@@ -71,39 +90,59 @@ class CommentControllerTest {
             .andExpect(jsonPath("$.createdBy").isNotEmpty())
             .andExpect(jsonPath("$.like").isNumber())
             .andExpect(jsonPath("$.like").isNotEmpty())
-            .andExpect(jsonPath("$.createdDate").isNotEmpty());
+            .andExpect(jsonPath("$.createdDate").isNotEmpty())
+            .andReturn();
 
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String contentAsString = response.getContentAsString();
+        log.info("result={}", contentAsString);
+
+        CreateCommentResponseDto result = objectMapper.readValue(contentAsString, CreateCommentResponseDto.class);
+        Long commentId = result.getCommentId();
+        Optional<Comment> findComment = commentRepository.findById(commentId);
+        assertThat(findComment.isPresent()).isTrue();
     }
 
     /**
      * 댓글 작성 실패 테스트
-     * 1. 퀴즈의 비밀번호가 일치하지 않는 경우
-     * 2. 존재하지 않는 퀴즈 번호로 요청한 경우
+     * 존재하지 않는 퀴즈 번호로 요청한 경우 댓글 생성에 실패한다.
      */
     @Test
     @DisplayName("댓글 생성 실패")
     void createCommentFail() throws Exception {
-        String failPassword = testPassword + UUID.randomUUID().toString().substring(0, 3);
         String idFailURL = "/api/v1/quiz/" + Long.MAX_VALUE + "/comment/new";
 
         CreateCommentRequestForm idFailForm = new CreateCommentRequestForm("quiz id fail", testPassword);
-        CreateCommentRequestForm passwordFailForm = new CreateCommentRequestForm("quiz password fail", failPassword);
-        String passwordFailJson = objectMapper.writeValueAsString(passwordFailForm);
-
-        mvc.perform(
-                post("/api/v1/quiz/" + quizId + "/comment/new")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(passwordFailJson)
-            )
-            .andExpect(status().isBadRequest());
+        String idFailJson = objectMapper.writeValueAsString(idFailForm);
 
         mvc.perform(
                 post(idFailURL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(idFailURL)
+                    .content(idFailJson)
             )
             .andExpect(status().isBadRequest());
     }
+
+    @Test
+    @DisplayName("댓글 삭제 성공")
+    void deleteCommentSuccess() throws Exception {
+
+        DeleteCommentRequestForm form = new DeleteCommentRequestForm(commentId, testPassword);
+        String formJson = objectMapper.writeValueAsString(form);
+
+        String deleteRequestURL = "/api/v1/quiz/" + quizId + "/comment";
+        log.info("delete comment url=[{}]", deleteRequestURL);
+        mvc.perform(
+                delete(deleteRequestURL)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(formJson)
+            )
+            .andExpect(status().isOk());
+
+        Optional<Comment> findComment = commentRepository.findById(commentId);
+        assertThat(findComment.isEmpty()).isTrue();
+    }
+
 
 
 }

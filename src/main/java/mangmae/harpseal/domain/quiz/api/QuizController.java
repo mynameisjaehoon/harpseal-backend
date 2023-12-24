@@ -3,14 +3,14 @@ package mangmae.harpseal.domain.quiz.api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.application.QuizFacadeService;
-import mangmae.harpseal.domain.quiz.api.dto.quiz.QuizDeleteRequestDto;
-import mangmae.harpseal.domain.quiz.api.dto.quiz.QuizEditRequestDto;
+import mangmae.harpseal.domain.quiz.dto.QuizDeleteRequestDto;
+import mangmae.harpseal.domain.quiz.dto.QuizEditRequestDto;
 import mangmae.harpseal.domain.quiz.application.dto.*;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchType;
 import mangmae.harpseal.domain.quiz.api.dto.question.QuestionCreateRequestForm;
 import mangmae.harpseal.domain.quiz.api.dto.question.QuestionCreateResponseDto;
-import mangmae.harpseal.domain.quiz.api.dto.quiz.QuizCreateRequestForm;
-import mangmae.harpseal.domain.quiz.api.dto.quiz.QuizSearchRequestCond;
+import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
+import mangmae.harpseal.domain.quiz.dto.QuizSearchRequestCond;
 import mangmae.harpseal.domain.quiz.application.QuizService;
 import mangmae.harpseal.global.entity.Question;
 import mangmae.harpseal.global.entity.Quiz;
@@ -18,7 +18,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +26,7 @@ import java.net.URI;
 
 import static org.springframework.http.MediaType.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/v1/quiz")
 @RequiredArgsConstructor
@@ -81,14 +81,14 @@ public class QuizController {
     }
 
     @DeleteMapping("/{quizId}")
-    public ResponseEntity<QuizDeleteResponseDto> deleteQuiz(
+    public ResponseEntity<Void> deleteQuiz(
         @PathVariable("quizId") Long quizId,
         @RequestBody QuizDeleteRequestDto requestDto
     ) {
-        QuizDeleteResponseDto response = quizService.deleteQuizById(quizId, requestDto.getPassword());
-        return ResponseEntity
-            .accepted()
-            .body(response);
+        quizService.deleteQuizById(quizId, requestDto.getPassword());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("http://localhost:8080/api/v1/quiz"));
+        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
     }
 
     @PostMapping("/{quizId}/like")

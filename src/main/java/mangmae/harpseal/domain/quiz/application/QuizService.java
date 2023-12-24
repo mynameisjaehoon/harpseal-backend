@@ -50,13 +50,16 @@ public class QuizService {
         return quizRepository.save(quiz);
     }
 
-    @Transactional
     public Quiz findById(Long id) {
         Optional<Quiz> findQuizOptional = quizRepository.findById(id);
 
         return findQuizOptional.orElseThrow(
             () -> new CannotFindQuizException("Can't find Quiz Entity with id=[" + id + "]")
         );
+    }
+
+    public boolean existsById(Long id) {
+        return quizRepository.existsById(id);
     }
 
     @Transactional

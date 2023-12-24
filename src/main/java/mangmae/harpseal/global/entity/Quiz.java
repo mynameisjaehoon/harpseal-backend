@@ -47,6 +47,7 @@ public class Quiz extends CreatedDateEntity {
         this.playTime = 0;
     }
 
+    // 편의 메서드
     public void changeTitle(String title) {
         this.title = title;
     }
@@ -71,6 +72,11 @@ public class Quiz extends CreatedDateEntity {
 
     public void addLikeCount() {
         likeCount++;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.changeQuiz(this);
     }
 
 }

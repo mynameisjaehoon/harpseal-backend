@@ -1,4 +1,5 @@
-package mangmae.harpseal.domain.quiz.api.dto.quiz;
+package mangmae.harpseal.domain.comment.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +8,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizDeleteRequestDto {
+public class DeleteCommentRepositoryDto {
 
-    private String password;
+    private Long commentId;
+    private Long quizId;
 
 }

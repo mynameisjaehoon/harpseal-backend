@@ -6,6 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.attachment.application.AttachmentService;
 import mangmae.harpseal.domain.choice.application.ChoiceService;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
+import mangmae.harpseal.domain.comment.application.CommentService;
+import mangmae.harpseal.domain.comment.dto.CreateCommentFacadeRequestForm;
+import mangmae.harpseal.domain.comment.dto.CreateCommentRequestServiceForm;
+import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
 import mangmae.harpseal.domain.question.application.QuestionService;
 import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 import mangmae.harpseal.domain.question.dto.QuestionServiceDto;
@@ -13,14 +17,11 @@ import mangmae.harpseal.domain.quiz.application.QuizService;
 import mangmae.harpseal.domain.question.dto.QuestionSimpleServiceDto;
 import mangmae.harpseal.domain.quiz.application.dto.*;
 import mangmae.harpseal.domain.question.util.QuestionValidator;
-import mangmae.harpseal.global.entity.QuizThumbnail;
+import mangmae.harpseal.global.entity.*;
 import mangmae.harpseal.global.entity.type.AttachmentType;
 import mangmae.harpseal.global.util.FileUtil;
 import mangmae.harpseal.global.util.SecurityUtil;
 import mangmae.harpseal.domain.thumbnail.application.ThumbnailService;
-import mangmae.harpseal.global.entity.MultipleQuestionChoice;
-import mangmae.harpseal.global.entity.Question;
-import mangmae.harpseal.global.entity.Quiz;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static mangmae.harpseal.global.util.SecurityUtil.*;
 
 
 @Slf4j
@@ -41,6 +44,7 @@ public class QuizFacadeService {
     private final QuestionService questionService;
     private final ChoiceService choiceService;
     private final AttachmentService attachmentService;
+    private final CommentService commentService;
 
     private final FileUtil fileUtil;
 
@@ -75,7 +79,7 @@ public class QuizFacadeService {
         QuestionValidator.validateQuestionRegistrationForm(dto);
 
         Quiz findQuiz = quizService.findById(quizId);
-        SecurityUtil.verifyPassword(dto.getPassword(), findQuiz.getPassword());
+        verifyPassword(dto.getPassword(), findQuiz.getPassword());
 
         Question savedQuestion = questionService.save(new Question(dto));
         findQuiz.addQuestion(savedQuestion); // 퀴즈와 연관관계 바인딩
@@ -162,6 +166,26 @@ public class QuizFacadeService {
         quiz.changeThumbnail(newThumbnail);
         thumbnailService.save(newThumbnail);
         return savedPath;
+    }
+
+    @Transactional
+    public CreateCommentResponseDto createComment(CreateCommentFacadeRequestForm form) {
+        Long quizId = form.getQuizId();
+        String content = form.getContent();
+        String password = form.getPassword();
+
+        Quiz findQuiz = quizService.findById(quizId);
+        Comment newComment = commentService.createComment(form.toServiceDto());
+
+        findQuiz.addComment(newComment); // 편의메서드 사용
+
+        return CreateCommentResponseDto.builder()
+            .commentId(newComment.getId())
+            .content(newComment.getContent())
+            .createdBy(newComment.getCreatedBy())
+            .createdDate(newComment.getCreatedDate())
+            .like(newComment.getLikeCount())
+            .build();
     }
 
 }

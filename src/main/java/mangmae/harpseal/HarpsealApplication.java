@@ -19,6 +19,7 @@ public class HarpsealApplication {
 
 	@Bean
 	public AuditorAware<String> auditorProvider() {
+		// TODO: 2023/12/22 추후 만들어질 유저이름 모듈로 변경
 		return () -> Optional.of(UserUtil.makeRandomUsername());
 	}
 

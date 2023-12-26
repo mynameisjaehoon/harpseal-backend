@@ -4,8 +4,8 @@ application-aws.properties
 ./src/main/generated/
 
 # build 폴더
-./build/*
-./build/
+build/*
+build/
 
 
 # gitignore.io 에서 생성한 목록

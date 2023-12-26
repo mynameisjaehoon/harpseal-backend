@@ -2,7 +2,10 @@ package mangmae.harpseal.domain.quiz.api;
 
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import mangmae.harpseal.global.entity.MultipleQuestionChoice;
+import mangmae.harpseal.global.entity.Question;
 import mangmae.harpseal.global.entity.Quiz;
+import mangmae.harpseal.global.entity.type.QuestionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,7 +58,16 @@ class QuizControllerTest {
         Quiz testQuiz = new Quiz("test quiz title", "test quiz description", testPassword);
         em.persist(testQuiz);
         testQuizId = testQuiz.getId();
-        em.flush();
+
+        Question newQuestion = new Question("example question", 1, "example answer", QuestionType.MULTIPLE);
+        for (int j = 1; j <= 5; j++) {
+            MultipleQuestionChoice newChoice = new MultipleQuestionChoice(j, "choice" + j);
+            em.persist(newChoice);
+            newQuestion.addChoice(newChoice);
+        }
+        em.persist(newQuestion);
+        testQuiz.addQuestion(newQuestion);
+
     }
 
     @Test
@@ -81,11 +93,17 @@ class QuizControllerTest {
                         fieldWithPath("thumbnailData").optional().description("퀴즈 썸네일이미지 데이터").type(STRING),
                         fieldWithPath("likeCount").description("퀴즈 좋아요 수").type(NUMBER),
                         fieldWithPath("playTime").description("퀴즈 플레이 횟수").type(NUMBER),
-                        fieldWithPath("questions").description("퀴즈 문제 목록").type(ARRAY)
+                        fieldWithPath("questions[].id").description("문제 ID").type(NUMBER),
+                        fieldWithPath("questions[].content").description("문제 내용").type(STRING),
+                        fieldWithPath("questions[].number").description("문제 번호").type(NUMBER),
+                        fieldWithPath("questions[].answer").description("문제 정답").type(STRING),
+                        fieldWithPath("questions[].attachmentData").optional().description("문제 첨부파일 데이터").type(STRING),
+                        fieldWithPath("questions[].attachmentType").optional().description("문제 첨부파일 타입").type(STRING),
+                        fieldWithPath("questions[].choices[].number").description("선택지 번호").type(NUMBER),
+                        fieldWithPath("questions[].choices[].content").description("선택지 내용").type(STRING)
                     )
                 )
             );
-
     }
 
     @Test

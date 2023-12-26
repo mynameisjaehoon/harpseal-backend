@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.284s</div>
+<div class="counter">0.267s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,13 +81,13 @@
 <tr>
 <td class="success">플레이 횟수를 기준으로 검색</td>
 <td class="success">playTimeSearchTest()</td>
-<td class="success">0.147s</td>
+<td class="success">0.149s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">퀴즈 생성시간을 기준으로 검색</td>
 <td class="success">recentSearchTest()</td>
-<td class="success">0.137s</td>
+<td class="success">0.118s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -95,41 +95,41 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2023-12-26T23:03:15.546+09:00  INFO 2748 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [mangmae.harpseal.domain.quiz.repository.QuizRepositoryImplTest]: QuizRepositoryImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-12-26T23:03:15.553+09:00  INFO 2748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.domain.quiz.repository.QuizRepositoryImplTest
-2023-12-26T23:03:15.575+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz1=Quiz(title=a6f35037quiz1, description=quiz1 description, password=12345, likeCount=0, playTime=1)
-2023-12-26T23:03:15.577+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz2=Quiz(title=a6f35037quiz2, description=quiz2 description, password=12345, likeCount=0, playTime=2)
-2023-12-26T23:03:15.577+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz3=Quiz(title=a6f35037quiz3, description=quiz3 description, password=12345, likeCount=0, playTime=3)
-2023-12-26T23:03:15.577+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz4=Quiz(title=a6f35037quiz4, description=quiz4 description, password=12345, likeCount=0, playTime=4)
-2023-12-26T23:03:15.579+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+<pre>2023-12-27T01:21:19.298+09:00  INFO 7489 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [mangmae.harpseal.domain.quiz.repository.QuizRepositoryImplTest]: QuizRepositoryImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-27T01:21:19.306+09:00  INFO 7489 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.domain.quiz.repository.QuizRepositoryImplTest
+2023-12-27T01:21:19.327+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz1=Quiz(title=b2fc9446quiz1, description=quiz1 description, password=12345, likeCount=0, playTime=1)
+2023-12-27T01:21:19.329+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz2=Quiz(title=b2fc9446quiz2, description=quiz2 description, password=12345, likeCount=0, playTime=2)
+2023-12-27T01:21:19.329+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz3=Quiz(title=b2fc9446quiz3, description=quiz3 description, password=12345, likeCount=0, playTime=3)
+2023-12-27T01:21:19.329+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz4=Quiz(title=b2fc9446quiz4, description=quiz4 description, password=12345, likeCount=0, playTime=4)
+2023-12-27T01:21:19.332+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.589+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.342+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.599+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.352+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.609+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.364+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.624+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.382+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -158,7 +158,7 @@
             q1_0.play_time desc 
         limit
             ?, ?
-2023-12-26T23:03:15.638+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.395+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -170,7 +170,7 @@
             quiz q1_0 
         where
             q1_0.title like ? escape '!'
-2023-12-26T23:03:15.652+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.410+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -199,7 +199,7 @@
             q1_0.play_time 
         limit
             ?, ?
-2023-12-26T23:03:15.661+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.419+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -211,39 +211,39 @@
             quiz q1_0 
         where
             q1_0.title like ? escape '!'
-2023-12-26T23:03:15.713+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz1=Quiz(title=a6f35037quiz1, description=quiz1 description, password=12345, likeCount=0, playTime=1)
-2023-12-26T23:03:15.713+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz2=Quiz(title=a6f35037quiz2, description=quiz2 description, password=12345, likeCount=0, playTime=2)
-2023-12-26T23:03:15.713+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz3=Quiz(title=a6f35037quiz3, description=quiz3 description, password=12345, likeCount=0, playTime=3)
-2023-12-26T23:03:15.713+09:00  INFO 2748 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz4=Quiz(title=a6f35037quiz4, description=quiz4 description, password=12345, likeCount=0, playTime=4)
-2023-12-26T23:03:15.714+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.468+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz1=Quiz(title=b2fc9446quiz1, description=quiz1 description, password=12345, likeCount=0, playTime=1)
+2023-12-27T01:21:19.468+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz2=Quiz(title=b2fc9446quiz2, description=quiz2 description, password=12345, likeCount=0, playTime=2)
+2023-12-27T01:21:19.469+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz3=Quiz(title=b2fc9446quiz3, description=quiz3 description, password=12345, likeCount=0, playTime=3)
+2023-12-27T01:21:19.469+09:00  INFO 7489 --- [    Test worker] m.h.d.q.r.QuizRepositoryImplTest         : quiz4=Quiz(title=b2fc9446quiz4, description=quiz4 description, password=12345, likeCount=0, playTime=4)
+2023-12-27T01:21:19.469+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.724+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.478+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.735+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.488+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.749+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.500+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-26T23:03:15.761+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.511+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -272,7 +272,7 @@
             q1_0.created_date desc 
         limit
             ?, ?
-2023-12-26T23:03:15.774+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.522+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -284,7 +284,7 @@
             quiz q1_0 
         where
             q1_0.title like ? escape '!'
-2023-12-26T23:03:15.787+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.534+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -313,7 +313,7 @@
             q1_0.created_date 
         limit
             ?, ?
-2023-12-26T23:03:15.801+09:00 DEBUG 2748 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T01:21:19.544+09:00 DEBUG 7489 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -336,7 +336,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 26. 오후 11:03:16</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 27. 오전 1:21:19</p>
 </div>
 </div>
 </body>

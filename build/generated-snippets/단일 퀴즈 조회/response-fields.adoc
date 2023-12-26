@@ -24,8 +24,36 @@
 |`+Number+`
 |true
 |퀴즈 플레이 횟수
-|`+questions+`
-|`+Array+`
+|`+questions[].id+`
+|`+Number+`
 |true
-|퀴즈 문제 목록
+|문제 ID
+|`+questions[].content+`
+|`+String+`
+|true
+|문제 내용
+|`+questions[].number+`
+|`+Number+`
+|true
+|문제 번호
+|`+questions[].answer+`
+|`+String+`
+|true
+|문제 정답
+|`+questions[].attachmentData+`
+|`+String+`
+|false
+|문제 첨부파일 데이터
+|`+questions[].attachmentType+`
+|`+String+`
+|false
+|문제 첨부파일 타입
+|`+questions[].choices[].number+`
+|`+Number+`
+|true
+|선택지 번호
+|`+questions[].choices[].content+`
+|`+String+`
+|true
+|선택지 내용
 |===

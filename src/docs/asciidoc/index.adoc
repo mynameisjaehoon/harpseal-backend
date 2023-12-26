@@ -1,0 +1,15 @@
+= Harpseal API Docs
+Harseal API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs // 문서에 표기되는 코드들의 하이라이팅을 highlightjs를 사용
+:toc: left // toc (Table Of Contents)를 문서의 좌측에 두기
+:toclevels: 2
+:sectlinks:
+
+[[Quiz-API]]
+== Quiz API
+
+[[Quiz-단일-조회]]
+=== Quiz 단일 조회
+operation::단일 퀴즈 조회[snippets='http-request,path-parameters,http-response,response-fields']

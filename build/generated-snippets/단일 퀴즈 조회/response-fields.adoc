@@ -1,0 +1,31 @@
+|===
+|필드명|타입|필수여부|설명
+|`+quizId+`
+|`+Number+`
+|true
+|퀴즈 ID
+|`+title+`
+|`+String+`
+|true
+|퀴즈 제목
+|`+description+`
+|`+String+`
+|true
+|퀴즈 설명
+|`+thumbnailData+`
+|`+String+`
+|false
+|퀴즈 썸네일이미지 데이터
+|`+likeCount+`
+|`+Number+`
+|true
+|퀴즈 좋아요 수
+|`+playTime+`
+|`+Number+`
+|true
+|퀴즈 플레이 횟수
+|`+questions+`
+|`+Array+`
+|true
+|퀴즈 문제 목록
+|===

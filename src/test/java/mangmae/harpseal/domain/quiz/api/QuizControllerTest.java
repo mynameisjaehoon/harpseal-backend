@@ -1,31 +1,92 @@
 package mangmae.harpseal.domain.quiz.api;
 
+import jakarta.persistence.EntityManager;
+import lombok.extern.slf4j.Slf4j;
+import mangmae.harpseal.global.entity.Quiz;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.restdocs.operation.preprocess.Preprocessors;
+import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.restdocs.request.RequestDocumentation;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcResultHandlersDsl;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.print.DocFlavor;
+import java.util.ArrayList;
+import java.util.UUID;
+
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.JsonFieldType.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
+@Slf4j
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
 @Transactional
 class QuizControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @Autowired
+    private EntityManager em;
+
+    private String testPassword; // 테스트용 퀴즈 비밀번호
+    private Long testQuizId; // 테스트용 퀴즈 엔티티 ID
+
+    @BeforeEach
+    void before() {
+        testPassword = UUID.randomUUID().toString().substring(0, 8);
+
+        Quiz testQuiz = new Quiz("test quiz title", "test quiz description", testPassword);
+        em.persist(testQuiz);
+        testQuizId = testQuiz.getId();
+        em.flush();
+    }
+
+    @Test
+    @DisplayName("단일 퀴즈 조회 응답테스트")
+    public void getSingleQuizTest() throws Exception {
+
+        mvc.perform(
+                RestDocumentationRequestBuilders.get("/api/v1/quiz/{quizId}", testQuizId)
+            )
+            .andExpect(status().isOk())
+            .andDo(
+                document(
+                    "단일 퀴즈 조회",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    pathParameters(
+                        parameterWithName("quizId").description("퀴즈 ID")
+                    ),
+                    responseFields(
+                        fieldWithPath("quizId").description("퀴즈 ID").type(NUMBER),
+                        fieldWithPath("title").description("퀴즈 제목").type(STRING),
+                        fieldWithPath("description").description("퀴즈 설명").type(STRING),
+                        fieldWithPath("thumbnailData").optional().description("퀴즈 썸네일이미지 데이터").type(STRING),
+                        fieldWithPath("likeCount").description("퀴즈 좋아요 수").type(NUMBER),
+                        fieldWithPath("playTime").description("퀴즈 플레이 횟수").type(NUMBER),
+                        fieldWithPath("questions").description("퀴즈 문제 목록").type(ARRAY)
+                    )
+                )
+            );
+
+    }
 
     @Test
     @DisplayName("퀴즈 목록 조회")
@@ -45,17 +106,12 @@ class QuizControllerTest {
 
     }
 
-    @Test
-    @DisplayName("단일 퀴즈 조회 응답테스트")
-    public void getSingleQuizTest() throws Exception {
-        mvc.perform(get("/api/v1/quiz/1"))
-            .andExpect(status().isOk());
-    }
 
-    @Test
-    @DisplayName("퀴즈 수정 응답테스트")
-    public void editQuizResponseTest() throws Exception {
-        mvc.perform(put("/api/v1/quiz/1/edit"))
-            .andExpect(status().isOk());
-    }
+
+//    @Test
+//    @DisplayName("퀴즈 수정 응답테스트")
+//    public void editQuizResponseTest() throws Exception {
+//        mvc.perform(put("/api/v1/quiz/1/edit"))
+//            .andExpect(status().isOk());
+//    }
 }

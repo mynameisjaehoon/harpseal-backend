@@ -28,7 +28,7 @@ import static org.springframework.http.MediaType.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/v1/quiz")
+@RequestMapping("/api/v1/quiz")
 @RequiredArgsConstructor
 @Slf4j
 public class QuizController {

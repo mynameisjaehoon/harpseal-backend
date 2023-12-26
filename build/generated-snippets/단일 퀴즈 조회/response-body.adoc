@@ -1,0 +1,12 @@
+[source,json,options="nowrap"]
+----
+{
+  "quizId" : 297,
+  "title" : "test quiz title",
+  "description" : "test quiz description",
+  "thumbnailData" : null,
+  "likeCount" : 0,
+  "playTime" : 0,
+  "questions" : [ ]
+}
+----

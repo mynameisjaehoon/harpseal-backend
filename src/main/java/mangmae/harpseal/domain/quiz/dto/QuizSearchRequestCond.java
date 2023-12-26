@@ -13,6 +13,10 @@ public class QuizSearchRequestCond {
     private String title;
     private String searchType;
 
+    public QuizSearchRequestCond(String searchType) {
+        this.searchType = searchType;
+    }
+
     public QuizSearchServiceCond toServiceDto() {
         QuizSearchType type = QuizSearchType.by(searchType);
 

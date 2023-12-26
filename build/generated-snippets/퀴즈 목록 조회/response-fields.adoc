@@ -1,0 +1,63 @@
+|===
+|필드명|타입|필수여부|설명
+|`+content+`
+|`+Array+`
+|true
+|조회 퀴즈 목록 데이터
+|`+content[].id+`
+|`+Number+`
+|true
+|퀴즈 ID
+|`+content[].title+`
+|`+String+`
+|true
+|퀴즈 제목
+|`+content[].description+`
+|`+String+`
+|true
+|퀴즈 설명
+|`+content[].imageData+`
+|`+String+`
+|false
+|퀴즈 썸네일 이미지 데이터
+|`+pageable+`
+|`+Object+`
+|true
+|페이징 정보
+|`+last+`
+|`+Boolean+`
+|true
+|마지막 페이지 여부
+|`+totalPages+`
+|`+Number+`
+|true
+|전체 페이지 수
+|`+totalElements+`
+|`+Number+`
+|true
+|전체 데이터 수
+|`+first+`
+|`+Boolean+`
+|true
+|첫번째 페이지 여부
+|`+size+`
+|`+Number+`
+|true
+|페이지 사이즈
+|`+number+`
+|`+Number+`
+|true
+|페이지 번(0부터 시작)
+|`+sort+`
+|`+Object+`
+|true
+|URL 정렬 정보
+|`+numberOfElements+`
+|`+Number+`
+|true
+|가져온 데이터 수
+|`+empty+`
+|`+Boolean+`
+|true
+|데이터 공백 여부
+|===

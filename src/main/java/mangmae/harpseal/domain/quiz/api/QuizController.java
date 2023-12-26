@@ -76,9 +76,10 @@ public class QuizController {
      */
     @GetMapping("/{quizId}")
     public ResponseEntity<SingleQuizServiceResponse> findSingleQuiz(@PathVariable("quizId") Long quizId) {
+        SingleQuizServiceResponse result = quizFacadeService.findSingleQuiz(new SingleQuizServiceCond(quizId));
         return ResponseEntity
             .ok()
-            .body(new SingleQuizServiceResponse(quizId));
+            .body(result);
     }
 
     /**

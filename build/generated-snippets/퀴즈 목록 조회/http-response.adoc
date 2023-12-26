@@ -1,0 +1,58 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+Content-Length: 959
+
+{
+  "content" : [ {
+    "id" : 1,
+    "title" : "새로운 퀴즈 제목",
+    "description" : "새로운 퀴즈 설명",
+    "imageData" : null
+  }, {
+    "id" : 2,
+    "title" : "init quiz 2",
+    "description" : "this is init quiz2",
+    "imageData" : null
+  }, {
+    "id" : 3,
+    "title" : "init quiz 3",
+    "description" : "this is init quiz3",
+    "imageData" : null
+  }, {
+    "id" : 436,
+    "title" : "test quiz title",
+    "description" : "test quiz description",
+    "imageData" : null
+  } ],
+  "pageable" : {
+    "pageNumber" : 0,
+    "pageSize" : 20,
+    "sort" : {
+      "empty" : true,
+      "unsorted" : true,
+      "sorted" : false
+    },
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "last" : true,
+  "totalPages" : 1,
+  "totalElements" : 4,
+  "first" : true,
+  "size" : 20,
+  "number" : 0,
+  "sort" : {
+    "empty" : true,
+    "unsorted" : true,
+    "sorted" : false
+  },
+  "numberOfElements" : 4,
+  "empty" : false
+}
+----

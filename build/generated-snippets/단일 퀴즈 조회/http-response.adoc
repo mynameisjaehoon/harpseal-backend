@@ -8,14 +8,14 @@ Content-Type: application/json
 Content-Length: 654
 
 {
-  "quizId" : 371,
+  "quizId" : 435,
   "title" : "test quiz title",
   "description" : "test quiz description",
   "thumbnailData" : null,
   "likeCount" : 0,
   "playTime" : 0,
   "questions" : [ {
-    "id" : 38,
+    "id" : 58,
     "content" : "example question",
     "number" : 1,
     "answer" : "example answer",

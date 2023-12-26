@@ -2,14 +2,18 @@
 Harseal API 문서
 :doctype: book
 :icons: font
-:source-highlighter: highlightjs // 문서에 표기되는 코드들의 하이라이팅을 highlightjs를 사용
-:toc: left // toc (Table Of Contents)를 문서의 좌측에 두기
+:source-highlighter: highlightjs
+:toc: left
 :toclevels: 2
 :sectlinks:
 
-[[Quiz-API]]
-== Quiz API
+[[퀴즈-API]]
+== 퀴즈 API
 
-[[Quiz-단일-조회]]
-=== Quiz 단일 조회
+[[퀴즈-목록-조회]]
+=== 퀴즈 목록 조회
+operation::퀴즈 목록 조회[snippets='http-request,http-response,response-fields']
+
+[[퀴즈-단일-조회]]
+=== 퀴즈 단일 조회
 operation::단일 퀴즈 조회[snippets='http-request,path-parameters,http-response,response-fields']

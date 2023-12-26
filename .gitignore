@@ -3,6 +3,8 @@ application-aws.properties
 # Querydsl Q Object
 ./src/main/generated/
 
+# build 폴더
+./build/*
 
 
 # gitignore.io 에서 생성한 목록

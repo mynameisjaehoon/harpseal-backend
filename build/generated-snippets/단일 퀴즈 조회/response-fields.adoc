@@ -24,6 +24,10 @@
 |`+Number+`
 |true
 |퀴즈 플레이 횟수
+|`+questions+`
+|`+Array+`
+|true
+|문제 목록
 |`+questions[].id+`
 |`+Number+`
 |true

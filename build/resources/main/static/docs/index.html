@@ -466,7 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h4 id="Quiz-단일-조회_http_request"><a class="link" href="#Quiz-단일-조회_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/v1/quiz/331 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/v1/quiz/358 HTTP/1.1
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -502,21 +502,21 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 3380
+Content-Length: 654
 
 {
-  "quizId" : 331,
+  "quizId" : 358,
   "title" : "test quiz title",
   "description" : "test quiz description",
   "thumbnailData" : null,
   "likeCount" : 0,
   "playTime" : 0,
   "questions" : [ {
-    "id" : 31,
+    "id" : 36,
     "content" : "example question",
     "number" : 1,
     "answer" : "example answer",
-    "attachmentData" : "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",
+    "attachmentData" : null,
     "attachmentType" : "MULTIPLE",
     "choices" : [ {
       "number" : 1,
@@ -618,13 +618,13 @@ Content-Length: 3380
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>questions[].attachmentData</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">문제 첨부파일 데이터</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>questions[].attachmentType</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">문제 첨부파일 타입</p></td>
 </tr>
 <tr>

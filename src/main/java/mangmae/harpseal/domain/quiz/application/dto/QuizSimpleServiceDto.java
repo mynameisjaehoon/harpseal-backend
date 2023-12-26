@@ -18,7 +18,7 @@ public class QuizSimpleServiceDto {
     private Long id;
     private String title;
     private String description;
-    private String thumbnailData;
+    private String thumbnailPath;
     private int likeCount;
     private int playTime;
 
@@ -27,13 +27,13 @@ public class QuizSimpleServiceDto {
             .id(dto.getId())
             .title(dto.getTitle())
             .description(dto.getDescription())
-            .thumbnailData(null)
+            .thumbnailPath(null)
             .likeCount(dto.getLikeCount())
             .playTime(dto.getPlayTime())
             .build();
     }
 
-    public void addThumbnailData(String data) {
-        thumbnailData = data;
+    public void addThumbnailData(String path) {
+        thumbnailPath = path;
     }
 }

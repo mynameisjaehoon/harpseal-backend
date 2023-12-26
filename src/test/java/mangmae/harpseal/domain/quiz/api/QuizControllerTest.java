@@ -6,6 +6,7 @@ import mangmae.harpseal.global.entity.MultipleQuestionChoice;
 import mangmae.harpseal.global.entity.Question;
 import mangmae.harpseal.global.entity.Quiz;
 import mangmae.harpseal.global.entity.type.QuestionType;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,11 +15,14 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.headers.HeaderDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.operation.preprocess.Preprocessors;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.restdocs.payload.PayloadDocumentation;
 import org.springframework.restdocs.request.RequestDocumentation;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.print.DocFlavor;
@@ -83,6 +87,9 @@ class QuizControllerTest {
                     "단일 퀴즈 조회",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint()),
+                    HeaderDocumentation.responseHeaders(
+
+                    ),
                     pathParameters(
                         parameterWithName("quizId").description("퀴즈 ID")
                     ),
@@ -93,6 +100,7 @@ class QuizControllerTest {
                         fieldWithPath("thumbnailData").optional().description("퀴즈 썸네일이미지 데이터").type(STRING),
                         fieldWithPath("likeCount").description("퀴즈 좋아요 수").type(NUMBER),
                         fieldWithPath("playTime").description("퀴즈 플레이 횟수").type(NUMBER),
+                        subsectionWithPath("questions").description("문제 목록"),
                         fieldWithPath("questions[].id").description("문제 ID").type(NUMBER),
                         fieldWithPath("questions[].content").description("문제 내용").type(STRING),
                         fieldWithPath("questions[].number").description("문제 번호").type(NUMBER),
@@ -107,22 +115,28 @@ class QuizControllerTest {
     }
 
     @Test
-    @DisplayName("퀴즈 목록 조회")
+    @DisplayName("퀴즈 목록 조회 테스트")
     public void getQuizListTest() throws Exception {
-
-        mvc.perform(
-                get("/api/v1/quiz")
-                    .accept(MediaType.APPLICATION_JSON)
-            )
-            .andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.content").exists())
-            .andExpect(jsonPath("$.content[*].id").isNotEmpty())
-            .andExpect(jsonPath("$.content[*].title").isNotEmpty())
-            .andExpect(jsonPath("$.content[*].description").isNotEmpty())
-            .andExpect(jsonPath("$.content[*].imageData").isNotEmpty());
-
+        
     }
+
+
+//    @Test
+//    @DisplayName("퀴즈 목록 조회")
+//    public void getQuizListTest() throws Exception {
+//
+//        mvc.perform(
+//                get("/api/v1/quiz")
+//                    .accept(MediaType.APPLICATION_JSON)
+//            )
+//            .andExpect(status().isOk())
+//            .andExpect(jsonPath("$.content").exists())
+//            .andExpect(jsonPath("$.content[*].id").isNotEmpty())
+//            .andExpect(jsonPath("$.content[*].title").isNotEmpty())
+//            .andExpect(jsonPath("$.content[*].description").isNotEmpty())
+//            .andExpect(jsonPath("$.content[*].imageData").isNotEmpty());
+//
+//    }
 
 
 

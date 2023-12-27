@@ -1,14 +1,14 @@
 [source,json,options="nowrap"]
 ----
 {
-  "quizId" : 132,
+  "quizId" : 173,
   "title" : "test quiz title",
   "description" : "test quiz description",
   "thumbnailData" : null,
   "likeCount" : 0,
   "playTime" : 0,
   "questions" : [ {
-    "id" : 36,
+    "id" : 56,
     "content" : "example question",
     "number" : 1,
     "answer" : "example answer",

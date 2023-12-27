@@ -124,7 +124,7 @@ public class QuizController {
      * @return HTTP 200 OK
      */
     @PostMapping("/{quizId}/like")
-    public ResponseEntity<Void> addQuizLike(@PathVariable Long quizId) {
+    public ResponseEntity<Void> addQuizLike(@PathVariable("quizId") Long quizId) {
         quizService.addQuizLike(quizId);
         return ResponseEntity.ok().build();
     }

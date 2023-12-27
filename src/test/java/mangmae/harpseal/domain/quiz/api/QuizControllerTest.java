@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchRequestCond;
 import mangmae.harpseal.global.entity.MultipleQuestionChoice;
 import mangmae.harpseal.global.entity.Question;
@@ -21,18 +22,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.headers.HeaderDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.operation.preprocess.Preprocessors;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.restdocs.payload.PayloadDocumentation;
 import org.springframework.restdocs.request.RequestDocumentation;
+import org.springframework.restdocs.snippet.Attributes;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;
@@ -40,6 +44,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.JsonFieldType.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.snippet.Attributes.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -85,6 +90,9 @@ class QuizControllerTest {
 
     }
 
+    /**
+     * 단일 퀴즈 조회 테스트
+     */
     @Test
     @DisplayName("단일 퀴즈 조회 응답테스트")
     public void getSingleQuizTest() throws Exception {
@@ -132,8 +140,11 @@ class QuizControllerTest {
         QuizSearchRequestCond condition = new QuizSearchRequestCond("NONE");
         String formJson = objectMapper.writeValueAsString(condition);
 
+        ConstraintDescriptions conditionSearchTypeConstraints = new ConstraintDescriptions(QuizSearchRequestCond.class);
+        List<String> searchTypeConstraints = conditionSearchTypeConstraints.descriptionsForProperty("searchType");
+
         mvc.perform(
-                get("/api/v1/quiz")
+                get("/api/v1/quiz?page=0&size=2")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(formJson)
             )
@@ -154,7 +165,7 @@ class QuizControllerTest {
                     ),
                     requestFields(
                         fieldWithPath("title").optional().type(STRING).description("퀴즈 검색 제목"),
-                        fieldWithPath("searchType").optional().type(STRING).description("검색 조건")
+                        fieldWithPath("searchType").type(STRING).description("검색 조건").attributes(key("constraints").value("`NONE`, `COUNT_ASC`, `COUNT_DESC`, `RECENT`, `OLD` 중 하나여야 한다."))
                     ),
                     responseFields(
                         fieldWithPath("content").type(ARRAY).description("조회 퀴즈 목록 데이터"),
@@ -168,7 +179,7 @@ class QuizControllerTest {
                         fieldWithPath("totalElements").type(NUMBER).description("전체 데이터 수"),
                         fieldWithPath("first").type(BOOLEAN).description("첫번째 페이지 여부"),
                         fieldWithPath("size").type(NUMBER).description("페이지 사이즈"),
-                        fieldWithPath("number").type(NUMBER).description("페이지 번(0부터 시작)"),
+                        fieldWithPath("number").type(NUMBER).description("페이지 번호(0부터 시작)"),
                         subsectionWithPath("sort").type(OBJECT).description("URL 정렬 정보"),
                         fieldWithPath("numberOfElements").type(NUMBER).description("가져온 데이터 수"),
                         fieldWithPath("empty").type(BOOLEAN).description("데이터 공백 여부")
@@ -177,30 +188,13 @@ class QuizControllerTest {
             );
     }
 
+    @Test
+    public void quizCreateTest() throws Exception {
+        QuizCreateRequestForm requestForm = new QuizCreateRequestForm("quiz name", "12345", "example new quiz");
+        
 
-//    @Test
-//    @DisplayName("퀴즈 목록 조회")
-//    public void getQuizListTest() throws Exception {
-//
-//        mvc.perform(
-//                get("/api/v1/quiz")
-//                    .accept(MediaType.APPLICATION_JSON)
-//            )
-//            .andExpect(status().isOk())
-//            .andExpect(jsonPath("$.content").exists())
-//            .andExpect(jsonPath("$.content[*].id").isNotEmpty())
-//            .andExpect(jsonPath("$.content[*].title").isNotEmpty())
-//            .andExpect(jsonPath("$.content[*].description").isNotEmpty())
-//            .andExpect(jsonPath("$.content[*].imageData").isNotEmpty());
-//
-//    }
+    }
 
 
 
-//    @Test
-//    @DisplayName("퀴즈 수정 응답테스트")
-//    public void editQuizResponseTest() throws Exception {
-//        mvc.perform(put("/api/v1/quiz/1/edit"))
-//            .andExpect(status().isOk());
-//    }
 }

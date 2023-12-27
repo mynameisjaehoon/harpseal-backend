@@ -5,54 +5,44 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 959
+Content-Length: 702
 
 {
   "content" : [ {
     "id" : 1,
-    "title" : "새로운 퀴즈 제목",
-    "description" : "새로운 퀴즈 설명",
+    "title" : "init quiz 1",
+    "description" : "this is init quiz1",
     "imageData" : null
   }, {
     "id" : 2,
     "title" : "init quiz 2",
     "description" : "this is init quiz2",
     "imageData" : null
-  }, {
-    "id" : 3,
-    "title" : "init quiz 3",
-    "description" : "this is init quiz3",
-    "imageData" : null
-  }, {
-    "id" : 436,
-    "title" : "test quiz title",
-    "description" : "test quiz description",
-    "imageData" : null
   } ],
   "pageable" : {
     "pageNumber" : 0,
-    "pageSize" : 20,
+    "pageSize" : 2,
     "sort" : {
       "empty" : true,
-      "unsorted" : true,
-      "sorted" : false
+      "sorted" : false,
+      "unsorted" : true
     },
     "offset" : 0,
     "paged" : true,
     "unpaged" : false
   },
-  "last" : true,
-  "totalPages" : 1,
+  "last" : false,
+  "totalPages" : 2,
   "totalElements" : 4,
   "first" : true,
-  "size" : 20,
+  "size" : 2,
   "number" : 0,
   "sort" : {
     "empty" : true,
-    "unsorted" : true,
-    "sorted" : false
+    "sorted" : false,
+    "unsorted" : true
   },
-  "numberOfElements" : 4,
+  "numberOfElements" : 2,
   "empty" : false
 }
 ----

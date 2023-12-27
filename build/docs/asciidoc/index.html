@@ -468,7 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h4 id="퀴즈-목록-조회_http_request"><a class="link" href="#퀴즈-목록-조회_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/quiz HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/quiz?page=0&amp;size=2 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 45
 Host: localhost:8080
@@ -481,6 +481,66 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
+<h4 id="퀴즈-목록-조회_query_parameters"><a class="link" href="#퀴즈-목록-조회_query_parameters">Query parameters</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회 퀴즈 페이지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회 사이즈</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="퀴즈-목록-조회_request_fields"><a class="link" href="#퀴즈-목록-조회_request_fields">Request fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">필드명</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">타입</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">필수여부</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">제약조건</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">설명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀴즈 검색 제목</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NONE</code>, <code>COUNT_ASC</code>, <code>COUNT_DESC</code>, <code>RECENT</code>, <code>OLD</code> 중 하나여야 한다.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">검색 조건</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
 <h4 id="퀴즈-목록-조회_http_response"><a class="link" href="#퀴즈-목록-조회_http_response">HTTP response</a></h4>
 <div class="listingblock">
 <div class="content">
@@ -489,54 +549,44 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 959
+Content-Length: 702
 
 {
   "content" : [ {
     "id" : 1,
-    "title" : "새로운 퀴즈 제목",
-    "description" : "새로운 퀴즈 설명",
+    "title" : "init quiz 1",
+    "description" : "this is init quiz1",
     "imageData" : null
   }, {
     "id" : 2,
     "title" : "init quiz 2",
     "description" : "this is init quiz2",
     "imageData" : null
-  }, {
-    "id" : 3,
-    "title" : "init quiz 3",
-    "description" : "this is init quiz3",
-    "imageData" : null
-  }, {
-    "id" : 436,
-    "title" : "test quiz title",
-    "description" : "test quiz description",
-    "imageData" : null
   } ],
   "pageable" : {
     "pageNumber" : 0,
-    "pageSize" : 20,
+    "pageSize" : 2,
     "sort" : {
       "empty" : true,
-      "unsorted" : true,
-      "sorted" : false
+      "sorted" : false,
+      "unsorted" : true
     },
     "offset" : 0,
     "paged" : true,
     "unpaged" : false
   },
-  "last" : true,
-  "totalPages" : 1,
+  "last" : false,
+  "totalPages" : 2,
   "totalElements" : 4,
   "first" : true,
-  "size" : 20,
+  "size" : 2,
   "number" : 0,
   "sort" : {
     "empty" : true,
-    "unsorted" : true,
-    "sorted" : false
+    "sorted" : false,
+    "unsorted" : true
   },
-  "numberOfElements" : 4,
+  "numberOfElements" : 2,
   "empty" : false
 }</code></pre>
 </div>
@@ -658,7 +708,7 @@ Content-Length: 959
 <h4 id="퀴즈-단일-조회_http_request"><a class="link" href="#퀴즈-단일-조회_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/quiz/435 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/quiz/7 HTTP/1.1
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -694,17 +744,17 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 654
+Content-Length: 651
 
 {
-  "quizId" : 435,
+  "quizId" : 7,
   "title" : "test quiz title",
   "description" : "test quiz description",
   "thumbnailData" : null,
   "likeCount" : 0,
   "playTime" : 0,
   "questions" : [ {
-    "id" : 58,
+    "id" : 1,
     "content" : "example question",
     "number" : 1,
     "answer" : "example answer",
@@ -847,7 +897,7 @@ Content-Length: 654
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-12-27 06:09:47 +0900
+Last updated 2023-12-27 06:45:25 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

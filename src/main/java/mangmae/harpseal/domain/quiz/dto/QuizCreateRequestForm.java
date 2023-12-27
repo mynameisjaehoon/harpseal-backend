@@ -1,10 +1,13 @@
 package mangmae.harpseal.domain.quiz.dto;
 
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import mangmae.harpseal.domain.quiz.application.dto.QuizCreateServiceDto;
 
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class QuizCreateRequestForm {
 
     private String title; //퀴즈 이름

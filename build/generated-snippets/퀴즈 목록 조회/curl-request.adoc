@@ -1,6 +1,6 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/api/v1/quiz' -i -X GET \
+$ curl 'http://localhost:8080/api/v1/quiz?page=0&size=2' -i -X GET \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -d '{
   "title" : null,

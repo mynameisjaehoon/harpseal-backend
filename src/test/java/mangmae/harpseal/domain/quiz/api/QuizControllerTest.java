@@ -1,19 +1,24 @@
 package mangmae.harpseal.domain.quiz.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import mangmae.harpseal.domain.choice.dto.ChoiceCreateDto;
+import mangmae.harpseal.domain.quiz.api.dto.question.QuestionCreateRequestForm;
 import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
 import mangmae.harpseal.domain.quiz.dto.QuizDeleteRequestDto;
+import mangmae.harpseal.domain.quiz.dto.QuizEditRequestDto;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchRequestCond;
 import mangmae.harpseal.global.entity.MultipleQuestionChoice;
 import mangmae.harpseal.global.entity.Question;
 import mangmae.harpseal.global.entity.Quiz;
 import mangmae.harpseal.global.entity.type.QuestionType;
 import org.aspectj.lang.annotation.Before;
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.mock.web.MockPart;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
@@ -34,12 +41,17 @@ import org.springframework.restdocs.payload.PayloadDocumentation;
 import org.springframework.restdocs.request.RequestDocumentation;
 import org.springframework.restdocs.snippet.Attributes;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.DocFlavor;
+import javax.sound.sampled.AudioFileFormat;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -230,6 +242,70 @@ class QuizControllerTest {
     }
 
     @Test
+    @DisplayName("문제 생성")
+    void createQuestion() throws Exception {
+
+        List<ChoiceCreateDto> choices = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            choices.add(new ChoiceCreateDto(i, "choice" + i));
+        }
+
+        QuestionCreateRequestForm questionForm = QuestionCreateRequestForm.builder()
+            .content("example question")
+            .password(testPassword)
+            .number(1)
+            .type("MULTIPLE")
+            .answer("1")
+            .attachmentType("IMAGE")
+            .choices(choices)
+            .build();
+
+        String formJson = objectMapper.writeValueAsString(questionForm);
+
+        MockMultipartFile form = new MockMultipartFile("form", "", "application/json", formJson.getBytes());
+        MockMultipartFile attachment = new MockMultipartFile("attachment", "", "image/png", (byte[]) null);
+
+        mvc.perform(
+                RestDocumentationRequestBuilders.multipart("/api/v1/quiz/{quizId}", testQuizId)
+                    .file(form)
+                    .file(attachment)
+                    .accept(APPLICATION_JSON, IMAGE_PNG, IMAGE_JPEG)
+            )
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("message").isNotEmpty())
+            .andDo(
+                document(
+                    "퀴즈 문제 등록",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    pathParameters(
+                        parameterWithName("quizId").description("문제생성 퀴즈 ID")
+                    ),
+                    requestPartBody("form"),
+                    requestPartFields(
+                        "form",
+                        fieldWithPath("content").type(STRING).description("문제 내용"),
+                        fieldWithPath("password").type(STRING).description("퀴즈 패스워드"),
+                        fieldWithPath("number").type(NUMBER).description("문제 번호"),
+                        fieldWithPath("type").type(STRING).description("문제 타입")
+                            .attributes(key("constraints").value("`MULTIPLE`, `SUBJECTIVE`")),
+                        fieldWithPath("answer").type(STRING).description("문제 정답"),
+                        fieldWithPath("attachmentType").type(STRING).description("첨부파일 타입")
+                            .attributes(key("constraints").value("`IMAGE`, `SOUND`")),
+                        fieldWithPath("choices").type(ARRAY).description("선택지 목록"),
+                        fieldWithPath("choices[].number").type(NUMBER).description("선택지 번호"),
+                        fieldWithPath("choices[].content").type(STRING).description("선택지 내용")
+                    ),
+                    responseFields(
+                        fieldWithPath("message").type(STRING).description("문제 생성 메세지")
+                    )
+                )
+            );
+
+
+    }
+
+    @Test
     @DisplayName("퀴즈 삭제")
     void deleteQuiz() throws Exception {
 
@@ -280,7 +356,41 @@ class QuizControllerTest {
     @Test
     @DisplayName("퀴즈 수정")
     void editQuiz() throws Exception {
+        QuizEditRequestDto requestForm = new QuizEditRequestDto("edited quiz", "edited quiz description", testPassword);
+        String formJson = objectMapper.writeValueAsString(requestForm);
+        MockMultipartFile form = new MockMultipartFile("form", "", "application/json", formJson.getBytes());
+        MockMultipartFile thumbnail = new MockMultipartFile("thumbnail", "", "image/png", (byte[]) null);
 
+        MockMultipartHttpServletRequestBuilder builder = RestDocumentationRequestBuilders.multipart("/api/v1/quiz/{quizId}/edit", testQuizId);
+        builder.with(request -> {
+            request.setMethod("PUT");
+            return request;
+        });
+
+        mvc.perform(
+                builder
+                    .file(form)
+                    .file(thumbnail)
+                    .accept(APPLICATION_JSON, IMAGE_PNG, IMAGE_JPEG)
+            )
+            .andExpect(status().isSeeOther())
+            .andDo(
+                document(
+                    "퀴즈 수정",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    pathParameters(
+                        parameterWithName("quizId").description("수정 퀴즈 ID")
+                    ),
+                    requestPartBody("form"),
+                    requestPartFields(
+                        "form",
+                        fieldWithPath("title").type(STRING).description("수정 퀴즈 제목"),
+                        fieldWithPath("description").type(STRING).description("수정 퀴즈 설명"),
+                        fieldWithPath("password").type(STRING).description("수정할 퀴즈의 패스워드")
+                    )
+                )
+            );
     }
 
 

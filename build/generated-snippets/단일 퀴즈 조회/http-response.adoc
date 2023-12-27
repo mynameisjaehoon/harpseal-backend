@@ -5,17 +5,17 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 651
+Content-Length: 653
 
 {
-  "quizId" : 7,
+  "quizId" : 95,
   "title" : "test quiz title",
   "description" : "test quiz description",
   "thumbnailData" : null,
   "likeCount" : 0,
   "playTime" : 0,
   "questions" : [ {
-    "id" : 1,
+    "id" : 23,
     "content" : "example question",
     "number" : 1,
     "answer" : "example answer",

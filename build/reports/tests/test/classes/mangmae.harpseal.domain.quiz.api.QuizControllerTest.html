@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">2</div>
+<div class="counter">3</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.717s</div>
+<div class="counter">0.896s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,13 +81,19 @@
 <tr>
 <td class="success">퀴즈 목록 조회 테스트</td>
 <td class="success">getQuizListTest()</td>
-<td class="success">0.245s</td>
+<td class="success">0.309s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">단일 퀴즈 조회 응답테스트</td>
 <td class="success">getSingleQuizTest()</td>
-<td class="success">0.472s</td>
+<td class="success">0.428s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">quizCreateTest()</td>
+<td class="success">quizCreateTest()</td>
+<td class="success">0.159s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -95,8 +101,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2023-12-27T06:51:08.065+09:00  INFO 20073 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [mangmae.harpseal.domain.quiz.api.QuizControllerTest]: QuizControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-12-27T06:51:08.076+09:00  INFO 20073 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.domain.quiz.api.QuizControllerTest
+<pre>2023-12-27T19:15:35.263+09:00  INFO 32886 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [mangmae.harpseal.domain.quiz.api.QuizControllerTest]: QuizControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-27T19:15:35.270+09:00  INFO 32886 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.domain.quiz.api.QuizControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -106,72 +112,165 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2023-12-27T06:51:08.086+09:00  INFO 20073 --- [    Test worker] m.h.domain.quiz.api.QuizControllerTest   : Starting QuizControllerTest using Java 17.0.6 with PID 20073 (started by jaehoonso in /Users/jaehoonso/projects/harpseal-backend)
-2023-12-27T06:51:08.086+09:00  INFO 20073 --- [    Test worker] m.h.domain.quiz.api.QuizControllerTest   : The following 2 profiles are active: &quot;aws&quot;, &quot;test&quot;
-2023-12-27T06:51:08.146+09:00  INFO 20073 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-12-27T06:51:08.159+09:00  INFO 20073 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 6 JPA repository interfaces.
-2023-12-27T06:51:08.192+09:00  INFO 20073 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-12-27T06:51:08.193+09:00  INFO 20073 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2023-12-27T06:51:08.195+09:00  INFO 20073 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-12-27T06:51:08.195+09:00  INFO 20073 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
-2023-12-27T06:51:08.308+09:00  INFO 20073 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13653a0b
-2023-12-27T06:51:08.309+09:00  INFO 20073 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
-2023-12-27T06:51:08.362+09:00  INFO 20073 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2023-12-27T06:51:08.600+09:00  INFO 20073 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-12-27T06:51:08.738+09:00  INFO 20073 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-12-27T06:51:08.738+09:00  INFO 20073 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-12-27T06:51:08.738+09:00  INFO 20073 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2023-12-27T06:51:08.741+09:00  INFO 20073 --- [    Test worker] m.h.domain.quiz.api.QuizControllerTest   : Started QuizControllerTest in 0.663 seconds (process running for 4.874)
-2023-12-27T06:51:08.760+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:35.280+09:00  INFO 32886 --- [    Test worker] m.h.domain.quiz.api.QuizControllerTest   : Starting QuizControllerTest using Java 17.0.6 with PID 32886 (started by jaehoonso in /Users/jaehoonso/projects/harpseal-backend)
+2023-12-27T19:15:35.280+09:00  INFO 32886 --- [    Test worker] m.h.domain.quiz.api.QuizControllerTest   : The following 2 profiles are active: &quot;aws&quot;, &quot;test&quot;
+2023-12-27T19:15:35.337+09:00  INFO 32886 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-27T19:15:35.346+09:00  INFO 32886 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 6 JPA repository interfaces.
+2023-12-27T19:15:35.382+09:00  INFO 32886 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-27T19:15:35.383+09:00  INFO 32886 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-27T19:15:35.384+09:00  INFO 32886 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-27T19:15:35.384+09:00  INFO 32886 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-12-27T19:15:35.509+09:00  INFO 32886 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2ec3b5dd
+2023-12-27T19:15:35.509+09:00  INFO 32886 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-12-27T19:15:35.558+09:00  INFO 32886 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-27T19:15:35.827+09:00  INFO 32886 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-27T19:15:35.973+09:00  INFO 32886 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-12-27T19:15:35.973+09:00  INFO 32886 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-12-27T19:15:35.973+09:00  INFO 32886 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2023-12-27T19:15:35.976+09:00  INFO 32886 --- [    Test worker] m.h.domain.quiz.api.QuizControllerTest   : Started QuizControllerTest in 0.704 seconds (process running for 4.918)
+2023-12-27T19:15:35.991+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T06:51:08.773+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.004+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:08.804+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.014+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:08.818+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.025+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:08.831+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.034+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:08.843+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.045+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:08.856+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.057+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Question */insert 
     into
         question (answer, content, number, question_type, quiz_id) 
     values
         (?, ?, ?, ?, ?)
-2023-12-27T06:51:09.047+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.085+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.Quiz */insert 
+    into
+        quiz (created_date, description, like_count, password, play_time, title) 
+    values
+        (?, ?, ?, ?, ?, ?)
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/v1/quiz/new
+       Parameters = {}
+          Headers = [Content-Type:&quot;multipart/form-data;charset=UTF-8&quot;, Accept:&quot;application/json, image/png, image/jpeg&quot;]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = mangmae.harpseal.domain.quiz.api.QuizController
+           Method = mangmae.harpseal.domain.quiz.api.QuizController#createQuiz(QuizCreateRequestForm, MultipartFile)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, Location:&quot;/api/v1/quiz/94&quot;]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = /api/v1/quiz/94
+          Cookies = []
+2023-12-27T19:15:36.149+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.Quiz */insert 
+    into
+        quiz (created_date, description, like_count, password, play_time, title) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2023-12-27T19:15:36.160+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
+    into
+        multiple_question_choice (content, number, question_id) 
+    values
+        (?, ?, ?)
+2023-12-27T19:15:36.169+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
+    into
+        multiple_question_choice (content, number, question_id) 
+    values
+        (?, ?, ?)
+2023-12-27T19:15:36.180+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
+    into
+        multiple_question_choice (content, number, question_id) 
+    values
+        (?, ?, ?)
+2023-12-27T19:15:36.190+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
+    into
+        multiple_question_choice (content, number, question_id) 
+    values
+        (?, ?, ?)
+2023-12-27T19:15:36.201+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
+    into
+        multiple_question_choice (content, number, question_id) 
+    values
+        (?, ?, ?)
+2023-12-27T19:15:36.210+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        mangmae.harpseal.global.entity.Question */insert 
+    into
+        question (answer, content, number, question_type, quiz_id) 
+    values
+        (?, ?, ?, ?, ?)
+2023-12-27T19:15:36.410+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -198,7 +297,7 @@
                 on q1_0.quiz_id=t1_0.quiz_id 
         where
             q1_0.quiz_id=?
-2023-12-27T06:51:09.070+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.435+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* update
         for mangmae.harpseal.global.entity.MultipleQuestionChoice */update multiple_question_choice 
     set
@@ -207,7 +306,7 @@
         question_id=? 
     where
         choice_id=?
-2023-12-27T06:51:09.080+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.445+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* update
         for mangmae.harpseal.global.entity.MultipleQuestionChoice */update multiple_question_choice 
     set
@@ -216,7 +315,7 @@
         question_id=? 
     where
         choice_id=?
-2023-12-27T06:51:09.089+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.454+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* update
         for mangmae.harpseal.global.entity.MultipleQuestionChoice */update multiple_question_choice 
     set
@@ -225,7 +324,7 @@
         question_id=? 
     where
         choice_id=?
-2023-12-27T06:51:09.098+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.464+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* update
         for mangmae.harpseal.global.entity.MultipleQuestionChoice */update multiple_question_choice 
     set
@@ -234,7 +333,7 @@
         question_id=? 
     where
         choice_id=?
-2023-12-27T06:51:09.108+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.475+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* update
         for mangmae.harpseal.global.entity.MultipleQuestionChoice */update multiple_question_choice 
     set
@@ -243,7 +342,7 @@
         question_id=? 
     where
         choice_id=?
-2023-12-27T06:51:09.118+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.484+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* update
         for mangmae.harpseal.global.entity.Question */update question 
     set
@@ -254,7 +353,7 @@
         quiz_id=? 
     where
         question_id=?
-2023-12-27T06:51:09.128+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.496+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         question.id,
         question.content,
@@ -285,7 +384,7 @@
             q1_0.quiz_id=? 
         order by
             q1_0.number
-2023-12-27T06:51:09.150+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.512+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         multipleQuestionChoice.question.id as questionId,
         multipleQuestionChoice.number,
@@ -305,56 +404,56 @@
             mqc1_0.question_id=? 
         order by
             mqc1_0.number
-2023-12-27T06:51:09.229+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.576+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T06:51:09.239+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.588+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:09.252+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.605+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:09.263+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.615+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:09.271+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.624+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:09.281+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.635+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.MultipleQuestionChoice */insert 
     into
         multiple_question_choice (content, number, question_id) 
     values
         (?, ?, ?)
-2023-12-27T06:51:09.290+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.645+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Question */insert 
     into
         question (answer, content, number, question_type, quiz_id) 
     values
         (?, ?, ?, ?, ?)
-2023-12-27T06:51:09.316+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.671+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -379,7 +478,7 @@
             q1_0.play_time 
         limit
             ?, ?
-2023-12-27T06:51:09.338+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.693+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -387,7 +486,7 @@
             count(q1_0.quiz_id) 
         from
             quiz q1_0
-2023-12-27T06:51:09.349+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.719+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -412,7 +511,7 @@
             q1_0.play_time desc 
         limit
             ?, ?
-2023-12-27T06:51:09.360+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.729+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -420,7 +519,7 @@
             count(q1_0.quiz_id) 
         from
             quiz q1_0
-2023-12-27T06:51:09.371+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.765+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -445,7 +544,7 @@
             q1_0.created_date desc 
         limit
             ?, ?
-2023-12-27T06:51:09.381+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.776+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -453,7 +552,7 @@
             count(q1_0.quiz_id) 
         from
             quiz q1_0
-2023-12-27T06:51:09.392+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.801+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         quiz.id,
         quiz.title,
@@ -478,7 +577,7 @@
             q1_0.created_date 
         limit
             ?, ?
-2023-12-27T06:51:09.404+09:00 DEBUG 20073 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-27T19:15:36.812+09:00 DEBUG 32886 --- [    Test worker] org.hibernate.SQL                        : 
     /* select
         count(quiz) 
     from
@@ -519,7 +618,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, Content-Type:&quot;application/json&quot;]
      Content type = application/json
-             Body = {&quot;content&quot;:[{&quot;id&quot;:1,&quot;title&quot;:&quot;init quiz 1&quot;,&quot;description&quot;:&quot;this is init quiz1&quot;,&quot;imageData&quot;:null},{&quot;id&quot;:2,&quot;title&quot;:&quot;init quiz 2&quot;,&quot;description&quot;:&quot;this is init quiz2&quot;,&quot;imageData&quot;:null}],&quot;pageable&quot;:{&quot;pageNumber&quot;:0,&quot;pageSize&quot;:2,&quot;sort&quot;:{&quot;empty&quot;:true,&quot;sorted&quot;:false,&quot;unsorted&quot;:true},&quot;offset&quot;:0,&quot;paged&quot;:true,&quot;unpaged&quot;:false},&quot;last&quot;:false,&quot;totalPages&quot;:2,&quot;totalElements&quot;:4,&quot;first&quot;:true,&quot;size&quot;:2,&quot;number&quot;:0,&quot;sort&quot;:{&quot;empty&quot;:true,&quot;sorted&quot;:false,&quot;unsorted&quot;:true},&quot;numberOfElements&quot;:2,&quot;empty&quot;:false}
+             Body = {&quot;content&quot;:[{&quot;id&quot;:1,&quot;title&quot;:&quot;init quiz 1&quot;,&quot;description&quot;:&quot;this is init quiz1&quot;,&quot;imageData&quot;:null},{&quot;id&quot;:2,&quot;title&quot;:&quot;init quiz 2&quot;,&quot;description&quot;:&quot;this is init quiz2&quot;,&quot;imageData&quot;:null}],&quot;pageable&quot;:{&quot;pageNumber&quot;:0,&quot;pageSize&quot;:2,&quot;sort&quot;:{&quot;empty&quot;:true,&quot;sorted&quot;:false,&quot;unsorted&quot;:true},&quot;offset&quot;:0,&quot;paged&quot;:true,&quot;unpaged&quot;:false},&quot;last&quot;:false,&quot;totalPages&quot;:3,&quot;totalElements&quot;:5,&quot;first&quot;:true,&quot;size&quot;:2,&quot;number&quot;:0,&quot;sort&quot;:{&quot;empty&quot;:true,&quot;sorted&quot;:false,&quot;unsorted&quot;:true},&quot;numberOfElements&quot;:2,&quot;empty&quot;:false}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -534,7 +633,7 @@ MockHttpServletResponse:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 27. 오전 6:51:10</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 27. 오후 7:15:37</p>
 </div>
 </div>
 </body>

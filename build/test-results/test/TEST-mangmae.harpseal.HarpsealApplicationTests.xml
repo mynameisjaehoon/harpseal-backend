@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="mangmae.harpseal.HarpsealApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-26T21:51:06" hostname="Jaehoonui-MacBookAir.local" time="0.261">
+<testsuite name="mangmae.harpseal.HarpsealApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-27T10:15:33" hostname="Jaehoonui-MacBookAir.local" time="0.269">
   <properties/>
-  <testcase name="contextLoads()" classname="mangmae.harpseal.HarpsealApplicationTests" time="0.261"/>
-  <system-out><![CDATA[06:51:04.267 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [mangmae.harpseal.HarpsealApplicationTests]: HarpsealApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-06:51:04.313 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.HarpsealApplicationTests
+  <testcase name="contextLoads()" classname="mangmae.harpseal.HarpsealApplicationTests" time="0.269"/>
+  <system-out><![CDATA[19:15:31.458 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [mangmae.harpseal.HarpsealApplicationTests]: HarpsealApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:15:31.509 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.HarpsealApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -13,20 +13,20 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2023-12-27T06:51:04.472+09:00  INFO 20073 --- [    Test worker] m.harpseal.HarpsealApplicationTests      : Starting HarpsealApplicationTests using Java 17.0.6 with PID 20073 (started by jaehoonso in /Users/jaehoonso/projects/harpseal-backend)
-2023-12-27T06:51:04.474+09:00  INFO 20073 --- [    Test worker] m.harpseal.HarpsealApplicationTests      : The following 2 profiles are active: "aws", "test"
-2023-12-27T06:51:04.762+09:00  INFO 20073 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-12-27T06:51:04.797+09:00  INFO 20073 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 6 JPA repository interfaces.
-2023-12-27T06:51:04.995+09:00  INFO 20073 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-12-27T06:51:05.014+09:00  INFO 20073 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2023-12-27T06:51:05.027+09:00  INFO 20073 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2023-12-27T06:51:05.117+09:00  INFO 20073 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-12-27T06:51:05.127+09:00  INFO 20073 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-12-27T06:51:05.404+09:00  INFO 20073 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3a70575
-2023-12-27T06:51:05.405+09:00  INFO 20073 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-12-27T06:51:05.863+09:00  INFO 20073 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2023-12-27T06:51:06.123+09:00  INFO 20073 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-12-27T06:51:06.656+09:00  INFO 20073 --- [    Test worker] m.harpseal.HarpsealApplicationTests      : Started HarpsealApplicationTests in 2.279 seconds (process running for 2.789)
+2023-12-27T19:15:31.677+09:00  INFO 32886 --- [    Test worker] m.harpseal.HarpsealApplicationTests      : Starting HarpsealApplicationTests using Java 17.0.6 with PID 32886 (started by jaehoonso in /Users/jaehoonso/projects/harpseal-backend)
+2023-12-27T19:15:31.678+09:00  INFO 32886 --- [    Test worker] m.harpseal.HarpsealApplicationTests      : The following 2 profiles are active: "aws", "test"
+2023-12-27T19:15:31.963+09:00  INFO 32886 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-27T19:15:32.004+09:00  INFO 32886 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 6 JPA repository interfaces.
+2023-12-27T19:15:32.203+09:00  INFO 32886 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-27T19:15:32.222+09:00  INFO 32886 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2023-12-27T19:15:32.236+09:00  INFO 32886 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-27T19:15:32.329+09:00  INFO 32886 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-27T19:15:32.339+09:00  INFO 32886 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-27T19:15:32.614+09:00  INFO 32886 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@342a1f84
+2023-12-27T19:15:32.615+09:00  INFO 32886 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-27T19:15:33.067+09:00  INFO 32886 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-27T19:15:33.341+09:00  INFO 32886 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-27T19:15:33.916+09:00  INFO 32886 --- [    Test worker] m.harpseal.HarpsealApplicationTests      : Started HarpsealApplicationTests in 2.343 seconds (process running for 2.858)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

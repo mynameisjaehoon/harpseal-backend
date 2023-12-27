@@ -65,7 +65,7 @@ public class QuizController {
     ) {
         Quiz createdQuiz = quizFacadeService.createQuiz(form.toServiceDto(), thumbnail);
         return ResponseEntity
-            .created(URI.create("/quiz/api/v1/" + createdQuiz.getId()))
+            .created(URI.create("/api/v1/quiz/" + createdQuiz.getId()))
             .build();
     }
 

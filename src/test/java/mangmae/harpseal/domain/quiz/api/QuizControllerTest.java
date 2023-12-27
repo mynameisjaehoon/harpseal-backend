@@ -16,12 +16,14 @@ import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.mock.web.MockPart;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.headers.HeaderDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
@@ -31,14 +33,18 @@ import org.springframework.restdocs.payload.PayloadDocumentation;
 import org.springframework.restdocs.request.RequestDocumentation;
 import org.springframework.restdocs.snippet.Attributes;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.print.DocFlavor;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.http.MediaType.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.JsonFieldType.*;
@@ -145,7 +151,7 @@ class QuizControllerTest {
 
         mvc.perform(
                 get("/api/v1/quiz?page=0&size=2")
-                    .contentType(MediaType.APPLICATION_JSON)
+                    .contentType(APPLICATION_JSON)
                     .content(formJson)
             )
             .andExpect(status().isOk())
@@ -191,7 +197,36 @@ class QuizControllerTest {
     @Test
     public void quizCreateTest() throws Exception {
         QuizCreateRequestForm requestForm = new QuizCreateRequestForm("quiz name", "12345", "example new quiz");
-        
+        String formJson = objectMapper.writeValueAsString(requestForm);
+
+//        MockMultipartFile thumbanilFile = new MockMultipartFile("thumbnail", "", "image/png", new byte[]{});
+
+        MockMultipartFile formFile = new MockMultipartFile("form", "", "application/json", formJson.getBytes());
+        MockMultipartFile imageFile = new MockMultipartFile("thumbnail", "", "image/png", (byte[]) null);
+
+        mvc.perform(
+                multipart("/api/v1/quiz/new")
+//                    .part(new MockPart("form", formJson.getBytes(StandardCharsets.UTF_8)))
+                    .file(formFile)
+                    .file(imageFile)
+                    .accept(APPLICATION_JSON, IMAGE_PNG, IMAGE_JPEG)
+            )
+            .andDo(print())
+            .andExpect(status().isCreated())
+            .andDo(
+                document(
+                    "퀴즈 생성",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    requestPartBody("form"),
+                    requestPartFields(
+                        "form",
+                        fieldWithPath("title").type(STRING).description("퀴즈 이름"),
+                        fieldWithPath("password").type(STRING).description("퀴즈 비밀번호"),
+                        fieldWithPath("description").type(STRING).description("퀴즈 설명")
+                    ),
+                )
+            );
 
     }
 

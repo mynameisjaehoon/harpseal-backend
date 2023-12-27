@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.quiz.dto.QuizCreateRequestForm;
+import mangmae.harpseal.domain.quiz.dto.QuizDeleteRequestDto;
 import mangmae.harpseal.domain.quiz.dto.QuizSearchRequestCond;
 import mangmae.harpseal.global.entity.MultipleQuestionChoice;
 import mangmae.harpseal.global.entity.Question;
@@ -195,18 +196,16 @@ class QuizControllerTest {
     }
 
     @Test
+    @DisplayName("퀴즈 생성")
     public void quizCreateTest() throws Exception {
         QuizCreateRequestForm requestForm = new QuizCreateRequestForm("quiz name", "12345", "example new quiz");
         String formJson = objectMapper.writeValueAsString(requestForm);
-
-//        MockMultipartFile thumbanilFile = new MockMultipartFile("thumbnail", "", "image/png", new byte[]{});
 
         MockMultipartFile formFile = new MockMultipartFile("form", "", "application/json", formJson.getBytes());
         MockMultipartFile imageFile = new MockMultipartFile("thumbnail", "", "image/png", (byte[]) null);
 
         mvc.perform(
                 multipart("/api/v1/quiz/new")
-//                    .part(new MockPart("form", formJson.getBytes(StandardCharsets.UTF_8)))
                     .file(formFile)
                     .file(imageFile)
                     .accept(APPLICATION_JSON, IMAGE_PNG, IMAGE_JPEG)
@@ -224,9 +223,63 @@ class QuizControllerTest {
                         fieldWithPath("title").type(STRING).description("퀴즈 이름"),
                         fieldWithPath("password").type(STRING).description("퀴즈 비밀번호"),
                         fieldWithPath("description").type(STRING).description("퀴즈 설명")
-                    ),
+                    )
                 )
             );
+
+    }
+
+    @Test
+    @DisplayName("퀴즈 삭제")
+    void deleteQuiz() throws Exception {
+
+        QuizDeleteRequestDto deleteForm = new QuizDeleteRequestDto(testPassword);
+        String deleteFormJson = objectMapper.writeValueAsString(deleteForm);
+
+        mvc.perform(
+                RestDocumentationRequestBuilders.delete("/api/v1/quiz/{quizId}", testQuizId)
+                    .contentType(APPLICATION_JSON)
+                    .content(deleteFormJson)
+            )
+            .andExpect(status().isSeeOther())
+            .andExpect(header().string("Location", "http://localhost:8080/api/v1/quiz"))
+            .andDo(
+                document(
+                    "퀴즈 삭제",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    pathParameters(
+                        parameterWithName("quizId").description("삭제 퀴즈 ID")
+                    ),
+                    requestFields(
+                        fieldWithPath("password").type(STRING).description("삭제 퀴즈 패스워드")
+                    )
+                )
+            );
+    }
+
+    @Test
+    @DisplayName("퀴즈 좋아요 증가")
+    void addQuizLike() throws Exception {
+        mvc.perform(
+                RestDocumentationRequestBuilders.post("/api/v1/quiz/{quizId}/like", testQuizId)
+            )
+            .andExpect(status().isOk())
+            .andDo(
+                document(
+                    "퀴즈 좋아요 증가",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    pathParameters(
+                        parameterWithName("quizId").description("대상 퀴즈 ID")
+                    )
+                )
+            );
+    }
+
+    @Test
+    @DisplayName("퀴즈 수정")
+    void editQuiz() throws Exception {
 
     }
 

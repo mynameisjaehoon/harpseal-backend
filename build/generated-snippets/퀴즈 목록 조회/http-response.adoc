@@ -24,8 +24,8 @@ Content-Length: 702
     "pageSize" : 2,
     "sort" : {
       "empty" : true,
-      "sorted" : false,
-      "unsorted" : true
+      "unsorted" : true,
+      "sorted" : false
     },
     "offset" : 0,
     "paged" : true,
@@ -39,8 +39,8 @@ Content-Length: 702
   "number" : 0,
   "sort" : {
     "empty" : true,
-    "sorted" : false,
-    "unsorted" : true
+    "unsorted" : true,
+    "sorted" : false
   },
   "numberOfElements" : 2,
   "empty" : false

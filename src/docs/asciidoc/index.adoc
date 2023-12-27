@@ -21,3 +21,9 @@ operation::단일 퀴즈 조회[snippets='http-request,path-parameters,http-resp
 [[퀴즈-생성]]
 === 퀴즈 생성
 operation::퀴즈 생성[snippets='http-request,request-part-form-body,request-part-form-fields,http-response']
+
+[[퀴즈-삭제]]
+=== 퀴즈 삭제
+operation::퀴즈 삭제[snippets='http-request,request-fields,http-response']
+
+- 삭제 성공 시 퀴즈 목록으로 이동

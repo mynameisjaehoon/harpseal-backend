@@ -17,8 +17,8 @@
     "pageSize" : 2,
     "sort" : {
       "empty" : true,
-      "sorted" : false,
-      "unsorted" : true
+      "unsorted" : true,
+      "sorted" : false
     },
     "offset" : 0,
     "paged" : true,
@@ -32,8 +32,8 @@
   "number" : 0,
   "sort" : {
     "empty" : true,
-    "sorted" : false,
-    "unsorted" : true
+    "unsorted" : true,
+    "sorted" : false
   },
   "numberOfElements" : 2,
   "empty" : false

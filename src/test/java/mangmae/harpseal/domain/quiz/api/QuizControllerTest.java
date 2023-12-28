@@ -184,7 +184,10 @@ class QuizControllerTest {
                     ),
                     requestFields(
                         fieldWithPath("title").optional().type(STRING).description("퀴즈 검색 제목"),
-                        fieldWithPath("searchType").type(STRING).description("검색 조건").attributes(key("constraints").value("`NONE`, `COUNT_ASC`, `COUNT_DESC`, `RECENT`, `OLD` 중 하나여야 한다."))
+                        fieldWithPath("searchType").type(STRING).description("검색 조건")
+                            .attributes(
+                                key("constraints").value("`NONE`, `COUNT_ASC`, `COUNT_DESC`, `RECENT`, `OLD` 중 하나여야 한다.")
+                            )
                     ),
                     responseFields(
                         fieldWithPath("content").type(ARRAY).description("조회 퀴즈 목록 데이터"),
@@ -301,8 +304,6 @@ class QuizControllerTest {
                     )
                 )
             );
-
-
     }
 
     @Test
@@ -391,8 +392,8 @@ class QuizControllerTest {
                     )
                 )
             );
+
+
     }
-
-
 
 }

@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.337s</div>
+<div class="counter">0.330s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,19 +81,19 @@
 <tr>
 <td class="success">댓글 생성 실패</td>
 <td class="success">createCommentFail()</td>
-<td class="success">0.174s</td>
+<td class="success">0.172s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">댓글 생성 성공</td>
 <td class="success">createCommentSuccess()</td>
-<td class="success">0.107s</td>
+<td class="success">0.105s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">댓글 삭제 성공</td>
 <td class="success">deleteCommentSuccess()</td>
-<td class="success">0.056s</td>
+<td class="success">0.053s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -101,8 +101,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2023-12-27T23:05:52.668+09:00  INFO 42655 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [mangmae.harpseal.domain.comment.api.CommentControllerTest]: CommentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-12-27T23:05:52.678+09:00  INFO 42655 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.domain.comment.api.CommentControllerTest
+<pre>2023-12-28T18:44:39.632+09:00  INFO 61464 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [mangmae.harpseal.domain.comment.api.CommentControllerTest]: CommentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-28T18:44:39.642+09:00  INFO 61464 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration mangmae.harpseal.HarpsealApplication for test class mangmae.harpseal.domain.comment.api.CommentControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -112,37 +112,37 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2023-12-27T23:05:52.688+09:00  INFO 42655 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : Starting CommentControllerTest using Java 17.0.6 with PID 42655 (started by jaehoonso in /Users/jaehoonso/projects/harpseal-backend)
-2023-12-27T23:05:52.689+09:00  INFO 42655 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : The following 2 profiles are active: &quot;aws&quot;, &quot;test&quot;
-2023-12-27T23:05:52.754+09:00  INFO 42655 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-12-27T23:05:52.765+09:00  INFO 42655 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 6 JPA repository interfaces.
-2023-12-27T23:05:52.804+09:00  INFO 42655 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-12-27T23:05:52.805+09:00  INFO 42655 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2023-12-27T23:05:52.807+09:00  INFO 42655 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-12-27T23:05:52.807+09:00  INFO 42655 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2023-12-27T23:05:52.927+09:00  INFO 42655 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6af10aa7
-2023-12-27T23:05:52.927+09:00  INFO 42655 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2023-12-27T23:05:52.987+09:00  INFO 42655 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2023-12-27T23:05:53.233+09:00  INFO 42655 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-12-27T23:05:53.387+09:00  INFO 42655 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2023-12-27T23:05:53.388+09:00  INFO 42655 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2023-12-27T23:05:53.390+09:00  INFO 42655 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2023-12-27T23:05:53.395+09:00  INFO 42655 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : Started CommentControllerTest in 0.716 seconds (process running for 3.821)
-2023-12-27T23:05:53.439+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:39.653+09:00  INFO 61464 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : Starting CommentControllerTest using Java 17.0.6 with PID 61464 (started by jaehoonso in /Users/jaehoonso/projects/harpseal-backend)
+2023-12-28T18:44:39.653+09:00  INFO 61464 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : The following 2 profiles are active: &quot;aws&quot;, &quot;test&quot;
+2023-12-28T18:44:39.720+09:00  INFO 61464 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-28T18:44:39.732+09:00  INFO 61464 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 6 JPA repository interfaces.
+2023-12-28T18:44:39.781+09:00  INFO 61464 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-28T18:44:39.782+09:00  INFO 61464 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-28T18:44:39.783+09:00  INFO 61464 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-28T18:44:39.783+09:00  INFO 61464 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-12-28T18:44:39.914+09:00  INFO 61464 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b25ce5e
+2023-12-28T18:44:39.915+09:00  INFO 61464 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-12-28T18:44:39.972+09:00  INFO 61464 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-28T18:44:40.279+09:00  INFO 61464 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T18:44:40.435+09:00  INFO 61464 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-12-28T18:44:40.436+09:00  INFO 61464 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-12-28T18:44:40.437+09:00  INFO 61464 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2023-12-28T18:44:40.441+09:00  INFO 61464 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : Started CommentControllerTest in 0.798 seconds (process running for 3.868)
+2023-12-28T18:44:40.486+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T23:05:53.459+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:40.506+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Comment */insert 
     into
         comments (content, created_by, created_date, like_count, password, quiz_id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T23:05:53.531+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:40.576+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     select
         q1_0.quiz_id,
         q1_0.created_date,
@@ -155,43 +155,43 @@
         quiz q1_0 
     where
         q1_0.quiz_id=?
-2023-12-27T23:05:53.582+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:40.626+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T23:05:53.593+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:40.635+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Comment */insert 
     into
         comments (content, created_by, created_date, like_count, password, quiz_id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T23:05:53.606+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:40.647+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Comment */insert 
     into
         comments (content, created_by, created_date, like_count, password, quiz_id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T23:05:53.631+09:00  INFO 42655 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : result={&quot;commentId&quot;:39,&quot;content&quot;:&quot;comment test example&quot;,&quot;createdBy&quot;:&quot;user-39fe16e5&quot;,&quot;like&quot;:0,&quot;createdDate&quot;:&quot;2023-12-27T23:05:53.606301&quot;}
-2023-12-27T23:05:53.690+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:40.676+09:00  INFO 61464 --- [    Test worker] m.h.d.comment.api.CommentControllerTest  : result={&quot;commentId&quot;:83,&quot;content&quot;:&quot;comment test example&quot;,&quot;createdBy&quot;:&quot;user-221993ea&quot;,&quot;like&quot;:0,&quot;createdDate&quot;:&quot;2023-12-28T18:44:40.647381&quot;}
+2023-12-28T18:44:40.731+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Quiz */insert 
     into
         quiz (created_date, description, like_count, password, play_time, title) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T23:05:53.700+09:00 DEBUG 42655 --- [    Test worker] org.hibernate.SQL                        : 
+2023-12-28T18:44:40.740+09:00 DEBUG 61464 --- [    Test worker] org.hibernate.SQL                        : 
     /* insert for
         mangmae.harpseal.global.entity.Comment */insert 
     into
         comments (content, created_by, created_date, like_count, password, quiz_id) 
     values
         (?, ?, ?, ?, ?, ?)
-2023-12-27T23:05:53.711+09:00  INFO 42655 --- [    Test worker] m.harpseal.global.util.SecurityUtil      : password1=e8091363, password2=e8091363
+2023-12-28T18:44:40.752+09:00  INFO 61464 --- [    Test worker] m.harpseal.global.util.SecurityUtil      : password1=d96b0bcd, password2=d96b0bcd
 </pre>
 </span>
 </div>
@@ -203,7 +203,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 27. 오후 11:05:56</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 28. 오후 6:44:43</p>
 </div>
 </div>
 </body>

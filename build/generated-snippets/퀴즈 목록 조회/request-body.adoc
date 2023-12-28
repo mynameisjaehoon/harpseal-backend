@@ -1,7 +1,0 @@
-[source,json,options="nowrap"]
-----
-{
-  "title" : null,
-  "searchType" : "NONE"
-}
-----

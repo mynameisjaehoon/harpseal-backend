@@ -6,6 +6,8 @@ logs/
 !**/src/main/**
 !**/src/test/**
 
+application-aws.properties
+
 ### STS ###
 .apt_generated
 .classpath

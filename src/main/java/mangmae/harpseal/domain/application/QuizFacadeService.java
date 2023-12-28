@@ -8,7 +8,6 @@ import mangmae.harpseal.domain.choice.application.ChoiceService;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.comment.application.CommentService;
 import mangmae.harpseal.domain.comment.dto.CreateCommentFacadeRequestForm;
-import mangmae.harpseal.domain.comment.dto.CreateCommentRequestServiceForm;
 import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
 import mangmae.harpseal.domain.question.application.QuestionService;
 import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
@@ -20,7 +19,6 @@ import mangmae.harpseal.domain.question.util.QuestionValidator;
 import mangmae.harpseal.global.entity.*;
 import mangmae.harpseal.global.entity.type.AttachmentType;
 import mangmae.harpseal.global.util.FileUtil;
-import mangmae.harpseal.global.util.SecurityUtil;
 import mangmae.harpseal.domain.thumbnail.application.ThumbnailService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -124,7 +122,7 @@ public class QuizFacadeService {
         return makeSingleQuizResponseDto(quiz, questions);
     }
 
-    private static SingleQuizServiceResponse makeSingleQuizResponseDto(
+    private SingleQuizServiceResponse makeSingleQuizResponseDto(
         final QuizSimpleServiceDto quiz,
         final List<QuestionServiceDto> questions
     ) {
@@ -132,7 +130,7 @@ public class QuizFacadeService {
             .quizId(quiz.getId())
             .title(quiz.getTitle())
             .description(quiz.getDescription())
-            .thumbnailData(quiz.getThumbnailData())
+            .thumbnailData(fileUtil.loadImageBase64(quiz.getThumbnailPath()))
             .likeCount(quiz.getLikeCount())
             .playTime(quiz.getPlayTime())
             .questions(questions)

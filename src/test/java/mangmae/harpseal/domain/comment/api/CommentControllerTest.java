@@ -77,11 +77,8 @@ class CommentControllerTest {
     void createCommentSuccess() throws Exception {
         CreateCommentRequestForm form = new CreateCommentRequestForm("comment test example", testPassword);
         String formJson = objectMapper.writeValueAsString(form);
-        String requestURL = "/api/v1/quiz/" + quizId + "/comment/new";
 
-        log.info("request new comment URL=[{}]", requestURL);
-
-        MvcResult mvcResult = mvc.perform(post(requestURL)
+        MvcResult mvcResult = mvc.perform(post("/api/v1/quiz/{quizId}/comment", quizId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(formJson)
             )
@@ -110,13 +107,12 @@ class CommentControllerTest {
     @Test
     @DisplayName("댓글 생성 실패")
     void createCommentFail() throws Exception {
-        String idFailURL = "/api/v1/quiz/" + Long.MAX_VALUE + "/comment/new";
 
         CreateCommentRequestForm idFailForm = new CreateCommentRequestForm("quiz id fail", testPassword);
         String idFailJson = objectMapper.writeValueAsString(idFailForm);
 
         mvc.perform(
-                post(idFailURL)
+                post("/api/v1/quiz/{quizId}/comment", Long.MAX_VALUE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(idFailJson)
             )
@@ -130,10 +126,8 @@ class CommentControllerTest {
         DeleteCommentRequestForm form = new DeleteCommentRequestForm(commentId, testPassword);
         String formJson = objectMapper.writeValueAsString(form);
 
-        String deleteRequestURL = "/api/v1/quiz/" + quizId + "/comment";
-        log.info("delete comment url=[{}]", deleteRequestURL);
         mvc.perform(
-                delete(deleteRequestURL)
+                delete("/api/v1/quiz/{quizId}/comment", quizId)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(formJson)
             )

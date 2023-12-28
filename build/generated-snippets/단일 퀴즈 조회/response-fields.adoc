@@ -1,0 +1,63 @@
+|===
+|필드명|타입|필수여부|설명
+|`+quizId+`
+|`+Number+`
+|true
+|퀴즈 ID
+|`+title+`
+|`+String+`
+|true
+|퀴즈 제목
+|`+description+`
+|`+String+`
+|true
+|퀴즈 설명
+|`+thumbnailData+`
+|`+String+`
+|false
+|퀴즈 썸네일이미지 데이터
+|`+likeCount+`
+|`+Number+`
+|true
+|퀴즈 좋아요 수
+|`+playTime+`
+|`+Number+`
+|true
+|퀴즈 플레이 횟수
+|`+questions+`
+|`+Array+`
+|true
+|문제 목록
+|`+questions[].id+`
+|`+Number+`
+|true
+|문제 ID
+|`+questions[].content+`
+|`+String+`
+|true
+|문제 내용
+|`+questions[].number+`
+|`+Number+`
+|true
+|문제 번호
+|`+questions[].answer+`
+|`+String+`
+|true
+|문제 정답
+|`+questions[].attachmentData+`
+|`+String+`
+|false
+|문제 첨부파일 데이터
+|`+questions[].attachmentType+`
+|`+String+`
+|false
+|문제 첨부파일 타입
+|`+questions[].choices[].number+`
+|`+Number+`
+|true
+|선택지 번호
+|`+questions[].choices[].content+`
+|`+String+`
+|true
+|선택지 내용
+|===

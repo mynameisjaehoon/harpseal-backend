@@ -1,0 +1,10 @@
+|===
+|Parameter|Description
+
+|`+page+`
+|조회 퀴즈 페이지
+
+|`+size+`
+|조회 사이즈
+
+|===

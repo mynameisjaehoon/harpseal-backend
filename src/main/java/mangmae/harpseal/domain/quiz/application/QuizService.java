@@ -115,7 +115,7 @@ public class QuizService {
 
         // 퀴즈의 썸네일을 지정한다.
         String path = repositoryDto.getThumbnailPath();
-        serviceDto.addThumbnailData(path); // if path is null, the default image is applied
+        serviceDto.addThumbnailData(path); // if path is null, thumbnail data is also null.
         return serviceDto;
     }
 

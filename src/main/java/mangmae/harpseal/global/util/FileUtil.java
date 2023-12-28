@@ -68,7 +68,7 @@ public class FileUtil {
 
     public String loadImageBase64(String filePath) {
         if (filePath == null) {
-            filePath = quizThumbnailDefaultImagePath;
+            return null; // 파일 경로가 없을 경우 null 반환
         }
         log.info("[image path]={}", filePath);
         return Base64.getEncoder().encodeToString(loadImageBytes(filePath));

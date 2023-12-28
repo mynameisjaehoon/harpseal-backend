@@ -7,8 +7,10 @@ import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
 
 import java.util.List;
 
-@Data
+@Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor
 public class QuestionCreateRequestForm {
 
     private String content;
@@ -19,12 +21,12 @@ public class QuestionCreateRequestForm {
     private String attachmentType;
     private List<ChoiceCreateDto> choices;
 
-    public QuestionCreateRequestForm(String content, int number, String type, String answer) {
-        this.content = content;
-        this.number = number;
-        this.type = type;
-        this.answer = answer;
-    }
+//    public QuestionCreateRequestForm(String content, int number, String type, String answer) {
+//        this.content = content;
+//        this.number = number;
+//        this.type = type;
+//        this.answer = answer;
+//    }
 
     public QuestionCreateServiceDto toServiceDto() {
 

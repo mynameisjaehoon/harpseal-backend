@@ -58,7 +58,7 @@ public class QuizController {
      * @param thumbnail 퀴즈 썸네일 이미지 데이터
      * @return 퀴즈 생성 응답 HTTP 201 CREATED
      */
-    @PostMapping(value = "/new", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/new", consumes = {MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Void> createQuiz(
         @RequestPart(value = "form") QuizCreateRequestForm form,
         @RequestPart(value = "thumbnail", required = false) MultipartFile thumbnail

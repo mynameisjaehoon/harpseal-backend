@@ -17,42 +17,21 @@ import mangmae.harpseal.global.entity.MultipleQuestionChoice;
 import mangmae.harpseal.global.entity.Question;
 import mangmae.harpseal.global.entity.Quiz;
 import mangmae.harpseal.global.entity.type.QuestionType;
-import org.aspectj.lang.annotation.Before;
-import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.mock.web.MockPart;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.headers.HeaderDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.restdocs.operation.preprocess.Preprocessors;
-import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.restdocs.payload.PayloadDocumentation;
-import org.springframework.restdocs.request.RequestDocumentation;
-import org.springframework.restdocs.snippet.Attributes;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.request.RequestPostProcessor;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.print.DocFlavor;
-import javax.sound.sampled.AudioFileFormat;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -118,6 +97,7 @@ class QuizControllerTest {
 
         mvc.perform(
                 RestDocumentationRequestBuilders.get("/api/v1/quiz/{quizId}", testQuizId)
+//                get("/api/v1/quiz/{quizId}", testQuizId)
             )
             .andExpect(status().isOk())
             .andDo(
@@ -138,7 +118,7 @@ class QuizControllerTest {
                         fieldWithPath("thumbnailData").optional().description("퀴즈 썸네일이미지 데이터").type(STRING),
                         fieldWithPath("likeCount").description("퀴즈 좋아요 수").type(NUMBER),
                         fieldWithPath("playTime").description("퀴즈 플레이 횟수").type(NUMBER),
-                        subsectionWithPath("questions").description("문제 목록"),
+                        fieldWithPath("questions").description("문제 목록"),
                         fieldWithPath("questions[].id").description("문제 ID").type(NUMBER),
                         fieldWithPath("questions[].content").description("문제 내용").type(STRING),
                         fieldWithPath("questions[].number").description("문제 번호").type(NUMBER),

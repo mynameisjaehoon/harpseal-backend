@@ -21,6 +21,7 @@ import mangmae.harpseal.global.entity.Quiz;
 import mangmae.harpseal.global.entity.QuizThumbnail;
 import mangmae.harpseal.global.entity.type.AttachmentType;
 import mangmae.harpseal.global.util.FileUtil;
+import mangmae.harpseal.global.util.SecurityUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,7 @@ public class QuizService {
         //TODO 비밀번호는 추후 암호화
         String title = dto.getTitle();
         String description = dto.getDescription();
-        String password = dto.getPassword();
+        String password = SecurityUtil.encryptSha256(dto.getPassword());
 
         Quiz newQuiz = new Quiz(title, description, password);
         return quizRepository.save(newQuiz);
@@ -122,7 +123,8 @@ public class QuizService {
     @Transactional
     public QuizDeleteResponseDto deleteQuizById(Long id, String password) {
         Quiz quiz = findById(id);
-        verifyPassword(quiz.getPassword(), password);
+        String encryptedPassword = encryptSha256(password);
+        verifyPassword(quiz.getPassword(), encryptedPassword);
         QuizDeleteRepositoryResponse response = quizRepository.deleteQuizById(id);
 
         return QuizDeleteResponseDto.fromRepositoryDto(response);
@@ -137,9 +139,9 @@ public class QuizService {
     public Quiz updateQuiz(QuizEditServiceRequestDto dto) {
         // 패스워드 확인
         Long quizId = dto.getId();
-        String requestPassword = dto.getPassword();
+        String encryptedPassword = SecurityUtil.encryptSha256(dto.getPassword());
         Quiz findQuiz = findById(quizId);
-        verifyPassword(findQuiz.getPassword(), requestPassword);
+        verifyPassword(findQuiz.getPassword(), encryptedPassword);
 
         // 퀴즈 정보 수정
         findQuiz.changeTitle(dto.getTitle());
@@ -156,7 +158,8 @@ public class QuizService {
         // 비밀번호 검사
         Long quizId = dto.getQuizId();
         Quiz quiz = findById(quizId);
-        verifyPassword(quiz.getPassword(), dto.getPassword());
+        String encryptedPassword = encryptSha256(dto.getPassword());
+        verifyPassword(quiz.getPassword(), encryptedPassword);
 
         // 수정하고자 하는 Question 엔티티를 찾는다.
         int questionNumber = dto.getNumber();

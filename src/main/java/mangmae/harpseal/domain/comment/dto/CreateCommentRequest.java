@@ -8,14 +8,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCommentFacadeRequestForm {
+public class CreateCommentRequest {
 
-    private Long quizId;
     private String content;
     private String password;
 
-    public CreateCommentRequestServiceForm toServiceDto() {
-        return new CreateCommentRequestServiceForm(content, password);
+    public CreateCommentFacadeServiceRequest toFacadeDto(Long quizId) {
+        return new CreateCommentFacadeServiceRequest(quizId, content, password);
     }
 
 }

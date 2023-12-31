@@ -2,10 +2,7 @@ package mangmae.harpseal.domain.comment.application;
 
 
 import lombok.RequiredArgsConstructor;
-import mangmae.harpseal.domain.comment.dto.CreateCommentRequestServiceForm;
-import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
-import mangmae.harpseal.domain.comment.dto.DeleteCommentRepositoryDto;
-import mangmae.harpseal.domain.comment.dto.DeleteCommentServiceForm;
+import mangmae.harpseal.domain.comment.dto.*;
 import mangmae.harpseal.domain.comment.exception.CannotFindCommentException;
 import mangmae.harpseal.domain.comment.repository.CommentRepository;
 import mangmae.harpseal.global.entity.Comment;
@@ -29,11 +26,11 @@ public class CommentService {
         return findComment.orElseThrow(() -> new CannotFindCommentException(id));
     }
 
-    public Comment createComment(final CreateCommentRequestServiceForm form) {
-        String commentPassword = form.getPassword();
+    public Comment createComment(final CreateCommentServiceRequest form) {
+        String encryptedPassword = SecurityUtil.encryptSha256(form.getPassword());
         String content = form.getContent();
 
-        Comment newComment = new Comment(content, commentPassword);
+        Comment newComment = new Comment(content, encryptedPassword);
         Comment savedComment = commentRepository.save(newComment);
 
         return savedComment;
@@ -41,11 +38,11 @@ public class CommentService {
 
     public void deleteComment(final DeleteCommentServiceForm form) {
         // verify password
-        String requestPassword = form.getPassword();
+        String encryptedPassword = SecurityUtil.encryptSha256(form.getPassword());
         Long commentId = form.getCommentId();
 
         Comment findComment = findById(commentId);
-        verifyPassword(findComment.getPassword(), requestPassword);
+        verifyPassword(findComment.getPassword(), encryptedPassword);
 
         commentRepository.deleteById(commentId);
     }

@@ -6,14 +6,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
-import mangmae.harpseal.domain.comment.application.CommentService;
-import mangmae.harpseal.domain.comment.dto.CreateCommentRequestForm;
+import mangmae.harpseal.domain.comment.dto.CreateCommentRequest;
 import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
 import mangmae.harpseal.domain.comment.dto.DeleteCommentRequestForm;
 import mangmae.harpseal.domain.comment.repository.CommentRepository;
 import mangmae.harpseal.global.entity.Comment;
 import mangmae.harpseal.global.entity.Quiz;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -75,7 +73,7 @@ class CommentControllerTest {
     @Test
     @DisplayName("댓글 생성 성공")
     void createCommentSuccess() throws Exception {
-        CreateCommentRequestForm form = new CreateCommentRequestForm("comment test example", testPassword);
+        CreateCommentRequest form = new CreateCommentRequest("comment test example", testPassword);
         String formJson = objectMapper.writeValueAsString(form);
 
         MvcResult mvcResult = mvc.perform(post("/api/v1/quiz/{quizId}/comment", quizId)
@@ -108,7 +106,7 @@ class CommentControllerTest {
     @DisplayName("댓글 생성 실패")
     void createCommentFail() throws Exception {
 
-        CreateCommentRequestForm idFailForm = new CreateCommentRequestForm("quiz id fail", testPassword);
+        CreateCommentRequest idFailForm = new CreateCommentRequest("quiz id fail", testPassword);
         String idFailJson = objectMapper.writeValueAsString(idFailForm);
 
         mvc.perform(

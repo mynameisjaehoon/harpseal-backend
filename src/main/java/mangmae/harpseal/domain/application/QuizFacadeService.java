@@ -7,7 +7,7 @@ import mangmae.harpseal.domain.attachment.application.AttachmentService;
 import mangmae.harpseal.domain.choice.application.ChoiceService;
 import mangmae.harpseal.domain.choice.dto.ChoiceServiceDto;
 import mangmae.harpseal.domain.comment.application.CommentService;
-import mangmae.harpseal.domain.comment.dto.CreateCommentFacadeRequestForm;
+import mangmae.harpseal.domain.comment.dto.CreateCommentFacadeServiceRequest;
 import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
 import mangmae.harpseal.domain.question.application.QuestionService;
 import mangmae.harpseal.domain.question.dto.QuestionCreateServiceDto;
@@ -20,6 +20,7 @@ import mangmae.harpseal.global.entity.*;
 import mangmae.harpseal.global.entity.type.AttachmentType;
 import mangmae.harpseal.global.util.FileUtil;
 import mangmae.harpseal.domain.thumbnail.application.ThumbnailService;
+import mangmae.harpseal.global.util.SecurityUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,7 +78,8 @@ public class QuizFacadeService {
         QuestionValidator.validateQuestionRegistrationForm(dto);
 
         Quiz findQuiz = quizService.findById(quizId);
-        verifyPassword(dto.getPassword(), findQuiz.getPassword());
+        String requestPassword = SecurityUtil.encryptSha256(dto.getPassword());
+        verifyPassword(requestPassword, findQuiz.getPassword());
 
         Question savedQuestion = questionService.save(new Question(dto));
         findQuiz.addQuestion(savedQuestion); // 퀴즈와 연관관계 바인딩
@@ -167,13 +169,10 @@ public class QuizFacadeService {
     }
 
     @Transactional
-    public CreateCommentResponseDto createComment(CreateCommentFacadeRequestForm form) {
+    public CreateCommentResponseDto createComment(CreateCommentFacadeServiceRequest form) {
         Long quizId = form.getQuizId();
-        String content = form.getContent();
-        String password = form.getPassword();
-
         Quiz findQuiz = quizService.findById(quizId);
-        Comment newComment = commentService.createComment(form.toServiceDto());
+        Comment newComment = commentService.createComment(form.toServiceForm());
 
         findQuiz.addComment(newComment); // 편의메서드 사용
 

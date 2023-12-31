@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.application.QuizFacadeService;
 import mangmae.harpseal.domain.comment.application.CommentService;
-import mangmae.harpseal.domain.comment.dto.CreateCommentRequestForm;
+import mangmae.harpseal.domain.comment.dto.CreateCommentRequest;
 import mangmae.harpseal.domain.comment.dto.CreateCommentResponseDto;
 import mangmae.harpseal.domain.comment.dto.DeleteCommentRequestForm;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class CommentController {
     @PostMapping("/{quizId}/comment")
     public ResponseEntity<CreateCommentResponseDto> createComment(
         @PathVariable("quizId") Long quizId,
-        @RequestBody CreateCommentRequestForm form
+        @RequestBody CreateCommentRequest form
     ) {
 
         CreateCommentResponseDto result = quizFacadeService.createComment(form.toFacadeDto(quizId));

@@ -4,6 +4,7 @@ package mangmae.harpseal.global.exhandler;
 import mangmae.harpseal.domain.comment.api.CommentController;
 import mangmae.harpseal.domain.quiz.exception.CannotFindQuizException;
 import mangmae.harpseal.domain.quiz.api.QuizController;
+import mangmae.harpseal.domain.quiz.exception.dto.InvalidQuizInfoResponse;
 import mangmae.harpseal.domain.quiz.exception.dto.QuizDeleteExceptionResponse;
 import mangmae.harpseal.global.exception.PasswordNotMatchException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,8 +18,8 @@ public class QuizControllerAdvice {
 
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(CannotFindQuizException.class)
-    public QuizDeleteExceptionResponse unknownQuizId(CannotFindQuizException ex) {
-        return new QuizDeleteExceptionResponse(ex.getMessage());
+    public InvalidQuizInfoResponse unknownQuizId(CannotFindQuizException ex) {
+        return new InvalidQuizInfoResponse(ex.getMessage());
     }
 
     @ResponseStatus(BAD_REQUEST)

@@ -70,7 +70,7 @@ public class QuizController {
     }
 
     /**
-     * 퀴즈 단일 조회 핸들러
+     * 퀴즈 단일 조회
      * @param quizId 조회 퀴즈 ID
      * @return 단일 조회 퀴즈 정보, HTTP 200 OK
      */
@@ -147,6 +147,4 @@ public class QuizController {
         headers.setLocation(URI.create("http://localhost:8080/api/v1/quiz/" + quizId));
         return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
     }
-
-
 }

@@ -20,4 +20,8 @@ public class CannotFindQuizException extends RuntimeException {
     protected CannotFindQuizException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+
+    public CannotFindQuizException(long quizId) {
+        this("can't find quiz id = [" + quizId + "]");
+    }
 }

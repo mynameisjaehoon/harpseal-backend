@@ -112,6 +112,10 @@ public class QuizService {
         // 퀴즈 ID에 해당하는 퀴즈 정보를 받아온다.
         Long quizId = condition.getId();
         QuizSimpleRepositoryDto repositoryDto = quizRepository.findSingleQuiz(quizId);
+        if (repositoryDto == null) {
+            throw new CannotFindQuizException(quizId);
+        }
+
         QuizSimpleServiceDto serviceDto = QuizSimpleServiceDto.fromRepositoryDto(repositoryDto);
 
         // 퀴즈의 썸네일을 지정한다.

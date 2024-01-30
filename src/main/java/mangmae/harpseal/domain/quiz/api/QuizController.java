@@ -136,7 +136,7 @@ public class QuizController {
      * @param thumbnail 퀴즈 썸네일 수정 데이터
      * @return HTTP 303 SEE OTHER, {quizID} 단일 정보조회로 리다이렉션
      */
-    @PutMapping(value = "/{quizId}/edit", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
+    @PutMapping(value = "/{quizId}", consumes = {APPLICATION_JSON_VALUE, MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Void> editQuiz(
         @PathVariable("quizId") Long quizId,
         @RequestPart(value = "form") QuizEditRequestDto form,

@@ -342,7 +342,7 @@ class QuizControllerTest {
         MockMultipartFile form = new MockMultipartFile("form", "", "application/json", formJson.getBytes());
         MockMultipartFile thumbnail = new MockMultipartFile("thumbnail", "", "image/png", (byte[]) null);
 
-        MockMultipartHttpServletRequestBuilder builder = RestDocumentationRequestBuilders.multipart("/api/v1/quiz/{quizId}/edit", testQuizId);
+        MockMultipartHttpServletRequestBuilder builder = RestDocumentationRequestBuilders.multipart("/api/v1/quiz/{quizId}", testQuizId);
         builder.with(request -> {
             request.setMethod("PUT");
             return request;

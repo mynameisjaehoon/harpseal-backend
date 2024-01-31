@@ -115,9 +115,12 @@ public class QuizController {
     ) {
         quizService.deleteQuizById(quizId, requestDto.getPassword());
         HttpHeaders headers = new HttpHeaders();
-        response.setHeader("Location", "/api/v1/quiz");
-//        headers.setLocation(URI.create());
-        return ResponseEntity.status(HttpStatus.SEE_OTHER).body(null);
+        headers.setLocation(URI.create("/api/v1/quiz"));
+
+        return ResponseEntity
+            .status(HttpStatus.SEE_OTHER)
+            .headers(headers)
+            .build();
     }
 
     /**

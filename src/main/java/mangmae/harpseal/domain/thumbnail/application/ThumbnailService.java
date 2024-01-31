@@ -48,8 +48,9 @@ public class ThumbnailService {
             thumbnailImage.transferTo(new File(storeImagePath)); //이미지 파일 저장
 
             //썸네일 데이터 저장
-            QuizThumbnail savedThumbnail = thumbnailRepository.save(new QuizThumbnail(storeImagePath));
-            quiz.changeThumbnail(savedThumbnail);
+            QuizThumbnail thumbnail = new QuizThumbnail(storeImagePath);
+            thumbnail.changeQuiz(quiz);
+            QuizThumbnail savedThumbnail = thumbnailRepository.save(thumbnail);
             return Optional.of(savedThumbnail);
         } catch (IOException e) {
             throw new ThumbnailImageStoreException("Fail to store quiz thumbnail image", e);

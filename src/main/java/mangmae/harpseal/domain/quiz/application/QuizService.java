@@ -55,7 +55,7 @@ public class QuizService {
         Optional<Quiz> findQuizOptional = quizRepository.findById(id);
 
         return findQuizOptional.orElseThrow(
-            () -> new CannotFindQuizException("Can't find Quiz Entity with id=[" + id + "]")
+            () -> new CannotFindQuizException("Can't find Quiz with id=[" + id + "]")
         );
     }
 
@@ -125,13 +125,11 @@ public class QuizService {
     }
 
     @Transactional
-    public QuizDeleteResponseDto deleteQuizById(Long id, String password) {
+    public void deleteQuizById(Long id, String password) {
         Quiz quiz = findById(id);
         String encryptedPassword = encryptSha256(password);
         verifyPassword(quiz.getPassword(), encryptedPassword);
-        QuizDeleteRepositoryResponse response = quizRepository.deleteQuizById(id);
-
-        return QuizDeleteResponseDto.fromRepositoryDto(response);
+        quizRepository.delete(quiz);
     }
 
 

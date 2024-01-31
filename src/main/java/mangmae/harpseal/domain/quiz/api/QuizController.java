@@ -1,5 +1,6 @@
 package mangmae.harpseal.domain.quiz.api;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mangmae.harpseal.domain.application.QuizFacadeService;
@@ -22,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.sound.midi.VoiceStatus;
 import java.net.URI;
 
 import static org.springframework.http.MediaType.*;
@@ -93,7 +93,7 @@ public class QuizController {
     public ResponseEntity<QuestionCreateResponseDto> createQuestion(
         @PathVariable("quizId") Long quizId,
         @RequestPart(value = "form") QuestionCreateRequestForm form,
-        @RequestPart(value = "attachment") MultipartFile attachment
+        @RequestPart(value = "attachment", required = false) MultipartFile attachment
     ) {
         Question storeQuestion = quizFacadeService.createQuestion(quizId, form.toServiceDto(), attachment);
         return ResponseEntity
@@ -110,12 +110,14 @@ public class QuizController {
     @DeleteMapping("/{quizId}")
     public ResponseEntity<Void> deleteQuiz(
         @PathVariable("quizId") Long quizId,
-        @RequestBody QuizDeleteRequestDto requestDto
+        @RequestBody QuizDeleteRequestDto requestDto,
+        HttpServletResponse response
     ) {
         quizService.deleteQuizById(quizId, requestDto.getPassword());
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("http://localhost:8080/api/v1/quiz"));
-        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
+        response.setHeader("Location", "/api/v1/quiz");
+//        headers.setLocation(URI.create());
+        return ResponseEntity.status(HttpStatus.SEE_OTHER).body(null);
     }
 
     /**

@@ -35,7 +35,7 @@ public class Quiz extends CreatedDateEntity {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToOne(mappedBy = "quiz", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
     private QuizThumbnail thumbnail;
 
 
